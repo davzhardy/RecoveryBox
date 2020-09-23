@@ -5,6 +5,7 @@ import { BoldAppText, MediumAppText } from '../styles/text'
 import HomeWelcome from '../components/HomeWelcome'
 import Feeling from '../components/Feeling'
 import Meetings from '../components/Meetings'
+import SuggestionsList from '../components/SuggestionsList'
 
 function HomeScreen () {
 
@@ -13,6 +14,7 @@ function HomeScreen () {
       <HomeWelcome/>
       <Feeling/>
       <Meetings/>
+      <SuggestionsList/>
     </View>
   );
 }

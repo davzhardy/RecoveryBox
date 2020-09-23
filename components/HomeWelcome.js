@@ -4,9 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
 import { DateTime } from 'luxon'
 import Divider from '../components/Divider'
+import { useNavigation } from '@react-navigation/native';
 
+function HomeWelcome () {
 
-function HomeWelcome (navigation) {
+  const navigation = useNavigation();
 
   const now = DateTime.local()
   let dayFormat = ''
@@ -28,8 +30,8 @@ function HomeWelcome (navigation) {
       
       <View style={styles.header}>
         <TouchableOpacity
-          title="Settings Icon"
-          onPress={() => navigation.navigate('Settings')}
+          title="Calendar Icon"
+          onPress={() => navigation.navigate('Calendar')}
         >
           <Image style={styles.icons} source={require('../assets/calendarIcon.png')}/>
         </TouchableOpacity>

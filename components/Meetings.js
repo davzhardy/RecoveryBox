@@ -42,6 +42,7 @@ function Meetings () {
           <MediumAppText style={{color: '#BBBCCD'}}>DAYS IN RECOVERY</MediumAppText>
         </View>
       </View>
+      <Divider/>
     </View>
   );
 }

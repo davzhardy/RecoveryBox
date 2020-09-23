@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import { MediumAppText } from '../styles/text'
 import Divider from '../components/Divider'
 
-
 function Feeling () {
 
   return (

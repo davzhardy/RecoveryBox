@@ -12,6 +12,15 @@ const initialState = {
     feeling: 50,
     moods: [],
     suggestions: [],
+  },
+  settings: {
+    suggestionSettings: {
+      suggestionsList: ['Meetings', 'Step 10s', 'Prayer'],
+      fullSuggestionsList: ['Meetings', 'Prayer', 'Meditation', 'Useful', 'Kind to Myself', 'Gratitude', 'Step 10s', 'Inventory', 'Called a Newcomer', 'Ate a'],
+    },
+    userSettings: {
+      spare: [],
+    }
   }
 };
 
@@ -41,6 +50,28 @@ function reducer(state = initialState, action) {
           meetings: state.dailyInfo.meetings -1
         }
       }
+    case "ADDTO_SUGGESTIONS_LIST":
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          suggestionSettings: {
+            ...state.settings.suggestionSettings,
+            suggestionsList: [...state.settings.suggestionSettings.suggestionsList, action.payload]
+          }
+        }
+      }
+    case "REMOVEFROM_SUGGESTIONS_LIST":
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          suggestionSettings: {
+            ...state.settings.suggestionSettings,
+            suggestionsList: state.settings.suggestionSettings.suggestionsList.filter(elInList => elInList !== action.payload)
+          }
+        }
+      }  
     default:
       return state;
    }
