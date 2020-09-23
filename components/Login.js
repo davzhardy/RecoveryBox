@@ -5,16 +5,15 @@ import {useDispatch, useSelector} from "react-redux";
 
 function LoginScreen ({navigation}) {
 
-  const [username, onChangeUsername] = useState(false);
-  const [password, onChangePassword] = useState(false);
-  const [warning, setWarning] = useState(false); 
-
-  const firstName = useSelector((state) => state.user.firstName)
-  const userName = useSelector((state) => state.user.username)
+  // const firstName = useSelector((state) => state.user.firstName)
   const dispatch = useDispatch();
 
+  const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
+  const [passwordInput, onChangePassword] = useState(false);
+  const [warning, setWarning] = useState(false); 
+
   const submitHandler = (arg) => {
-    if (username && password) {
+    if (usernameInput && passwordInput) {
       dispatch({
         type: 'UPDATE_USERNAME',
         payload: arg
@@ -27,23 +26,23 @@ function LoginScreen ({navigation}) {
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Welcome to RecoveryBox {userName}</BoldAppText>
+      <BoldAppText>Welcome to RecoveryBox</BoldAppText>
       <MediumAppText style={{fontSize : 20}}>Please enter your details to log-in</MediumAppText>
       <TextInput
         placeholder='Enter a username'
-        value= {username ? username : ''}
+        value= {usernameInput ? usernameInput : ''}
         onChangeText={text => onChangeUsername(text)}
         style={styles.input}
         textContentType={'username'}
       />
       <TextInput
         placeholder='Enter a password'
-        value= {password ? password : ''}
+        value= {passwordInput ? passwordInput : ''}
         secureTextEntry={true}
         onChangeText={text => onChangePassword(text)}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={() => submitHandler(username)}>
+      <TouchableOpacity style={styles.button} onPress={() => submitHandler(usernameInput)}>
         <MediumAppText>Please submit me</MediumAppText>
       </TouchableOpacity>
       <View>

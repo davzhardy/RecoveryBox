@@ -3,7 +3,9 @@ import { createStore } from "redux";
 const initialState = {
   user: {
     username: false,
-    firstName: 'David'
+    password: false,
+    firstName: 'David',
+    lastName: 'Hardy',
   },
 };
 
