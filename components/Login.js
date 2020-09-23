@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'react-native';
 import { BoldAppText, MediumAppText } from '../styles/text'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
+import store from '../redux/store'
 
-function LoginScreen ({navigation}) {
+
+function LoginScreen ({ navigation }) {
 
   // fix: refactor to not have to useState for passwordInput and usernameInput?
   const dispatch = useDispatch();
@@ -11,6 +13,7 @@ function LoginScreen ({navigation}) {
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
+
 
   const submitHandler = (arg) => {
     if (usernameInput && passwordInput) {
