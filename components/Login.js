@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, TouchableOpacity, Text } from 'react-native';
-import {  BoldAppText, MediumAppText } from '../styles/text'
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'react-native';
+import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector} from "react-redux";
 
 function LoginScreen ({navigation}) {
 
-  // const firstName = useSelector((state) => state.user.firstName)
+  // fix: refactor to not have to useState for passwordInput and usernameInput?
   const dispatch = useDispatch();
 
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
-  const [passwordInput, onChangePassword] = useState(false);
+  const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
 
   const submitHandler = (arg) => {
@@ -57,10 +57,9 @@ function LoginScreen ({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#DFE2E2',
+    backgroundColor: '#fff',
   },
   input: {
     marginTop: 20,
