@@ -8,14 +8,13 @@ import Divider from '../components/Divider'
 function Meetings () {
 
   const dispatch = useDispatch();
-  // const meetings = useSelector((state) => state.user.username);  
   
-  const [meetings, setMeetings] = useState(useSelector((state) => state.dailyInfo.meetings)); //need to put this up in App.js so that it can be used with ApiService to fetch info from server
-  const onPlus = () => setMeetings(prevCount => prevCount + 1);
+  const meetings = useSelector((state) => state.dailyInfo.meetings); 
+  const onPlus = () => dispatch({type: 'INCREMENT_DAILY_MEETINGS'});
   const onMinus = () => {
     if (meetings===0) 
     return;
-    setMeetings(prevCount => prevCount - 1);
+    dispatch({type: 'DECREMENT_DAILY_MEETINGS'});
   };
 
   return (
@@ -32,10 +31,14 @@ function Meetings () {
       <View>
         <View style={styles.infocontainer}>
           <BoldAppText style={{fontSize: 18, marginRight: 10}}>{meetings}</BoldAppText>
+          <MediumAppText style={{color: '#BBBCCD'}} >MEETINGS TODAY</MediumAppText>
+        </View>
+        <View style={styles.infocontainer}>
+          <BoldAppText style={{fontSize: 18, marginRight: 10}}>XXX</BoldAppText>
           <MediumAppText style={{color: '#BBBCCD'}} >MEETINGS IN 90 DAYS</MediumAppText>
         </View>
         <View style={styles.infocontainer}>
-          <BoldAppText style={{fontSize: 18, marginRight: 10}}>0</BoldAppText>
+          <BoldAppText style={{fontSize: 18, marginRight: 10}}>YYYY</BoldAppText>
           <MediumAppText style={{color: '#BBBCCD'}}>DAYS IN RECOVERY</MediumAppText>
         </View>
       </View>

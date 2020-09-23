@@ -8,7 +8,7 @@ const initialState = {
     lastName: 'Hardy',
   },
   dailyInfo: {
-    meetings: 1,
+    meetings: 2,
     feeling: 50,
     moods: [],
     suggestions: [],
@@ -25,12 +25,20 @@ function reducer(state = initialState, action) {
           username: action.payload
         }
       }
-    case "ADD_DAILY_MEETINGS":
+    case "INCREMENT_DAILY_MEETINGS":
       return {
         ...state,
         dailyInfo: {
           ...state.dailyInfo,
           meetings: state.dailyInfo.meetings +1
+        }
+      }
+    case "DECREMENT_DAILY_MEETINGS":
+      return {
+        ...state,
+        dailyInfo: {
+          ...state.dailyInfo,
+          meetings: state.dailyInfo.meetings -1
         }
       }
     default:
