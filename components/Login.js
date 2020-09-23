@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Text } from 'react-native';
-import Navigation from './Navigation'
 
-function Login () {
+function LoginScreen ({navigation}) {
 
   const [username, onChangeUsername] = useState(false);
   const [password, onChangePassword] = useState(false);
-  const [navigation, setNavigation] = useState(false);
   const [warning, setWarning] = useState(false); 
 
   const submitHandler = () => {
     if (username && password) {
-      setNavigation(true)
+      navigation.navigate('Home');
     } else {
-      setWarning(true)
+      setWarning(true);
     }
   }
 
   return (
-    !navigation ?
-    <View>
+    <View style={styles.container}>
       <TextInput
         placeholder='Enter a username'
         value= {username ? username : ''}
@@ -37,25 +34,29 @@ function Login () {
       <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
         <Text>Please submit me</Text>
       </TouchableOpacity>
-  
       <View>
         { 
           warning ? <Text>Please submit both a username and password</Text> : null
         }
       </View>
     </View>
-    : <Navigation/>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
     marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
   },
   button: {
-    width: '100%',
+    width: '10%',
     height: 50,
     borderRadius: 5,
     marginHorizontal: 20,
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Login;
+export default LoginScreen;
