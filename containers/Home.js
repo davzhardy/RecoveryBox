@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import {useDispatch, useSelector} from "react-redux";
 
+function HomeScreen () {
 
-function Home () {
+  const username = useSelector((state) => state.user.username)
 
   return (
     <View style={styles.container}>
-      <Text>Homescreen</Text>
+      <Text>Homescreen for {username}</Text>
     </View>
   );
 }
@@ -22,4 +24,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Home;
+export default HomeScreen;

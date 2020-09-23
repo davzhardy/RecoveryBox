@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Text } from 'react-native';
+import {  BoldAppText, MediumAppText } from '../styles/text'
+import {useDispatch, useSelector} from "react-redux";
 
 function LoginScreen ({navigation}) {
 
@@ -7,8 +9,16 @@ function LoginScreen ({navigation}) {
   const [password, onChangePassword] = useState(false);
   const [warning, setWarning] = useState(false); 
 
-  const submitHandler = () => {
+  const firstName = useSelector((state) => state.user.firstName)
+  const userName = useSelector((state) => state.user.username)
+  const dispatch = useDispatch();
+
+  const submitHandler = (arg) => {
     if (username && password) {
+      dispatch({
+        type: 'UPDATE_USERNAME',
+        payload: arg
+      })
       navigation.navigate('Home');
     } else {
       setWarning(true);
@@ -17,6 +27,8 @@ function LoginScreen ({navigation}) {
 
   return (
     <View style={styles.container}>
+      <BoldAppText>Welcome to RecoveryBox {userName}</BoldAppText>
+      <MediumAppText style={{fontSize : 20}}>Please enter your details to log-in</MediumAppText>
       <TextInput
         placeholder='Enter a username'
         value= {username ? username : ''}
@@ -31,8 +43,8 @@ function LoginScreen ({navigation}) {
         onChangeText={text => onChangePassword(text)}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
-        <Text>Please submit me</Text>
+      <TouchableOpacity style={styles.button} onPress={() => submitHandler(username)}>
+        <MediumAppText>Please submit me</MediumAppText>
       </TouchableOpacity>
       <View>
         { 
@@ -49,10 +61,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#DFE2E2',
   },
   input: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 20,
     textAlign: 'center',
   },
   button: {
@@ -60,7 +73,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     marginHorizontal: 20,
-    backgroundColor: '#DFE2E2'
+    backgroundColor: '#ADF1FF',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 
