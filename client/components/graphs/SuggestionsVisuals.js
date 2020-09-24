@@ -3,21 +3,22 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { useSelector} from "react-redux";
-import { MediumAppText, BoldAppText } from '../styles/text'
-import Divider from './Divider'
-import { VictoryArea, VictoryChart, VictoryAxis } from 'victory-native';
+import { MediumAppText, BoldAppText } from '../../styles/text'
+import Divider from '../Divider'
+import { VictoryArea, VictoryStack, VictoryGroup, VictoryAxis } from 'victory-native';
 import _ from 'lodash';
 import { DateTime } from 'luxon'
 import {Defs, LinearGradient, Stop } from "react-native-svg";
 
 function SuggestionsVisuals () {
 
-  const moodsToShow = 5;
-  // TODO make the number of moods you show customisable
-
+  const suggestionsToShow = 5;
   const historicalData = useSelector((state) => state.historicalData);
-  const moodsData = _.map(historicalData, el => el.moods) 
+  const suggestionsData = _.map(historicalData, el => el.suggestions) 
+  const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
   
+  // TODO add some kind of toggle to show more data on the graphs or change their format
+
   function create (array) {
     let obj = {}
     for (let i of array) {
@@ -32,11 +33,11 @@ function SuggestionsVisuals () {
     return obj
   }
 
-  function createMoods (obj) {
+  function createSuggestions (obj) {
     let arr = [];
     for (let i in obj) {
       let newobj = {}
-      newobj.mood = i
+      newobj.suggestion = i
       newobj.value = obj[i]
       arr.push(newobj)
     }
@@ -64,17 +65,30 @@ function SuggestionsVisuals () {
     return newArr
   }
 
-  const moodsObject = create(moodsData)
-  const moods = createMoods(moodsObject)
-  const sortedMoods = _.orderBy(moods, ['value'], ['desc'])
-  const topMoods = topFive(sortedMoods, moodsToShow)
-  const randomTopMoods = randomNumGen(topMoods, 0, moodsToShow)
+  const suggestionsObject = create(suggestionsData)
+  const suggestions = createSuggestions(suggestionsObject)
+  const sortedSuggestions = _.orderBy(suggestions, ['value'], ['desc'])
+  const topSuggestions = topFive(sortedSuggestions, suggestionsToShow)
+  const randomTopSuggestions = randomNumGen(topSuggestions, 0, suggestionsToShow)
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Your contentment level for a [week]</BoldAppText>
-      <VictoryChart width={350} >
-          <Defs>
+      <BoldAppText>Your top suggesitons this [week]</BoldAppText>
+      <VictoryGroup width={350} >
+        <VictoryStack>
+        <VictoryArea 
+        data={randomTopSuggestions} 
+        x="suggestion" 
+        y="value"
+        style={{ 
+          data: { fill: 'url(#gradient1)' },
+          parent: {}
+          }}
+        interpolation="natural"
+        />
+        </VictoryStack>
+      </VictoryGroup>
+      <Defs>
             <LinearGradient id="gradient1"
               x1="0%" 
               y1="0%" 
@@ -86,27 +100,6 @@ function SuggestionsVisuals () {
               <Stop offset="100%" stopColor='#FF8787'/>
             </LinearGradient>
           </Defs>
-        <VictoryArea 
-        data={randomTopMoods} 
-        x="mood" 
-        y="value"
-        style={{ 
-          data: { fill: 'url(#gradient1)' },
-          parent: {}
-          }}
-        interpolation="natural"
-        />
-        <VictoryAxis
-          tickCount={3}
-        />
-        <VictoryAxis dependentAxis
-          style={{
-            axis: {stroke: '#DFE2E2', opacity: 0.5},
-            tickLabels: {fontsize:5, color: 'blue'},
-          }}
-          tickCount={2}
-        />
-      </VictoryChart>
       <Divider/>
     </View>
   );

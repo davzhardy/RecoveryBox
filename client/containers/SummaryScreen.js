@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useSelector } from "react-redux";
-import FeelingGraph from '../components/FeelingGraph'
-import MoodVisuals from '../components/MoodVisuals'
-import SuggestionsVisuals from '../components/SuggestionsVisuals'
+import MeetingsSummary from '../components/MeetingsSummary'
+import FeelingGraph from '../components/graphs/FeelingGraph'
+import MoodVisuals from '../components/graphs/MoodVisuals'
+import SuggestionsVisuals from '../components/graphs/SuggestionsVisuals'
 
 function SummaryScreen () {
 
   return (
     <ScrollView style={styles.container}>
       <Text>Days in recovery</Text>
-      <Text>History of Meetings</Text>
+      <MeetingsSummary/>
       <FeelingGraph/>
       <MoodVisuals/>
       <SuggestionsVisuals/>
