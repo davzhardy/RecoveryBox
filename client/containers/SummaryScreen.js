@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useSelector } from "react-redux";
 import FeelingGraph from '../components/FeelingGraph'
 import MoodVisuals from '../components/MoodVisuals'
+import SuggestionsVisuals from '../components/SuggestionsVisuals'
 
 function SummaryScreen () {
 
@@ -12,7 +13,7 @@ function SummaryScreen () {
       <Text>History of Meetings</Text>
       <FeelingGraph/>
       <MoodVisuals/>
-      <Text>Top Suggestions</Text>
+      <SuggestionsVisuals/>
     </ScrollView>
   )
 }

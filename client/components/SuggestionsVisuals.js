@@ -1,14 +1,16 @@
+//https://formidable.com/open-source/victory/gallery/area-hover-styles
+
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { useSelector} from "react-redux";
 import { MediumAppText, BoldAppText } from '../styles/text'
 import Divider from './Divider'
-import { VictoryScatter, VictoryGroup, VictoryChart, VictoryAxis } from 'victory-native';
+import { VictoryArea, VictoryChart, VictoryAxis } from 'victory-native';
 import _ from 'lodash';
 import { DateTime } from 'luxon'
 import {Defs, LinearGradient, Stop } from "react-native-svg";
 
-function MoodVisuals () {
+function SuggestionsVisuals () {
 
   const moodsToShow = 5;
   // TODO make the number of moods you show customisable
@@ -70,40 +72,41 @@ function MoodVisuals () {
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Your moods for the past [week]</BoldAppText>
-      <VictoryGroup width={350} height={200} >
-        <VictoryScatter
+      <BoldAppText>Your contentment level for a [week]</BoldAppText>
+      <VictoryChart width={350} >
+          <Defs>
+            <LinearGradient id="gradient1"
+              x1="0%" 
+              y1="0%" 
+              x2="25%"
+              x3="100%" 
+              y2="100%"
+            >
+              <Stop offset="0%" stopColor='#FF55B8'/>
+              <Stop offset="100%" stopColor='#FF8787'/>
+            </LinearGradient>
+          </Defs>
+        <VictoryArea 
         data={randomTopMoods} 
-        animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-        }}
-        x={"mood"} 
-        y={"value"}
-        bubbleProperty="value"
-        maxBubbleSize={40}
-        minBubbleSize={5}
+        x="mood" 
+        y="value"
         style={{ 
           data: { fill: 'url(#gradient1)' },
-          labels: { fill: "#2A2A30", fontSize: 12}
-        }}
+          parent: {}
+          }}
         interpolation="natural"
-        labels={({ datum }) => `${datum.mood}`}
         />
-        <Defs>
-          <LinearGradient id="gradient1"
-            x1="0%" 
-            y1="0%" 
-            x2="25%"
-            x3="100%" 
-            y2="100%"
-          >
-            <Stop offset="0%" stopColor='#FF55B8'/>
-            <Stop offset="100%" stopColor='#FF8787'/>
-          </LinearGradient>
-        </Defs>
-      </VictoryGroup>
-    
+        <VictoryAxis
+          tickCount={3}
+        />
+        <VictoryAxis dependentAxis
+          style={{
+            axis: {stroke: '#DFE2E2', opacity: 0.5},
+            tickLabels: {fontsize:5, color: 'blue'},
+          }}
+          tickCount={2}
+        />
+      </VictoryChart>
       <Divider/>
     </View>
   );
@@ -114,6 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-export default MoodVisuals;
+export default SuggestionsVisuals;
