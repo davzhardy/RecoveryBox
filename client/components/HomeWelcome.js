@@ -12,16 +12,16 @@ function HomeWelcome () {
 
   // TODO - remove this comment const date = DateTime.fromISO("2020-09-21");
 
-  const now = DateTime.local()
+  const now = useSelector((state) => state.helper.now)
   let dayFormat = ''
 
   if (now.day === 1 || now.day === 21 || now.day === 31)
-  dayFormat = 'st'
+  dayFormat = 'st';
   else if (now.day === 2 || now.day === 22)
-  dayFormat = 'nd' 
+  dayFormat = 'nd';
   else if (now.day === 3 || now.day ===23)
-  dayFormat = 'rd'
-  else dayFormat = 'th' 
+  dayFormat = 'rd';
+  else dayFormat = 'th';
 
   const formattedDate = now.toFormat(`d'${dayFormat}' MMM y`)  
 
@@ -33,7 +33,7 @@ function HomeWelcome () {
       <View style={styles.header}>
         <TouchableOpacity
           title="Calendar Icon"
-          onPress={() => navigation.navigate('Summary')}
+          onPress={() => navigation.navigate('Calendar')}
         >
           <Image style={styles.icons} source={require('../assets/calendarIcon.png')}/>
         </TouchableOpacity>
@@ -45,7 +45,7 @@ function HomeWelcome () {
 
         <TouchableOpacity
           title="Settings Icon"
-          onPress={() => navigation.navigate('Settings')}
+          onPress={() => navigation.navigate('Summary')}
         >
           <Image style={styles.icons} source={require('../assets/settingsIcon.png')}/>
         </TouchableOpacity>

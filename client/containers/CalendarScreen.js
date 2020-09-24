@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import HomeWelcome from '../components/HomeWelcome'
+import CalendarDH from '../components/Calendar'
 
 
 // https://github.com/tiaanduplessis/react-native-datepicker-modal
@@ -11,9 +11,9 @@ function CalendarScreen () {
 
   return (
     <View style={styles.container}>
-      <HomeWelcome/>
+      <CalendarDH/>
     </View>
-  );
+  ); 
 }
 
 const styles = StyleSheet.create({
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
 
 });
-
 
 
 export default CalendarScreen;
