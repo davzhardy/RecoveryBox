@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-const BASE_URL = 'http://192.168.43.152:3001/'
+const BASE_URL = 'http://172.20.10.3:3001/'
 
 function fetchRequest (path, options) {
   return fetch(BASE_URL + path, options)

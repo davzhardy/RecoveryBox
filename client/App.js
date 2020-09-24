@@ -7,6 +7,7 @@ import HomeScreen from './containers/HomeScreen'
 import CalendarScreen from './containers/CalendarScreen'
 import ModifySuggestionsList from './containers/ModifySuggestionsList'
 import SummaryScreen from './containers/SummaryScreen'
+import HistoryScreen from './containers/HistoryScreen'
 import {useFonts, Montserrat_500Medium, Montserrat_700Bold} from '@expo-google-fonts/montserrat'
 import { AppLoading } from 'expo';
 import { Provider } from "react-redux";
@@ -33,6 +34,7 @@ export default function App() {
             <Stack.Screen name="Calendar" component={CalendarScreen}/>
             <Stack.Screen name="ModifySuggestions" component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen}/>
+            <Stack.Screen name="History" component={HistoryScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider> 

@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
 
 const initialState = {
-  now: DateTime.local(),
-  selectedDate: DateTime.local(),
+  now: DateTime.local().ts,
+  selectedDate: false,
 }
 
 const helperReducer = (state = initialState, action) => {

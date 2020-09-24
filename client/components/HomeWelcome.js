@@ -1,18 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
-import { DateTime } from 'luxon'
 import Divider from '../components/Divider'
 import { useNavigation } from '@react-navigation/native';
+import { DateTime } from 'luxon'
 
 function HomeWelcome () {
 
   const navigation = useNavigation();
 
-  // TODO - remove this comment const date = DateTime.fromISO("2020-09-21");
-
-  const now = useSelector((state) => state.helper.now)
+  const now = useSelector((state) => DateTime.fromMillis(state.helper.now))
   let dayFormat = ''
 
   if (now.day === 1 || now.day === 21 || now.day === 31)
