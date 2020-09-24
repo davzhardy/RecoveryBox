@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'reac
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
 import store from '../redux/store'
-
+import ApiService from '../ApiService'
 
 function LoginScreen ({ navigation }) {
 
@@ -13,7 +13,6 @@ function LoginScreen ({ navigation }) {
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
-
 
   const submitHandler = (arg) => {
     if (usernameInput && passwordInput) {
