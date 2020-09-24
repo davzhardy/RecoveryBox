@@ -3,11 +3,10 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'reac
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
 import store from '../redux/store'
-import ApiService from '../ApiService'
 
 function LoginScreen ({ navigation }) {
 
-  // fix: refactor to not have to useState for passwordInput and usernameInput?
+  // TODO: refactor to not have to useState for passwordInput and usernameInput?
   const dispatch = useDispatch();
 
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));

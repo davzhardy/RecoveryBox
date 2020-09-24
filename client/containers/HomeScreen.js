@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
 import Feeling from '../components/Feeling'
@@ -7,11 +7,23 @@ import SuggestionsList from '../components/SuggestionsList'
 import InspirationalQuote from '../components/InspirationalQuote'
 import ApiService from '../ApiService'
 import { AppLoading } from 'expo';
+import {useDispatch, useSelector } from "react-redux";
 
 function HomeScreen () {
 
-  const [quoteItem, setQuote] = useState(false)
-  useEffect(() => {ApiService.getQuote().then(quote => setQuote(quote))},[])
+  // TODO:  use react query
+  const dispatch = useDispatch();
+  useEffect(() => {
+    ApiService.getQuote()
+    .then(quote => 
+      dispatch({
+        type: "UPDATE_QUOTE",
+        payload: quote
+      })
+    )
+  },[])
+  
+  const quoteItem = useSelector((state) => state.dailyQuote.todaysQuote);
 
   return (
     !quoteItem ?

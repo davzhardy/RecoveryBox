@@ -1,6 +1,6 @@
 const initialState = {
-  username: false,
-  password: false,
+  username: 'replace me in the userreducer when dev is over',
+  password: 'replace me in the userreducer when dev is over',
   firstName: 'David',
   lastName: 'Hardy',
 }

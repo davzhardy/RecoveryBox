@@ -10,6 +10,8 @@ function HomeWelcome () {
 
   const navigation = useNavigation();
 
+  // TODO - remove this comment const date = DateTime.fromISO("2020-09-21");
+
   const now = DateTime.local()
   let dayFormat = ''
 
@@ -31,7 +33,7 @@ function HomeWelcome () {
       <View style={styles.header}>
         <TouchableOpacity
           title="Calendar Icon"
-          onPress={() => navigation.navigate('Calendar')}
+          onPress={() => navigation.navigate('Summary')}
         >
           <Image style={styles.icons} source={require('../assets/calendarIcon.png')}/>
         </TouchableOpacity>

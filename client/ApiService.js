@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-const BASE_URL = 'http://localhost:3001/'
+const BASE_URL = 'http://192.168.43.152:3001/'
 
 function fetchRequest (path, options) {
   return fetch(BASE_URL + path, options)
@@ -20,6 +20,8 @@ function fetchRequest (path, options) {
 function getQuote () {
   return fetchRequest('apirequest')
 }
+// TODO: refactor and integrate with react-query
+
 
 export default {
   getQuote
