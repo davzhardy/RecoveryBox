@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useSelector } from "react-redux";
-import MoodGraph from '../components/MoodGraph'
+import FeelingGraph from '../components/FeelingGraph'
+import MoodVisuals from '../components/MoodVisuals'
 
 function SummaryScreen () {
 
-  const historicalData = useSelector((state) => state.historicalData);
-  console.log(historicalData)
-
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text>Days in recovery</Text>
       <Text>History of Meetings</Text>
-      <MoodGraph/>
-      <Text>Top Moods</Text>
+      <FeelingGraph/>
+      <MoodVisuals/>
       <Text>Top Suggestions</Text>
-    </View>
+    </ScrollView>
   )
 }
 
