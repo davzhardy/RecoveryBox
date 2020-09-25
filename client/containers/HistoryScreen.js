@@ -1,44 +1,45 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
-import Feeling from '../components/Feeling'
-import Meetings from '../components/Meetings'
-import Moods from '../components/Moods'
-import SuggestionsList from '../components/SuggestionsList'
 import _ from 'lodash'
+import SuggestionItem from '../components/SuggestionItem'
 import {useDispatch, useSelector } from "react-redux";
 import { DateTime } from 'luxon'
 
 function HistoryScreen () {
 
   const selectedDate = useSelector((state) => state.helper.selectedDate)
+  const UTCadjustment = 7200000
+  const seladj = selectedDate - UTCadjustment
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
-  const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === selectedDate)
-  console.log(selectedDate)
-  console.log(fullHistoricalInfo)
-  console.log(requiredInfo)
+  const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === seladj)
 
-const arr = [   1600293600000,
-1600380000000,
-1600466400000,
- 1600552800000,
-1600639200000,
- 1600725600000,
-1600812000000,
- 1600898400000]
+  //TODO remove UTC adjustment when data is sitting on server
 
- console.log(DateTime.fromMillis(selectedDate))
+  if (requiredInfo.length > 0) {
+    return (
+      <View style={styles.container}>
+        <HomeWelcome historicalDate={selectedDate}/>
+        <Text> Feeling level of {requiredInfo[0].feeling} </Text>
+        <Text> Went to {requiredInfo[0].meetings} meetings </Text>
+        {requiredInfo[0].moods.map(
+          mood => <Text>Mood of {mood}</Text>
+        )}
+        {requiredInfo[0].suggestions.map(
+          suggestion => <SuggestionItem
+              key={suggestion}
+              name={suggestion}
+              selected={true}
+            />
+          )}
+      </View>
+    )
+  } else {
+    return (
+      <Text>You have no data for today. That means you wern't registered at that time.</Text>
+    )
+  }
 
-
-  return (
-    <View style={styles.container}>
-      <HomeWelcome historicalDate={selectedDate}/>
-      <Feeling/>
-      <Meetings/>
-      <SuggestionsList/>
-      <Moods/>
-    </View>
-  )
 }
 
 const styles = StyleSheet.create({

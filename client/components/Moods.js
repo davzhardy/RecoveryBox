@@ -35,7 +35,7 @@ function Moods () {
       <MediumAppText>Are you feeling good?</MediumAppText>
       <Picker
         selectedValue={stateOne}
-        style={{height: 50, width: 100}}
+        style={styles.picker}
         mode="dropdown"
         onValueChange={(itemValue, itemIndex) =>
         setStateOne(itemValue)
@@ -51,7 +51,7 @@ function Moods () {
       <MediumAppText>Or are things a little bit tough?</MediumAppText>
       <Picker
         selectedValue={stateTwo}
-        style={{height: 50, width: 100}}
+        style={styles.picker}
         mode="dropdown"
         onValueChange={(v, itemIndex) =>
         setStateTwo(v)
@@ -82,7 +82,7 @@ function Moods () {
 
 const styles = StyleSheet.create({
   button: {
-    width: '10%',
+    width: '20%',
     height: 50,
     borderRadius: 5,
     marginHorizontal: 20,
@@ -102,7 +102,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    width: '60%',
+  },
+  picker: {
+    height: 50,
+    width: 150,
+    borderColor: '#FFF4E4',
+    borderWidth: 1,
+
   },
 });
 

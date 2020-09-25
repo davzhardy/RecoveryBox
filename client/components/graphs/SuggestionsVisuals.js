@@ -5,7 +5,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { useSelector} from "react-redux";
 import { MediumAppText, BoldAppText } from '../../styles/text'
 import Divider from '../Divider'
-import { VictoryArea, VictoryStack, VictoryGroup } from './Victory';
+import { VictoryArea, VictoryStack, VictoryGroup, VictoryChart, VictoryBar} from './Victory';
 
 import _ from 'lodash';
 import { DateTime } from 'luxon'
@@ -75,9 +75,8 @@ function SuggestionsVisuals () {
   return (
     <View style={styles.container}>
       <BoldAppText>Your top suggesitons this [week]</BoldAppText>
-      <VictoryGroup width={350} height={200} styles={styles.container} >
-        <VictoryStack>
-        <VictoryArea 
+      <VictoryChart width={350} height={200} styles={styles.container} >
+        <VictoryBar 
         data={randomTopSuggestions} 
         x="suggestion" 
         y="value"
@@ -87,8 +86,7 @@ function SuggestionsVisuals () {
           }}
         interpolation="natural"
         />
-        </VictoryStack>
-      </VictoryGroup>
+      </VictoryChart>
       <Defs>
             <LinearGradient id="gradient1"
               x1="0%" 

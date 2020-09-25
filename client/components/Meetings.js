@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginLeft: 100,
     flexDirection: "row",
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   }, 
 });
 

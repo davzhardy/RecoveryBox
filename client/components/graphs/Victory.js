@@ -1,5 +1,6 @@
 export const VictoryArea = require('victory-native').VictoryArea;
 export const VictoryAxis = require('victory-native').VictoryAxis;
+export const VictoryBar = require('victory-native').VictoryBar;
 export const VictoryChart = require('victory-native').VictoryChart;
 export const VictoryGroup = require('victory-native').VictoryGroup;
 export const VictoryScatter = require('victory-native').VictoryScatter;

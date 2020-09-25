@@ -39,6 +39,8 @@ function Feeling () {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
