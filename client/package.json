@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.1.0",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/slider": "^3.0.3",
     "@react-navigation/drawer": "^5.9.1",
     "@react-navigation/native": "^5.7.4",
     "@react-navigation/stack": "^5.9.1",
@@ -19,7 +20,7 @@
     "expo-status-bar": "~1.0.2",
     "lodash": "^4.17.20",
     "luxon": "^1.25.0",
-    "react": "16.13.1",
+    "react": "^16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-calendars": "^1.403.0",

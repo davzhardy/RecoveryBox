@@ -31,7 +31,7 @@ export default function App() {
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{headerShown : false}} component={LoginScreen}/>
             <Stack.Screen name="Home" component={HomeScreen}/>
-            <Stack.Screen name="Calendar" component={CalendarScreen}/>
+            <Stack.Screen name="Calendar" options={{ headerShown: false }} component={CalendarScreen}/>
             <Stack.Screen name="ModifySuggestions" component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen}/>
             <Stack.Screen name="History" component={HistoryScreen}/>

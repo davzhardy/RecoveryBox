@@ -1,17 +1,15 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import CalendarDH from '../components/Calendar'
 
-
-// https://github.com/tiaanduplessis/react-native-datepicker-modal
-// https://github.com/react-native-community/datetimepicker
-// https://github.com/wix/react-native-calendars
-
-function CalendarScreen () {
+function CalendarScreen ({ navigation } ) {
 
   return (
     <View style={styles.container}>
       <CalendarDH/>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <Text>Back to HomeScreen</Text>
+      </TouchableOpacity>
     </View>
   ); 
 }
