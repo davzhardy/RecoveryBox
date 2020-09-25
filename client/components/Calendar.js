@@ -22,8 +22,6 @@ function CalendarDH() {
 
   return (
     <View style={styles.container}>
-    <Modal
-    animationType='fade'>
       <Calendar
         current={now}
         minDate={'2019-05-10'}
@@ -46,7 +44,6 @@ function CalendarDH() {
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
       />
-    </Modal>
     </View>
   );
 }
