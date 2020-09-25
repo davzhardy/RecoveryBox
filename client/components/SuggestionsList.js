@@ -4,6 +4,7 @@ import { MediumAppText } from '../styles/text';
 import SuggestionItem from './SuggestionItem';
 import { useNavigation } from '@react-navigation/native';
 import {useDispatch, useSelector} from "react-redux";
+import Divider from './Divider'
 
 function SuggestionsList () {
 
@@ -47,13 +48,14 @@ function SuggestionsList () {
           />
         )}
       </View>
+      <Divider/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',

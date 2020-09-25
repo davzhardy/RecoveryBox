@@ -72,7 +72,7 @@ function MoodVisuals () {
   return (
     <View style={styles.container}>
       <BoldAppText>Your moods for the past [week]</BoldAppText>
-      <VictoryGroup width={350} height={200} >
+      <VictoryGroup width={350} height={200} styles={styles.container}>
         <VictoryScatter
         data={randomTopMoods} 
         animate={{
@@ -112,7 +112,12 @@ function MoodVisuals () {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
 
 export default MoodVisuals;

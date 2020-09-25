@@ -4,13 +4,16 @@ import { useSelector } from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
 import Divider from '../components/Divider'
 import { useNavigation } from '@react-navigation/native';
-import { DateTime } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 
-function HomeWelcome () {
+function HomeWelcome ( { historicalDate = false }) {
 
   const navigation = useNavigation();
 
-  const now = useSelector((state) => DateTime.fromMillis(state.helper.now))
+  const todaysDate = useSelector((state) => state.helper.now);
+
+  const dateToUse = historicalDate ? historicalDate : todaysDate;
+  const now = DateTime.fromMillis(dateToUse);
   let dayFormat = ''
 
   if (now.day === 1 || now.day === 21 || now.day === 31)
@@ -22,12 +25,26 @@ function HomeWelcome () {
   else dayFormat = 'th';
 
   const formattedDate = now.toFormat(`d'${dayFormat}' MMM y`)  
+  const duration = Duration.fromMillis((todaysDate - historicalDate)).toFormat('d')
 
   const username = useSelector((state) => state.user.username)
 
+  const displayDate = historicalDate ? `${duration} days ago` : 'Today'
+  const displayUsername = historicalDate ? <></> : <View><BoldAppText>Hello {username}!</BoldAppText></View>
+
+  if (historicalDate) {
+    return (
+      <View style={styles.container}>
+        <View>
+          <BoldAppText>{formattedDate}</BoldAppText>
+          <MediumAppText >{displayDate}</MediumAppText>
+        </View>
+        <Divider/>
+      </View>
+    )
+  } else {
   return (
     <View style={styles.container}>
-      
       <View style={styles.header}>
         <TouchableOpacity
           title="Calendar Icon"
@@ -35,9 +52,8 @@ function HomeWelcome () {
         >
           <Image style={styles.icons} source={require('../assets/calendarIcon.png')}/>
         </TouchableOpacity>
-
         <View>
-          <BoldAppText >Today</BoldAppText>
+          <BoldAppText>{displayDate}</BoldAppText>
           <MediumAppText >{formattedDate}</MediumAppText>
         </View>
 
@@ -48,14 +64,11 @@ function HomeWelcome () {
           <Image style={styles.icons} source={require('../assets/settingsIcon.png')}/>
         </TouchableOpacity>
       </View>
-
-      <View>
-        <BoldAppText>Hello {username}!</BoldAppText>
-      </View>
-
+      {displayUsername}
       <Divider/>
     </View>
   );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -63,7 +76,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
-    flex: 1,
   },
   header: {
     alignItems: 'flex-start',

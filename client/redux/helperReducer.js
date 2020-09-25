@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 
 const initialState = {
-  now: DateTime.local().ts,
+  now: DateTime.local().toUTC().ts,
   selectedDate: false,
 }
 

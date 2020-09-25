@@ -34,7 +34,7 @@ export default function App() {
             <Stack.Screen name="Calendar" options={{ headerShown: false }} component={CalendarScreen}/>
             <Stack.Screen name="ModifySuggestions" options={{ headerShown: false }} component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen}/>
-            <Stack.Screen name="History" component={HistoryScreen}/>
+            <Stack.Screen name="History" options={{ title: 'How were you feeling?' }} component={HistoryScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider> 

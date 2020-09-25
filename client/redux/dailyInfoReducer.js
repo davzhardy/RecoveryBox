@@ -1,8 +1,8 @@
 const initialState = {
-  meetings: 2,
+  meetings: 0,
   feeling: false,
   moods: [],
-  suggestions: ['Meetings'],
+  suggestions: [],
 }
 
 const dailyInfoReducer = (state = initialState, action) => {
@@ -31,6 +31,11 @@ const dailyInfoReducer = (state = initialState, action) => {
     return {
       ...state,
       suggestions: state.suggestions.filter(elInList => elInList !== action.payload)
+    }
+    case "UPDATE_MOODS":
+    return {
+      ...state,
+      moods: [...state.moods, ...action.payload]
     }
     default:
       return state;

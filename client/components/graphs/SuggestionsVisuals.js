@@ -75,7 +75,7 @@ function SuggestionsVisuals () {
   return (
     <View style={styles.container}>
       <BoldAppText>Your top suggesitons this [week]</BoldAppText>
-      <VictoryGroup width={350} >
+      <VictoryGroup width={350} height={200} styles={styles.container} >
         <VictoryStack>
         <VictoryArea 
         data={randomTopSuggestions} 
@@ -108,7 +108,12 @@ function SuggestionsVisuals () {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
 
 export default SuggestionsVisuals;

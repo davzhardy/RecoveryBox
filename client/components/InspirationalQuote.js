@@ -17,6 +17,7 @@ function InpsirationalQuote ({ quote, author }) {
 
 const styles = StyleSheet.create({
   container: {
+
   },
 });
 

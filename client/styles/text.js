@@ -4,7 +4,7 @@ import { Text } from "react-native";
 export const textBoldStyles = {
   fontFamily: 'Montserrat_700Bold',
   fontStyle: "normal",
-  fontSize: 30,
+  fontSize: 22,
   color: "#2A2A30",
   marginBottom: 10,
 };

@@ -34,7 +34,7 @@ function FeelingGraph () {
   return (
     <View style={styles.container}>
       <BoldAppText>Your contentment level for a [week]</BoldAppText>
-      <VictoryChart width={350} >
+      <VictoryChart width={350} height={200} styles={styles.container}>
           <Defs>
             <LinearGradient id="gradient1"
               x1="0%" 
@@ -75,9 +75,12 @@ function FeelingGraph () {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-
 
 
 export default FeelingGraph;

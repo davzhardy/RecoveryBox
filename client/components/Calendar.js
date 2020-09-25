@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Modal } from 'react-native';
 import {Calendar } from 'react-native-calendars'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -20,9 +20,10 @@ function CalendarDH() {
     navigation.navigate('History');
   }
 
-
   return (
     <View style={styles.container}>
+    <Modal
+    animationType='fade'>
       <Calendar
         current={now}
         minDate={'2019-05-10'}
@@ -45,6 +46,7 @@ function CalendarDH() {
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
       />
+    </Modal>
     </View>
   );
 }
