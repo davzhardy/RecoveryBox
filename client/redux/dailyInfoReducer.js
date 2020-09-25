@@ -1,6 +1,6 @@
 const initialState = {
   meetings: 2,
-  feeling: 50,
+  feeling: false,
   moods: [],
   suggestions: [],
 }
@@ -17,6 +17,11 @@ const dailyInfoReducer = (state = initialState, action) => {
         ...state,
         meetings: state.meetings -1
       }
+      case "UPDATE_FEELING":
+        return {
+          ...state,
+          feeling: action.payload
+        }  
     default:
       return state;
    }

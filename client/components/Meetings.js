@@ -33,14 +33,6 @@ function Meetings () {
           <BoldAppText style={{fontSize: 18, marginRight: 10}}>{meetings}</BoldAppText>
           <MediumAppText style={{color: '#BBBCCD'}} >MEETINGS TODAY</MediumAppText>
         </View>
-        <View style={styles.infocontainer}>
-          <BoldAppText style={{fontSize: 18, marginRight: 10}}>XXX</BoldAppText>
-          <MediumAppText style={{color: '#BBBCCD'}} >MEETINGS IN 90 DAYS</MediumAppText>
-        </View>
-        <View style={styles.infocontainer}>
-          <BoldAppText style={{fontSize: 18, marginRight: 10}}>YYYY</BoldAppText>
-          <MediumAppText style={{color: '#BBBCCD'}}>DAYS IN RECOVERY</MediumAppText>
-        </View>
       </View>
       <Divider/>
     </View>
