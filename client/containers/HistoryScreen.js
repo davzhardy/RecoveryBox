@@ -4,7 +4,7 @@ import HomeWelcome from '../components/HomeWelcome'
 import _ from 'lodash'
 import SuggestionItem from '../components/SuggestionItem'
 import {useDispatch, useSelector } from "react-redux";
-import { DateTime } from 'luxon'
+import {DateTime} from 'luxon'
 
 function HistoryScreen () {
 
@@ -13,6 +13,8 @@ function HistoryScreen () {
   const seladj = selectedDate - UTCadjustment
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
   const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === seladj)
+
+  const todaysDate = useSelector((state) => state.helper.now);
 
   //TODO remove UTC adjustment when data is sitting on server
 

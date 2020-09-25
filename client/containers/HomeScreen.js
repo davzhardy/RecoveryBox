@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
 import Feeling from '../components/Feeling'
 import Moods from '../components/Moods'
@@ -9,6 +9,7 @@ import InspirationalQuote from '../components/InspirationalQuote'
 import ApiService from '../ApiService'
 import { AppLoading } from 'expo';
 import {useDispatch, useSelector } from "react-redux";
+import {DateTime} from 'luxon';
 
 function HomeScreen () {
 
@@ -26,6 +27,19 @@ function HomeScreen () {
   
   const quoteItem = useSelector((state) => state.dailyQuote.todaysQuote);
 
+  const fullHistoricalInfo = useSelector((state) => state.historicalData);
+  const dailyInfo = useSelector((state) => state.dailyInfo);
+  const todaysDate = useSelector((state) => state.helper.now);
+
+  function clickHandler (arg) {
+    arg.date = DateTime.fromMillis(todaysDate).toUTC().startOf('day').ts
+    dispatch({
+      type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
+      payload: arg
+    })
+    console.log(fullHistoricalInfo)
+  }
+
   return (
     !quoteItem ?
     <AppLoading/>
@@ -37,6 +51,11 @@ function HomeScreen () {
       <Feeling/>
       <SuggestionsList/>
       <Moods/>
+      <View style={styles.wrapper}>
+        <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
+          <Text>Submit your data for the day</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -45,7 +64,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     textAlign: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+  button: {
+    width: '20%',
+    height: 50,
+    borderRadius: 5,
+    marginHorizontal: 20,
+    backgroundColor: '#FFF4E4',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wrapper: {
+    alignItems: 'center',
+    marginTop: 5,
   },
 
 });

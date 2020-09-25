@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector} from "react-redux";
 import _ from 'lodash';
+import { BoldAppText, MediumAppText } from '../styles/text'
 
 function MeetingsSummary () {
 
@@ -13,7 +14,7 @@ function MeetingsSummary () {
   const [timePeriod, setTimePeriod] = useState(week)
 
   function meetingsReducer (arr, time) {
-    const copyArr = arr.slice(0, time-1) 
+    const copyArr = arr.slice(-time) 
     const number = copyArr.reduce((acc, value) => acc + value)
     return number
   } 
@@ -22,7 +23,7 @@ function MeetingsSummary () {
 
   return (
     <View>
-      <Text>You've been to {meetingsToDisplay} meetings the last {timePeriod} days</Text>
+      <BoldAppText>You've been to {meetingsToDisplay} meetings the last {timePeriod} days</BoldAppText>
     </View>
   );
 }

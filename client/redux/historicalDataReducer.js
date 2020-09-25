@@ -59,6 +59,8 @@ const initialState = {
 
 const historicalDataReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "UPDATE_HISTORICALDATA_WITH_DAILYINFO":
+      return {...state, xxx: action.payload }
     default:
       return state;
   }

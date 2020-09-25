@@ -1,5 +1,5 @@
 const initialState = {
-  username: 'Set me 2 false at end of dev',
+  username: 'Dev Placeholder',
   password: 'replace me in the userreducer when dev is over',
   firstName: 'David',
   lastName: 'Hardy',
