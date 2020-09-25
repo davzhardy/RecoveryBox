@@ -2,7 +2,7 @@ const initialState = {
   meetings: 2,
   feeling: false,
   moods: [],
-  suggestions: [],
+  suggestions: ['Meetings'],
 }
 
 const dailyInfoReducer = (state = initialState, action) => {
@@ -17,11 +17,21 @@ const dailyInfoReducer = (state = initialState, action) => {
         ...state,
         meetings: state.meetings -1
       }
-      case "UPDATE_FEELING":
-        return {
-          ...state,
-          feeling: action.payload
-        }  
+    case "UPDATE_FEELING":
+      return {
+        ...state,
+        feeling: action.payload
+      }
+    case "ADDTO_SUGGESTIONS":
+      return {
+        ...state,
+        suggestions: [...state.suggestions, action.payload]
+      }
+    case "REMOVEFROM_SUGGESTIONS":
+    return {
+      ...state,
+      suggestions: state.suggestions.filter(elInList => elInList !== action.payload)
+    }
     default:
       return state;
    }

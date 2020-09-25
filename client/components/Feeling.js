@@ -27,7 +27,7 @@ function Feeling () {
         maximumValue={10}
         onValueChange={value => setSliderValue(value)}
         onSlidingComplete={value => handleSliderCompletion(value)}
-        minimumTrackTintColor="blue"
+        minimumTrackTintColor="red"
         maximumTrackTintColor="#000000"
       />
       <Text>{sliderValue}</Text>

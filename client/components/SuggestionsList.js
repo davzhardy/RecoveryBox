@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, TouchableOpacity, Text } from 'react-native';
 import { MediumAppText } from '../styles/text';
 import SuggestionItem from './SuggestionItem';
 import { useNavigation } from '@react-navigation/native';
@@ -7,8 +7,24 @@ import {useDispatch, useSelector} from "react-redux";
 
 function SuggestionsList () {
 
-  const suggestionList = useSelector((state) => state.settings.suggestionSettings.suggestionsList);
+  const dispatch = useDispatch();
+  const suggestionListToDisplay = useSelector((state) => state.settings.suggestionSettings.suggestionsList);
   const navigation = useNavigation();
+  const dailySuggestions = useSelector((state) => state.dailyInfo.suggestions);
+
+  function clickHandler (list, suggestion) {
+    if (!list.includes(suggestion)) {
+      dispatch({
+        type: "ADDTO_SUGGESTIONS",
+        payload: suggestion
+      });
+    } else {
+      dispatch({
+        type: "REMOVEFROM_SUGGESTIONS",
+        payload: suggestion
+      });
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -21,11 +37,13 @@ function SuggestionsList () {
         </TouchableOpacity>
       </View>
       <View style={styles.suggestionWrapper}>
-        {suggestionList.map(
+        {suggestionListToDisplay.map(
           suggestion =>
           <SuggestionItem
             key={suggestion}
             name={suggestion}
+            clickHandler={clickHandler}
+            selected={dailySuggestions.includes(suggestion) ? true : false}
           />
         )}
       </View>
