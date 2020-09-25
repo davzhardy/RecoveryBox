@@ -2,6 +2,8 @@ const User = require('./models/user');
 const Settings = require('./models/user');
 const FullData = require('./models/fullData');
 const fetch = require('node-fetch');
+const db = require('./models/index');
+
 
 async function getQuote (req, res) {
   try {
@@ -19,7 +21,8 @@ async function getQuote (req, res) {
 async function getUserInfo (req, res) {
   try {
     console.log(req)
-    const user = 'test';
+    const query = 'test';
+    const user = await db.User.findAll({ where: { id: `${query}`}})
     res.status(200);
     res.send(user);
   } catch (e) {

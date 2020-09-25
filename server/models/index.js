@@ -1,15 +1,32 @@
-const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const db = {};
 
-const dbUrl = 'mongodb://localhost:27017/';
-const dbName = 'weeklyassessment6DH';
-
-mongoose.connect(`${dbUrl}${dbName}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, });
-
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:')); // eslint-disable-line no-console
-db.once('open', function () {
-  console.log('Connected to MongoDB database'); // eslint-disable-line no-console
+const sequelize = new Sequelize('reactmovies', 'davidhardy', 'admin', { //REL reminder to change the table name
+  host: 'localhost',
+  dialect: 'postgres',
+  logging: false,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
 });
 
-module.exports = mongoose;
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  });
+  
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;

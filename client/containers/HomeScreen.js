@@ -40,6 +40,8 @@ function HomeScreen () {
     console.log(fullHistoricalInfo)
   }
 
+//TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
+
   return (
     !quoteItem ?
     <AppLoading/>
