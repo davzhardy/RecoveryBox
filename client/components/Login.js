@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'reac
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
 import ApiService from '../ApiService'
+import colors from '../styles/colors'
 
 function LoginScreen ({ navigation }) {
 
@@ -52,24 +53,29 @@ function LoginScreen ({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Welcome to RecoveryBox</BoldAppText>
-      <MediumAppText style={{fontSize : 20}}>Please enter your details to log-in</MediumAppText>
-      <TextInput
-        placeholder='Enter a username'
-        value= {usernameInput ? usernameInput : ''}
-        onChangeText={text => onChangeUsername(text)}
-        style={styles.input}
-        textContentType={'username'}
-      />
-      <TextInput
-        placeholder='Enter a password'
-        value= {passwordInput ? passwordInput : ''}
-        secureTextEntry={true}
-        onChangeText={text => onChangePassword(text)}
-        style={styles.input}
-      />
+      <BoldAppText style={styles.logo}>RecoveryBox</BoldAppText>
+      <View style={styles.inputView} >
+        <TextInput
+          placeholder='Enter a username'
+          value= {usernameInput ? usernameInput : ''}
+          onChangeText={text => onChangeUsername(text)}
+          style={styles.inputText}
+          placeholderTextColor={colors.platinum}
+          textContentType={'username'}
+        />
+      </View>
+      <View style={styles.inputView} >
+        <TextInput
+          placeholder='Enter a password'
+          value= {passwordInput ? passwordInput : ''}
+          secureTextEntry={true}
+          style={styles.inputText}
+          onChangeText={text => onChangePassword(text)}
+          placeholderTextColor={colors.platinum}
+        />
+      </View>
       <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
-        <MediumAppText>Please submit me</MediumAppText>
+        <Text style={styles.text}>LOGIN</Text>
       </TouchableOpacity>
       <View>
         { 
@@ -85,21 +91,43 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.platinum,
   },
-  input: {
-    marginTop: 20,
-    marginBottom: 20,
+  inputView:{
+    width:"80%",
+    backgroundColor:"#465881",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20,
+  },
+  logo: {
+    color: colors.orange, 
+    fontSize: 40,
+    marginBottom: 60,
+  },
+  inputText: {
+    height:50,
+    color:'white',
     textAlign: 'center',
   },
   button: {
-    width: '10%',
-    height: 50,
-    borderRadius: 5,
-    marginHorizontal: 20,
-    backgroundColor: '#ADF1FF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width:"60%",
+    backgroundColor: colors.orange,
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10,
+  },
+  text: {
+    fontFamily: 'Montserrat_500Medium',
+    fontStyle: "normal",
+    fontSize: 16,
+    color: "white",
+
   }
 });
 

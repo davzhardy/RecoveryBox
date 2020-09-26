@@ -10,6 +10,7 @@ import ApiService from '../ApiService'
 import { AppLoading } from 'expo';
 import {useDispatch, useSelector } from "react-redux";
 import {DateTime} from 'luxon';
+import colors from '../styles/colors'
 
 function HomeScreen () {
 
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.lightWarmGray,
   },
   button: {
     width: '20%',

@@ -2,7 +2,7 @@ const initialState = {
   id: false,
   email: false,
   username: false,
-  password: 'replace me in the userreducer when dev is over',
+  password: 'TODO: replace me',
   firstName: false,
   lastName: false,
   registrationDate: false,

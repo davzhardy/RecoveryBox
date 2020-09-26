@@ -1,24 +1,25 @@
 
+export default {
+ celeste: '#AFFDFD',
+ cosmicLatte: '#FFF4E4',
+ platinum :'#DFE2E2',
+ orange :'#FF8787',
+ pink :'#FF55B8',
+ lightGray :'#DBDBDB',
+ lightWarmGray :'#f5f5f5',
+ offWhite: '#b7bdc5',
+ 
+}
 
-const blizzardBlue = '#ADF1FF'
-// rgb(173, 241, 255)
 
-const celeste = '#AFFDFD'
-// rgb(175, 253, 253)
 
-const cosmicLatte = '#FFF4E4'
-// rgb(255, 244, 228)
 
-const platinum = '#DFE2E2'
-// rgb(223, 226, 226)
 
-const orange = '#FF8787'
 
-const pink = '#FF55B8'
 
-const greyText = '#7B7C86'
 
-const blackText = '#2A2A30'
+
+
 
 
 //TODO delete old data

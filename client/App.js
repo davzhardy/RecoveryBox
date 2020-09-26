@@ -12,6 +12,7 @@ import {useFonts, Montserrat_500Medium, Montserrat_700Bold} from '@expo-google-f
 import { AppLoading } from 'expo';
 import { Provider } from "react-redux";
 import store from './redux/store'
+import colors from './styles/colors'
 
 const Stack = createStackNavigator();
 
@@ -30,7 +31,17 @@ export default function App() {
        <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{headerShown : false}} component={LoginScreen}/>
-            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={{ 
+              title: 'Today',
+              headerStyle: {
+                backgroundColor: colors.platinum,
+              },
+              headerTitleStyle: {
+                color: colors.orange,
+                fontFamily: 'Montserrat_700Bold',
+              }
+              }} 
+            />
             <Stack.Screen name="Calendar" options={{ headerShown: false }} component={CalendarScreen}/>
             <Stack.Screen name="ModifySuggestions" options={{ headerShown: false }} component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen}/>
