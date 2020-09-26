@@ -35,6 +35,8 @@ function LoginScreen ({ navigation }) {
       }
       for (let i of data[0].Data) {
         i.date = Number(i.date)
+        i.moods = i.moods.replace(/[\[\]',]+/g,'').split(' ')
+        i.suggestions = i.suggestions.replace(/[\[\]',]+/g,'').split(' ')
       }
       let dispatchtoHistoricalData = data[0].Data
       dispatch({

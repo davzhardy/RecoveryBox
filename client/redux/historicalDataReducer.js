@@ -1,5 +1,7 @@
 const initialState = {}
 
+// TODO refactor this to some kind of array so the data is more easily accessible
+
 const historicalDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_HISTORICALDATA_WITH_DAILYINFO":
