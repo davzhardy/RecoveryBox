@@ -13,9 +13,6 @@ function HistoryScreen () {
   const seladj = selectedDate - UTCadjustment
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
   const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === seladj)
-
-  const todaysDate = useSelector((state) => state.helper.now);
-
   //TODO remove UTC adjustment when data is sitting on server
 
   if (requiredInfo.length > 0) {

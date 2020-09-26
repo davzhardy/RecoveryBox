@@ -1,6 +1,3 @@
-const User = require('./models/user');
-const Settings = require('./models/user');
-const FullData = require('./models/fullData');
 const fetch = require('node-fetch');
 const db = require('./models/index');
 
@@ -31,7 +28,39 @@ async function getUserInfo (req, res) {
   }
 }
 
-async function postUserInfo (req, res) {}
+async function postData (req, res) {
+  const data = req.body
+  try {
+    const newData = await db.Data.create({
+
+    })
+  } catch {
+    console.log('Error', e); // eslint-disable-line no-console
+    res.sendStatus(500);
+  }
+}
+
+async function Test (req, res) {
+  console.log('recieved')
+  res.sendStatus(201)
+}
+
+async function postUserInfo (req, res) {
+  const user = req.body
+  try {
+    const newUser = await db.User.create({
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      registrationDate: user.registrationDate,
+    })
+    res.status(201).send(JSON.stringify(newUser))
+  } catch (e) {
+    console.log('Error', e); // eslint-disable-line no-console
+    res.sendStatus(500);
+  }
+}
 
 async function getSettingsInfo () {}
 
@@ -43,4 +72,6 @@ module.exports = {
   getSettingsInfo,
   postUserInfo,
   postSettingsInfo,
+  postData,
+  Test
 };

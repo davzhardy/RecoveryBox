@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
 
-const sequelize = new Sequelize('reactmovies', 'davidhardy', 'admin', { //REL reminder to change the table name
+const sequelize = new Sequelize('soloprojecttest', 'davidhardy', 'admin', { //REL reminder to change the table name
   host: 'localhost',
   dialect: 'postgres',
   logging: false,
@@ -25,6 +25,12 @@ fs
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db)
+  }
+});
   
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
