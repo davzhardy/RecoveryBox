@@ -1,14 +1,13 @@
 
 export default {
- celeste: '#AFFDFD',
- cosmicLatte: '#FFF4E4',
- platinum :'#DFE2E2',
- orange :'#FF8787',
- pink :'#FF55B8',
- lightGray :'#DBDBDB',
- lightWarmGray :'#f5f5f5',
- offWhite: '#b7bdc5',
- 
+  blue: '#2F80ED',
+  cosmicLatte: '#FFF4E4',
+  platinum :'#DFE2E2',
+  orange :'#FF8787',
+  pink :'#FF55B8',
+  lightGray :'#DBDBDB',
+  lightWarmGray :'#f5f5f5',
+  darkGrayFont: "#2A2A30",
 }
 
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { MediumAppText, BoldAppText } from '../styles/text'
 import Divider from '../components/Divider'
-
+import colors from '../styles/colors'
+import _ from 'lodash'
 
 function Meetings () {
 
@@ -17,24 +18,41 @@ function Meetings () {
     dispatch({type: 'DECREMENT_DAILY_MEETINGS'});
   };
 
+  //TODO put in a reducer as this info is used on multiple screens
+  // const historicalData = useSelector((state) => state.historicalData);
+  // const meetingsData = _.map(historicalData, el => el.meetings) 
+
+  // function meetingsReducer (arr) {
+  //   const copyArr = arr.slice(0) 
+  //   const number = copyArr.reduce((acc, value) => acc + value)
+  //   return number
+  // } 
+
+  // const totalMeetings = meetingsReducer(meetingsData)
+
   return (
     <View style={styles.container}>
       <View style={styles.topcontainer}>
         <TouchableOpacity style={styles.button} onPress={onMinus}>
-          <Text style={{color: '#FF61AB', fontSize: 25, fontWeight: '700'}}>-</Text>
+          <Image source={require('../assets/remove.png')}/>
         </TouchableOpacity>
-        <MediumAppText style={{color: "#2A2A30", fontSize: 22}}>My Meetings</MediumAppText>
+        <BoldAppText style={{fontSize: 18}}>Meetings</BoldAppText>
         <TouchableOpacity style={styles.button} onPress={onPlus}>
-          <Text style={{color: '#FF61AB', fontSize: 25, fontWeight: '600'}}>+</Text>
+        <Image source={require('../assets/add.png')}/>
         </TouchableOpacity>
       </View>
       <View>
         <View style={styles.infocontainer}>
-          <BoldAppText style={{fontSize: 18, marginRight: 10}}>{meetings}</BoldAppText>
-          <MediumAppText style={{color: '#BBBCCD'}} >MEETINGS TODAY</MediumAppText>
+          <View tyle={styles.infowrapper}>
+            <BoldAppText style={styles.number}>{meetings}</BoldAppText>
+            <MediumAppText style={styles.text}>MEETINGS TODAY</MediumAppText>
+          </View>
+          <View>
+            <BoldAppText style={styles.number}>10</BoldAppText>
+            <MediumAppText style={styles.text}>TOTAL MEETINGS</MediumAppText>
+          </View>
         </View>
       </View>
-      <Divider/>
     </View>
   );
 }
@@ -45,27 +63,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   topcontainer: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: "#DDDDE6",
-    width: 40,
-    height: 40,
+    backgroundColor: colors.blue,
+    width: 30,
+    height: 30,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center', 
   },
   infocontainer: {
-    width: '80%',
-    marginLeft: 100,
+    marginTop: 10,
     flexDirection: "row",
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   }, 
+  infowrapper: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  number: {
+    fontSize: 16,
+    marginRight: 5,
+  },
+  text: {
+    fontSize: 10,
+  },
 });
 
 

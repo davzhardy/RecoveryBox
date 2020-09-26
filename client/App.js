@@ -34,7 +34,8 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} options={{ 
               title: 'Today',
               headerStyle: {
-                backgroundColor: colors.platinum,
+                backgroundColor: 'white',
+                
               },
               headerTitleStyle: {
                 color: colors.orange,

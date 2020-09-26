@@ -1,11 +1,12 @@
 import React from "react";
 import { Text } from "react-native";
+import colors from './colors'
 
 export const textBoldStyles = {
   fontFamily: 'Montserrat_700Bold',
   fontStyle: "normal",
   fontSize: 22,
-  color: "#2A2A30",
+  color: colors.darkGrayFont,
   marginBottom: 10,
 };
 

@@ -72,12 +72,19 @@ function HomeScreen () {
     <AppLoading/>
     :
     <View style={styles.container}>        
-      <HomeWelcome/>
-      <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/>
-      <Meetings/>
-      <Feeling/>
-      <SuggestionsList/>
-      <Moods/>
+      <View style={styles.wrapperZero}>
+        <Meetings/>
+      </View>
+      {/* <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/> */}
+      <View style={styles.wrapperOne}> 
+        <Feeling/>
+      </View>
+      <View style={styles.wrapperTwo}>
+        <SuggestionsList/>
+      </View>  
+      <View style={styles.wrapperTwo}>
+        <Moods/>
+      </View>
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
           <Text>Submit your data for the day</Text>
@@ -90,9 +97,7 @@ function HomeScreen () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    textAlign: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.lightWarmGray,
+    backgroundColor: colors.platinum,
   },
   button: {
     width: '20%',
@@ -102,6 +107,39 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF4E4',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  wrapperZero: {
+    flexDirection: 'row',
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
+    margin: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+  },
+  wrapperOne: {
+    flexDirection: 'row',
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
+    marginTop: 1,
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+  },
+  wrapperTwo: {
+    flexDirection: 'row',
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
+    marginTop: 1,
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
   },
   wrapper: {
     alignItems: 'center',

@@ -45,7 +45,7 @@ function HomeWelcome ( { historicalDate = false }) {
   } else {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity
           title="Calendar Icon"
           onPress={() => navigation.navigate('Calendar')}
@@ -63,8 +63,10 @@ function HomeWelcome ( { historicalDate = false }) {
         >
           <Image style={styles.icons} source={require('../assets/settingsIcon.png')}/>
         </TouchableOpacity>
+      </View> */}
+      <View>
+        {displayUsername}
       </View>
-      {displayUsername}
       <Divider/>
     </View>
   );
@@ -73,9 +75,12 @@ function HomeWelcome ( { historicalDate = false }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: 'center',
+    // borderRadius: 5,
+    // backgroundColor: 'white',
+    // elevation: 1,
+    margin: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
   },
   header: {
     alignItems: 'flex-start',
@@ -84,6 +89,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
     marginTop: 5,
+
   },
   icons: {
     width: 34,
