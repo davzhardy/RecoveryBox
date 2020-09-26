@@ -2,11 +2,13 @@ const router = require('express').Router();
 const query = require('./controller');
 
 router.get('/apirequest', query.getQuote);
-router.get('/queryuser', query.getUserInfo);
-router.get('/querysettings', query.getSettingsInfo);
+router.get('/user/:username', query.getUserInfo);
+router.get('/data/:id', query.getAllData);
 router.post('/adduser', query.postUserInfo);
-router.post('/query', query.postSettingsInfo);
 router.post('/adddata', query.postData);
-router.post('/test', query.Test);
+
+//TODO do these routes
+router.put('/addsettings', query.postSettingsInfo);
+router.get('/querysettings', query.getSettingsInfo);
 
 module.exports = router;

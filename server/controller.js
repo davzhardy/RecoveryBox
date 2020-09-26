@@ -14,14 +14,24 @@ async function getQuote (req, res) {
   }
 }
 
-
 async function getUserInfo (req, res) {
   try {
-    console.log(req)
-    const query = 'test';
-    const user = await db.User.findAll({ where: { id: `${query}`}})
+    const username = req.params.username
+    const user = await db.User.findAll({ where: { username: `${username}`}})
     res.status(200);
     res.send(user);
+  } catch (e) {
+    console.log('Error', e); // eslint-disable-line no-console
+    res.sendStatus(500);
+  }
+}
+
+async function getAllData (req, res) {
+  try {
+    const userId = req.params.id
+    const data = await db.Data.findAll({ where: { UserId: `${userId}`}})
+    res.status(200);
+    res.send(data);
   } catch (e) {
     console.log('Error', e); // eslint-disable-line no-console
     res.sendStatus(500);
@@ -32,30 +42,33 @@ async function postData (req, res) {
   const data = req.body
   try {
     const newData = await db.Data.create({
-
+      date: data.date,
+      meetings: data.meetings,
+      feeling: data.feeling,
+      moods: data.moods,
+      suggestions: data.suggestions,
+      UserId: data.UserId
     })
-  } catch {
+    res.status(201).send(newData)
+  } catch (e) {
     console.log('Error', e); // eslint-disable-line no-console
     res.sendStatus(500);
   }
 }
 
-async function Test (req, res) {
-  console.log('recieved')
-  res.sendStatus(201)
-}
-
 async function postUserInfo (req, res) {
+  //TODO add ability to reject request if username already taken
   const user = req.body
   try {
     const newUser = await db.User.create({
       email: user.email,
+      username: user.username,
       password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
       registrationDate: user.registrationDate,
     })
-    res.status(201).send(JSON.stringify(newUser))
+    res.status(201).send(newUser)
   } catch (e) {
     console.log('Error', e); // eslint-disable-line no-console
     res.sendStatus(500);
@@ -69,9 +82,9 @@ async function postSettingsInfo () {}
 module.exports = {
   getQuote,
   getUserInfo,
+  getAllData,
   getSettingsInfo,
   postUserInfo,
   postSettingsInfo,
   postData,
-  Test
 };
