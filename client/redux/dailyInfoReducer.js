@@ -1,6 +1,6 @@
 const initialState = {
   meetings: 0,
-  feeling: false,
+  feeling: 0,
   moods: [],
   suggestions: [],
 }

@@ -31,7 +31,7 @@ function HomeScreen () {
   const dailyInfo = useSelector((state) => state.dailyInfo);
   const todaysDate = useSelector((state) => state.helper.now);
   const userId = useSelector((state) => state.user.id);
-  console.log(userId)
+  console.log(fullHistoricalInfo)
 
   function clickHandler (arg) {
     arg.date = DateTime.fromMillis(todaysDate).toUTC().startOf('day').ts
@@ -40,7 +40,6 @@ function HomeScreen () {
       type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
       payload: arg
     })
-    console.log(fullHistoricalInfo)
   }
 
 //TODO refactor the data flow, there must be a better way to do this
@@ -55,10 +54,8 @@ function HomeScreen () {
     })
     .then(data => {
       let objToDispatch = {}
-      
-      
-      console.log('datafromserver',data)
-      // dispatch({
+
+            // dispatch({
       //   type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
       //   payload: data
       // })

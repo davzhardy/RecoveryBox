@@ -13,13 +13,9 @@ function LoginScreen ({ navigation }) {
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
 
-  const submitHandler = (arg) => {
+  const submitHandler = async () => {
     if (usernameInput && passwordInput) {
-      receiveInfoandData(usernameInput)
-      dispatch({
-        type: 'UPDATE_USERNAME',
-        payload: arg
-      })
+      await receiveInfoandData(usernameInput)
       navigation.navigate('Home');
     } else {
       setWarning(true);
@@ -29,14 +25,26 @@ function LoginScreen ({ navigation }) {
   function receiveInfoandData (username) {
     ApiService.getUserInfo(username)
     .then(data => {
-      let objToDispatch = {}
-      
-      
-      console.log('datafromserver',data)
-      // dispatch({
-      //   type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
-      //   payload: data
-      // })
+      let dispatchtoUser = {
+        id: data[0].id,
+        email: data[0].id,
+        username: data[0].username,
+        firstName: data[0].firstName,
+        lastName: data[0].lastName,
+        registrationDate: data[0].registrationDate,
+      }
+      for (let i of data[0].Data) {
+        i.date = Number(i.date)
+      }
+      let dispatchtoHistoricalData = data[0].Data
+      dispatch({
+        type: 'UPDATE_USERINFO',
+        payload: dispatchtoUser
+      })
+      dispatch({
+        type: 'CREATE_HISTORICALDATA',
+        payload: dispatchtoHistoricalData
+      })
     })
   }
 
@@ -58,7 +66,7 @@ function LoginScreen ({ navigation }) {
         onChangeText={text => onChangePassword(text)}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={() => submitHandler(usernameInput)}>
+      <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
         <MediumAppText>Please submit me</MediumAppText>
       </TouchableOpacity>
       <View>

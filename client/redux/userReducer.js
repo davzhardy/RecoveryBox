@@ -1,7 +1,7 @@
 const initialState = {
-  id: 1,
+  id: false,
   email: false,
-  username: 'cow',
+  username: false,
   password: 'replace me in the userreducer when dev is over',
   firstName: false,
   lastName: false,
@@ -14,6 +14,16 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         username: action.payload
+      }
+    case "UPDATE_USERINFO":
+      return {
+        ...state,
+        id: action.payload.id,
+        email: action.payload.email,
+        username: action.payload.username,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        registrationDate: action.payload.registrationDate,
       }
     default:
       return state;

@@ -42,7 +42,6 @@ async function getAllData (req, res) {
 
 async function postData (req, res) {
   const data = req.body
-  console.log(data)
   try {
     const newData = await db.Data.create({
       date: data.date,
