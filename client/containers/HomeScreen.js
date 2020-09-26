@@ -30,15 +30,40 @@ function HomeScreen () {
   const fullHistoricalInfo = useSelector((state) => state.historicalData);
   const dailyInfo = useSelector((state) => state.dailyInfo);
   const todaysDate = useSelector((state) => state.helper.now);
+  const userId = useSelector((state) => state.user.id);
+  console.log(userId)
 
   function clickHandler (arg) {
     arg.date = DateTime.fromMillis(todaysDate).toUTC().startOf('day').ts
+    createDailyData(arg)
     dispatch({
       type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
       payload: arg
     })
     console.log(fullHistoricalInfo)
   }
+
+//TODO refactor the data flow, there must be a better way to do this
+  function createDailyData (dailyData) {
+    ApiService.postDailyData( {
+      date: dailyData.date,
+      meetings: dailyData.meetings,
+      feeling: dailyData.feeling,
+      moods: JSON.stringify(dailyData.moods),
+      suggestions: JSON.stringify(dailyData.suggestions),
+      UserId: userId,
+    })
+    .then(data => {
+      let objToDispatch = {}
+      
+      
+      console.log('datafromserver',data)
+      // dispatch({
+      //   type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
+      //   payload: data
+      // })
+    })
+  };
 
 //TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
 

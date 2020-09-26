@@ -1,6 +1,8 @@
 import { useQuery } from "react-query";
 
-const BASE_URL = 'http://192.168.1.244:3001/'
+// TODO: refactor and integrate with react-query
+
+const BASE_URL = 'http://192.168.1.244:3001'
 
 function fetchRequest (path, options) {
   return fetch(BASE_URL + path, options)
@@ -18,11 +20,25 @@ function fetchRequest (path, options) {
 // }
 
 function getQuote () {
-  return fetchRequest('apirequest')
+  return fetchRequest('/apirequest')
 }
-// TODO: refactor and integrate with react-query
 
+function postDailyData (body) {
+  return fetchRequest('/adddata', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  })
+}
+
+function getUserInfo (username) {
+  return fetchRequest(`/user/${username}`, {
+    method: 'GET',
+  })
+}
 
 export default {
-  getQuote
+  getQuote,
+  postDailyData,
+  getUserInfo,
 }

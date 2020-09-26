@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'react-native';
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
-import store from '../redux/store'
+import ApiService from '../ApiService'
 
 function LoginScreen ({ navigation }) {
 
@@ -15,6 +15,7 @@ function LoginScreen ({ navigation }) {
 
   const submitHandler = (arg) => {
     if (usernameInput && passwordInput) {
+      receiveInfoandData(usernameInput)
       dispatch({
         type: 'UPDATE_USERNAME',
         payload: arg
@@ -23,6 +24,20 @@ function LoginScreen ({ navigation }) {
     } else {
       setWarning(true);
     }
+  }
+
+  function receiveInfoandData (username) {
+    ApiService.getUserInfo(username)
+    .then(data => {
+      let objToDispatch = {}
+      
+      
+      console.log('datafromserver',data)
+      // dispatch({
+      //   type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
+      //   payload: data
+      // })
+    })
   }
 
   return (
