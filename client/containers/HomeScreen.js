@@ -25,6 +25,8 @@ function HomeScreen () {
       })
     )
   },[])
+
+
   
   const quoteItem = useSelector((state) => state.dailyQuote.todaysQuote);
 
@@ -69,7 +71,7 @@ function HomeScreen () {
     !quoteItem ?
     <AppLoading/>
     :
-    <View style={styles.container}>
+    <View style={styles.container}>        
       <HomeWelcome/>
       <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/>
       <Meetings/>

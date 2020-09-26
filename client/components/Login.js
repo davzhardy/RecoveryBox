@@ -4,6 +4,8 @@ import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
 import ApiService from '../ApiService'
 import colors from '../styles/colors'
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+
 
 function LoginScreen ({ navigation }) {
 
@@ -17,7 +19,8 @@ function LoginScreen ({ navigation }) {
   const submitHandler = async () => {
     if (usernameInput && passwordInput) {
       await receiveInfoandData(usernameInput)
-      navigation.navigate('Home');
+      navigation.dispatch(
+        StackActions.replace('Home'))
     } else {
       setWarning(true);
     }
