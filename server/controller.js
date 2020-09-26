@@ -17,7 +17,9 @@ async function getQuote (req, res) {
 async function getUserInfo (req, res) {
   try {
     const username = req.params.username
-    const user = await db.User.findAll({ where: { username: `${username}`}})
+    const user = await db.User.findAll({
+       where: { username: `${username}`},
+      include: db.Data})
     res.status(200);
     res.send(user);
   } catch (e) {
