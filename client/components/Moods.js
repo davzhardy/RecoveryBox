@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {Picker} from '@react-native-community/picker';
 import Divider from './Divider'
+import { delay } from 'lodash';
 
 function Moods () {
  
@@ -37,24 +38,45 @@ function Moods () {
   // const [animationValue6, setAnimationValue6] = useState(0)
 
   const [animationValue, setAnimationValue] = useState(new Animated.Value(0));
-  const animationValue1 = new Animated.Value(0);
+  const [animationValue1, setAnimationValue1] = useState(new Animated.Value(0));
+  const [animationValue2, setAnimationValue2] = useState(new Animated.Value(0));
+  const [animationValue3, setAnimationValue3] = useState(new Animated.Value(0));
+  const [animationValue4, setAnimationValue4] = useState(new Animated.Value(0));
+  const [animationValue5, setAnimationValue5] = useState(new Animated.Value(0));
+  const [animationValue6, setAnimationValue6] = useState(new Animated.Value(0));
+
+//TODO refactor the loop to use animation.loop
 
   useEffect(() => {
-    fadeIn()
+    fadeIn(animationValue, 5000, 4000, 2000)
+    setInterval(()=>fadeIn(animationValue, 5000, 4000, 2000), 11000)
+    fadeIn(animationValue1, 6000, 5000, 0)
+    setInterval(()=>fadeIn(animationValue1, 6000, 5000, 0), 11000)
+    fadeIn(animationValue2, 6000, 5000, 3000)
+    setInterval(()=>fadeIn(animationValue2, 6000, 5000, 1000), 14000)
+    fadeIn(animationValue3, 4000, 4000, 5000)
+    setInterval(()=>fadeIn(animationValue3, 4000, 4000, 0), 13000)
+    fadeIn(animationValue4, 3000, 6000, 1500)
+    setInterval(()=>fadeIn(animationValue4, 3000, 6000, 1000), 10500)
+    fadeIn(animationValue5, 1000, 9000, 2000)
+    setInterval(()=>fadeIn(animationValue5, 1000, 9000, 500), 12000)
+    fadeIn(animationValue6, 2000, 9000, 4000)
+    setInterval(()=>fadeIn(animationValue6, 2000, 9000, 1000), 15000)
   });
 
-  function fadeIn () {
-    Animated.timing(animationValue, {
+  function fadeIn (value, duration1, duration2, delay1) {
+    Animated.timing(value, {
       toValue: 1,
-      duration: 5000,
+      duration: duration1,
+      delay: delay1,
       useNativeDriver: true,
-    }).start(() => fadeOut())
+    }).start(() => fadeOut(value, duration2))
   }
 
-  function fadeOut () {
-    Animated.timing(animationValue, {
+  function fadeOut (value, duration) {
+    Animated.timing(value, {
       toValue: 0,
-      duration: 3000,
+      duration: duration,
       useNativeDriver: true,
     }).start() 
   }
@@ -114,11 +136,11 @@ function Moods () {
         <View style={styles.rightWrapper}>
             <Animated.Text style={[styles.animatedText, {opacity:animationValue}]}>Calm</Animated.Text>
             <Animated.Text style={[styles.animatedText, {opacity:animationValue1}]}>Joyful</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Relaxed</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Peaceful</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Energised</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Content</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Happy</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue2}]}>Relaxed</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue3}]}>Peaceful</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue4}]}>Energised</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue5}]}>Content</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue6}]}>Happy</Animated.Text>
         </View>
       </View>
     </View>
