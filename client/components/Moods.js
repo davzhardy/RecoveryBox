@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Animated, Text, TouchableOpacity, TextInput } from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
@@ -26,6 +26,37 @@ function Moods () {
       type: 'UPDATE_MOODS',
       payload: moods
     })
+  }
+
+  // const [animationValue, setAnimationValue] = useState(0)
+  // const [animationValue1, setAnimationValue1] = useState(0)
+  // const [animationValue2, setAnimationValue2] = useState(0)
+  // const [animationValue3, setAnimationValue3] = useState(0)
+  // const [animationValue4, setAnimationValue4] = useState(0)
+  // const [animationValue5, setAnimationValue5] = useState(0)
+  // const [animationValue6, setAnimationValue6] = useState(0)
+
+  const [animationValue, setAnimationValue] = useState(new Animated.Value(0));
+  const animationValue1 = new Animated.Value(0);
+
+  useEffect(() => {
+    fadeIn()
+  });
+
+  function fadeIn () {
+    Animated.timing(animationValue, {
+      toValue: 1,
+      duration: 5000,
+      useNativeDriver: true,
+    }).start(() => fadeOut())
+  }
+
+  function fadeOut () {
+    Animated.timing(animationValue, {
+      toValue: 0,
+      duration: 3000,
+      useNativeDriver: true,
+    }).start() 
   }
 
   return (
@@ -81,8 +112,8 @@ function Moods () {
           </View>
         </View>
         <View style={styles.rightWrapper}>
-            <Animated.Text style={styles.animatedText}>Calm</Animated.Text>
-            <Animated.Text style={styles.animatedText}>Joyful</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue}]}>Calm</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue1}]}>Joyful</Animated.Text>
             <Animated.Text style={styles.animatedText}>Relaxed</Animated.Text>
             <Animated.Text style={styles.animatedText}>Peaceful</Animated.Text>
             <Animated.Text style={styles.animatedText}>Energised</Animated.Text>
