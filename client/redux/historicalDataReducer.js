@@ -49,7 +49,7 @@ const initialState = {1600300800000: {
 },
 1601078400000: {
   date: 1601078400000,
-  meetings: 9,
+  meetings: 5,
   feeling: 7,
   moods: ['tired', 'happy', 'sad'],
   suggestions: ['Prayer', 'Meditation', 'Useful', 'Kind to Myself']

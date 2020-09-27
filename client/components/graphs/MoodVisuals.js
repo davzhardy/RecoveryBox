@@ -4,10 +4,11 @@ import { useSelector} from "react-redux";
 import { MediumAppText, BoldAppText } from '../../styles/text'
 import Divider from '../Divider'
 import { VictoryScatter, VictoryGroup } from './Victory';
-
 import _ from 'lodash';
 import { DateTime } from 'luxon'
 import {Defs, LinearGradient, Stop } from "react-native-svg";
+import colors from '../../styles/colors'
+
 
 function MoodVisuals () {
 
@@ -71,8 +72,8 @@ function MoodVisuals () {
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Your moods for the past [week]</BoldAppText>
-      <VictoryGroup width={350} height={200} styles={styles.container}>
+      <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Moods</BoldAppText>
+      <VictoryGroup width={325} height={200} styles={styles.container}>
         <VictoryScatter
         data={randomTopMoods} 
         animate={{
@@ -83,29 +84,27 @@ function MoodVisuals () {
         y={"value"}
         bubbleProperty="value"
         maxBubbleSize={40}
-        minBubbleSize={5}
+        minBubbleSize={10}
         style={{ 
-          data: { fill: 'url(#gradient1)' },
-          labels: { fill: "#2A2A30", fontSize: 12}
+          data: { 
+            fill: colors.cosmicLatte,
+            stroke: 'white',
+            strokeWidth: 2,
+            opacity: 0.8,
+          },
+          parent: {
+          },
+          labels: { 
+            fill: colors.darkGrayFont, 
+            fontSize: 10,
+            color: colors.green,
+          }
         }}
         interpolation="natural"
         labels={({ datum }) => `${datum.mood}`}
         />
-        <Defs>
-          <LinearGradient id="gradient1"
-            x1="0%" 
-            y1="0%" 
-            x2="25%"
-            x3="100%" 
-            y2="100%"
-          >
-            <Stop offset="0%" stopColor='#FF55B8'/>
-            <Stop offset="100%" stopColor='#FF8787'/>
-          </LinearGradient>
-        </Defs>
+
       </VictoryGroup>
-    
-      <Divider/>
     </View>
   );
 }
@@ -116,6 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
 });
 

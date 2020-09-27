@@ -3,27 +3,44 @@ import { View, Text } from 'react-native';
 import { useSelector} from "react-redux";
 import _ from 'lodash';
 import { BoldAppText, MediumAppText } from '../styles/text'
+import colors from '../styles/colors'
+import { DateTime } from 'luxon'
 
 function MeetingsSummary () {
 
-  const week = 7
-  const month = 30
+  const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
+  const millisPerDay = 1000 * 60 * 60 * 24
+  const week = 7*millisPerDay;
+  const month = 30*millisPerDay;
+
+  function convertTime (string) {
+    if (string === 'week') return week;
+    else if (string === 'month') return month;
+    else return false;
+  }
+
+  const timePeriod = convertTime(chartTimePeriod)
+  const lastDay = useSelector((state) => state.helper.now) - timePeriod
+
+  console.log(useSelector((state) => state.helper.now))
 
   const historicalData = useSelector((state) => state.historicalData);
-  const meetingsData = _.map(historicalData, el => el.meetings) 
-  const [timePeriod, setTimePeriod] = useState(week)
-
-  function meetingsReducer (arr, time) {
-    const copyArr = arr.slice(-time) 
+  const filteredData = _.filter(historicalData, el => el.date > lastDay)
+  const meetingsData = _.map(filteredData, el => el.meetings);
+  
+  function meetingsReducer (arr) {
+    const copyArr = arr.length ? arr.slice(0) : [0]
     const number = copyArr.reduce((acc, value) => acc + value)
     return number
   } 
 
-  const meetingsToDisplay = meetingsReducer(meetingsData, timePeriod)
+  const meetingsToDisplay = meetingsReducer(meetingsData)
 
   return (
-    <View>
-      <BoldAppText>You've been to {meetingsToDisplay} meetings the last {timePeriod} days</BoldAppText>
+    <View style={{flexDirection: 'row'}}>
+      <BoldAppText style={{fontSize: 15}}>You've been to </BoldAppText>
+      <BoldAppText style={{fontSize: 15, color:colors.orange}}>{meetingsToDisplay} </BoldAppText>
+      <BoldAppText style={{fontSize: 15}}>meetings</BoldAppText>
     </View>
   );
 }

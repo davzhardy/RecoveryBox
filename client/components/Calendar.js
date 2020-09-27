@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Modal } from 'react-native';
 import {Calendar } from 'react-native-calendars'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
+import colors from '../styles/colors';
 
 function CalendarDH() {
 
@@ -19,6 +20,8 @@ function CalendarDH() {
     });
     navigation.navigate('History');
   }
+
+//TODO add a function which maps through dates where there are entries, converts them and marks them with dots
 
   return (
     <View style={styles.container}>
@@ -43,6 +46,17 @@ function CalendarDH() {
         disableArrowRight={false}
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
+        theme={{
+          textDayFontFamily: 'Montserrat_500Medium',
+          textMonthFontFamily: 'Montserrat_700Bold',
+          textDayHeaderFontFamily: 'Montserrat_700Bold',
+          textDayFontSize: 14,
+          textMonthFontSize: 18,
+
+        }}
+        markedDates={{
+          '2020-09-17': {marked: true, dotColor: colors.green},
+        }}
       />
     </View>
   );
@@ -51,9 +65,6 @@ function CalendarDH() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 70,
-    height: 500,
-    width: 300,
-    flex: 1,
     alignSelf: 'center',
   },
 });

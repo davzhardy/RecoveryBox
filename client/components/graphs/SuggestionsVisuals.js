@@ -5,8 +5,8 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { useSelector} from "react-redux";
 import { MediumAppText, BoldAppText } from '../../styles/text'
 import Divider from '../Divider'
-import { VictoryArea, VictoryStack, VictoryGroup, VictoryChart, VictoryBar} from './Victory';
-
+import { VictoryArea, VictoryScatter, VictoryGroup, VictoryChart, VictoryBar} from './Victory';
+import colors from '../../styles/colors'
 import _ from 'lodash';
 import { DateTime } from 'luxon'
 import {Defs, LinearGradient, Stop } from "react-native-svg";
@@ -74,32 +74,39 @@ function SuggestionsVisuals () {
 
   return (
     <View style={styles.container}>
-      <BoldAppText>Your top suggesitons this [week]</BoldAppText>
-      <VictoryChart width={350} height={200} styles={styles.container} >
-        <VictoryBar 
-        data={randomTopSuggestions} 
-        x="suggestion" 
-        y="value"
+      <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Suggestions</BoldAppText>
+      <VictoryGroup width={350} height={200} styles={styles.container} >
+        <VictoryScatter 
+          data={randomTopSuggestions} 
+          animate={{
+          duration: 2000,
+          onLoad: { duration: 1000 }
+        }}
+        x={"suggestion"} 
+        y={"value"}
+        bubbleProperty="value"
+        maxBubbleSize={40}
+        minBubbleSize={10}
         style={{ 
-          data: { fill: 'url(#gradient1)' },
-          parent: {}
-          }}
+          data: { 
+            fill: colors.blue,
+            stroke: 'white',
+            strokeWidth: 2,
+            opacity: 0.8,
+          },
+          parent: {
+          },
+          labels: { 
+            fill: colors.darkGrayFont, 
+            fontSize: 10,
+            color: colors.green,
+          }
+        }}
         interpolation="natural"
+        labels={({ datum }) => `${datum.suggestion}`}
         />
-      </VictoryChart>
-      <Defs>
-            <LinearGradient id="gradient1"
-              x1="0%" 
-              y1="0%" 
-              x2="25%"
-              x3="100%" 
-              y2="100%"
-            >
-              <Stop offset="0%" stopColor='#FF55B8'/>
-              <Stop offset="100%" stopColor='#FF8787'/>
-            </LinearGradient>
-          </Defs>
-      <Divider/>
+
+      </VictoryGroup>
     </View>
   );
 }
