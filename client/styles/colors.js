@@ -8,6 +8,7 @@ export default {
   lightGray :'#DBDBDB',
   lightWarmGray :'#f5f5f5',
   darkGrayFont: "#2A2A30",
+  green: '#27AE60'
 }
 
 

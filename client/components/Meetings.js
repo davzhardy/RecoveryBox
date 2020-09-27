@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   text: {
-    fontSize: 10,
+    fontSize: 11,
   },
 });
 

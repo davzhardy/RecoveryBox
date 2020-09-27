@@ -1,7 +1,7 @@
 const initialState = {
   suggestionSettings: {
-    suggestionsList: ['Meetings', 'Step 10s', 'Prayer'],
-    fullSuggestionsList: ['Meetings', 'Prayer', 'Meditation', 'Useful', 'Kind to Myself', 'Gratitude', 'Step 10s', 'Inventory', 'Called a Newcomer', 'Ate a'],
+    suggestionsList: ['Meetings', 'Prayer', 'Meditation', 'Useful', 'Kind to Myself', 'Gratitude', 'Step 10s', 'Inventory', 'Called a Newcomer', 'Apologised'],
+    fullSuggestionsList: ['Meetings', 'Prayer', 'Meditation', 'Useful', 'Kind to Myself', 'Gratitude', 'Step 10s', 'Inventory', 'Called a Newcomer', 'Apologised'],
   },
   userSettings: {
     spare: [],

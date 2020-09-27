@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
 import Feeling from '../components/Feeling'
 import Moods from '../components/Moods'
 import Meetings from '../components/Meetings'
 import SuggestionsList from '../components/SuggestionsList'
+import Footer from '../components/Footer'
 import InspirationalQuote from '../components/InspirationalQuote'
 import ApiService from '../ApiService'
 import { AppLoading } from 'expo';
 import {useDispatch, useSelector } from "react-redux";
 import {DateTime} from 'luxon';
 import colors from '../styles/colors'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import CalendarScreen from './CalendarScreen'
+
 
 function HomeScreen () {
 
@@ -67,11 +72,15 @@ function HomeScreen () {
 
 //TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
 
+  const Tab = createBottomTabNavigator();
+
+
   return (
     !quoteItem ?
     <AppLoading/>
     :
     <View style={styles.container}>        
+      <ScrollView>
       <View style={styles.wrapperZero}>
         <Meetings/>
       </View>
@@ -90,6 +99,8 @@ function HomeScreen () {
           <Text>Submit your data for the day</Text>
         </TouchableOpacity>
       </View>
+      </ScrollView>
+      <Footer/>
     </View>
   )
 }
@@ -98,6 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.platinum,
+    paddingBottom: 65,
   },
   button: {
     width: '20%',

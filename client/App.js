@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { TouchableOpacity, Image } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './components/Login'
 import HomeScreen from './containers/HomeScreen'
@@ -13,8 +13,11 @@ import { AppLoading } from 'expo';
 import { Provider } from "react-redux";
 import store from './redux/store'
 import colors from './styles/colors'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 const Stack = createStackNavigator();
+
 
 export default function App() {
 
@@ -40,15 +43,20 @@ export default function App() {
               headerTitleStyle: {
                 color: colors.orange,
                 fontFamily: 'Montserrat_700Bold',
-              }
-              }} 
+              },
+              headerRight:({ navigation }) => {
+                return (
+                <TouchableOpacity onPress={() => navigation.navigate('ModifySuggestions')}>
+                  <Image style={{height:30, width:30, marginRight:35}} source={require('./assets/settings.png')}/>
+                </TouchableOpacity>) }             
+              }}
             />
             <Stack.Screen name="Calendar" options={{ headerShown: false }} component={CalendarScreen}/>
             <Stack.Screen name="ModifySuggestions" options={{ headerShown: false }} component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen}/>
             <Stack.Screen name="History" options={{ title: 'How were you feeling?' }} component={HistoryScreen}/>
           </Stack.Navigator>
-        </NavigationContainer>
+      </NavigationContainer>
       </Provider> 
     );
   }
