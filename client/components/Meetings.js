@@ -19,16 +19,16 @@ function Meetings () {
   };
 
   //TODO put in a reducer as this info is used on multiple screens
-  // const historicalData = useSelector((state) => state.historicalData);
-  // const meetingsData = _.map(historicalData, el => el.meetings) 
+  const historicalData = useSelector((state) => state.historicalData);
+  const meetingsData = _.map(historicalData, el => el.meetings) 
 
-  // function meetingsReducer (arr) {
-  //   const copyArr = arr.slice(0) 
-  //   const number = copyArr.reduce((acc, value) => acc + value)
-  //   return number
-  // } 
+  function meetingsReducer (arr) {
+    const copyArr = arr.slice(0) 
+    const number = copyArr.reduce((acc, value) => acc + value)
+    return number
+  } 
 
-  // const totalMeetings = meetingsReducer(meetingsData)
+  const totalMeetings = meetingsReducer(meetingsData)
 
   return (
     <View style={styles.container}>
@@ -48,7 +48,7 @@ function Meetings () {
             <MediumAppText style={styles.text}>MEETINGS TODAY</MediumAppText>
           </View>
           <View>
-            <BoldAppText style={styles.number}>10</BoldAppText>
+            <BoldAppText style={styles.number}>{totalMeetings}</BoldAppText>
             <MediumAppText style={styles.text}>TOTAL MEETINGS</MediumAppText>
           </View>
         </View>

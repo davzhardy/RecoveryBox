@@ -9,9 +9,9 @@ import colors from '../styles/colors';
 function Moods () {
  
   const dispatch = useDispatch()
-  const [stateOne, setStateOne] = useState('')
-  const [stateTwo, setStateTwo] = useState('')
-  const [stateThree, setStateThree] = useState('')
+  const [stateOne, setStateOne] = useState(false)
+  const [stateTwo, setStateTwo] = useState(false)
+  const [stateThree, setStateThree] = useState(false)
   const currentMoods = useSelector((state) => state.dailyInfo.moods)
 
   const moodAggregator = [stateOne, stateTwo, stateThree]
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     width: '80%',
     fontSize: 10,
     fontFamily: 'Montserrat_500Medium',
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: colors.cosmicLatte,
   },
   button: {
