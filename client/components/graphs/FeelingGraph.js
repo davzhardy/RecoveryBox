@@ -115,13 +115,13 @@ function FeelingGraph () {
         />
       </VictoryChart>
       <View style={styles.key}>
-        <View>
-          <View/>
-          <Text>Feeling</Text>
+        <View style={[styles.keyWrapper, {marginBottom:-10}]}>
+          <View style={styles.box1}/>
+          <MediumAppText>Feeling</MediumAppText>
         </View>
-        <View>
-          <View/>
-          <Text>Meetings</Text>
+        <View style={styles.keyWrapper}>
+          <View style={styles.box2}/>
+          <MediumAppText>Meetings</MediumAppText>
         </View>
       </View>
     </View>
@@ -137,6 +137,28 @@ const styles = StyleSheet.create({
   },
   key: {
     position: 'absolute',
+    flexDirection: 'column',
+    left:10,
+    top:30,
+  },
+  keyWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  box1: {
+    backgroundColor: colors.green,
+    width: 7,
+    height: 7,
+    marginTop: -7,
+    marginRight: 5,
+  },
+  box2: {
+    backgroundColor: colors.blue,
+    width: 7,
+    height: 7,
+    marginTop: -7,
+    marginRight: 5,
   },
 });
 

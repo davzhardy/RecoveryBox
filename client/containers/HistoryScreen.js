@@ -72,7 +72,10 @@ function HistoryScreen () {
     return (
       <View style={styles.container}>
         <HomeWelcome historicalDate={selectedDate}/>
-        {requiredInfo.length ? <></> : <Text>You have no data for today. You can always add to your historical record though...</Text>}
+        {requiredInfo.length ? <></> : <View style={styles.noData}>
+            <Text>You have no data for today.</Text>
+          </View>
+        }
       <ScrollView style={styles.infoWrapper}>  
         <View style={styles.infoSubWrapper}>
           <View style={styles.textWrapper}>
@@ -105,11 +108,11 @@ function HistoryScreen () {
             </TouchableOpacity>
           </View>
         </View>
-        <View>
+        <View style={{flex: 1, minHeight:75}}>
           <MediumAppText>Moods:</MediumAppText>
           {moodsArr.map(
             mood => (
-              <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{flexDirection:'row', minHeight:30, alignItems:'center'}}>
                 <BoldAppText key={mood} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{mood}</BoldAppText>
                 <TouchableOpacity style={styles.removeIcon} onPress={()=>onMoodsRemove()}>
                   <Image style={styles.remove} source={require('../assets/close.png')}/>
@@ -118,13 +121,13 @@ function HistoryScreen () {
             )
           )}
           <TextInput
-              style={styles.moodsTextInput}
+              style={moodsArr.length ? styles.moodsTextInput : styles.moodsTextInput1}
               placeholder='Enter a mood'
               value= {moodsArr ? moodsArr : ''}
               onChangeText={text => setNewMoodsArr(text)}
             />
         </View>
-        <View>
+        <View style={{flex:1, minHeight: 180,}}>
           <View>
             <MediumAppText>Suggestions completed:</MediumAppText>
               {suggestionsArr.map(
@@ -251,12 +254,38 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: colors.cosmicLatte,
   },
+  moodsTextInput1: {
+    position:'absolute',
+    left: 0,
+    top: 10,
+    backgroundColor: 'transparent',
+    borderRadius:5,
+    height:40,
+    paddingLeft: 5,
+    marginTop:5,
+    width: '35%',
+    fontSize: 10,
+    fontFamily: 'Montserrat_500Medium',
+    borderBottomWidth: 2,
+    borderBottomColor: colors.cosmicLatte,
+  },
   unusedSuggestionsWrapper: {
     position:'absolute',
     right: 15,
     marginTop:25,
-    
-  }
+  },
+  noData: {
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
+    marginTop: 1,
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+  },
 });
 
 
