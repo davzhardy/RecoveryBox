@@ -24,14 +24,14 @@ function Footer () {
         <BoldAppText style={styles.text} onPress={() => navigation.navigate('Home')}>Home</BoldAppText>
       </View>
       <View style={styles.wrapper}>
-        <Pressable style={styles.icon}>
+        <Pressable style={styles.icon} onPress={() => navigation.navigate('Summary')}>
           <Image style={styles.icon} source={require('../assets/dashboardlightgrey.png')}/>
         </Pressable>
         <BoldAppText style={styles.text} onPress={() => navigation.navigate('Summary')}>Summary</BoldAppText>
       </View>
       <View style={styles.wrapper}>
         <Pressable onPress={() => navigation.navigate('Calendar')}>
-          <Image style={styles.icon} source={require('../assets/datelightgrey.png')}/>
+          <Image style={styles.icon} onPress={() => navigation.navigate('Calendar')} source={require('../assets/datelightgrey.png')}/>
         </Pressable>
         <BoldAppText style={styles.text} onPress={() => navigation.navigate('Calendar')}>Calendar</BoldAppText>
       </View>

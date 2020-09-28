@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Animated, Text, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, View, Animated, Image, TouchableOpacity, TextInput, Modal } from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import { BoldAppText, MediumAppText } from '../styles/text'
-import {Picker} from '@react-native-community/picker';
 import Divider from './Divider'
 import { delay } from 'lodash';
+import colors from '../styles/colors';
 
 function Moods () {
  
-  const Item = Picker.Item;
-
   const dispatch = useDispatch()
-  const [stateOne, setStateOne] = useState(false)
-  const [stateTwo, setStateTwo] = useState(false)
-  const [stateThree, setStateThree] = useState(false)
+  const [stateOne, setStateOne] = useState('')
+  const [stateTwo, setStateTwo] = useState('')
+  const [stateThree, setStateThree] = useState('')
   const currentMoods = useSelector((state) => state.dailyInfo.moods)
 
   const moodAggregator = [stateOne, stateTwo, stateThree]
@@ -27,15 +25,8 @@ function Moods () {
       type: 'UPDATE_MOODS',
       payload: moods
     })
+    setModalVisible(true)
   }
-
-  // const [animationValue, setAnimationValue] = useState(0)
-  // const [animationValue1, setAnimationValue1] = useState(0)
-  // const [animationValue2, setAnimationValue2] = useState(0)
-  // const [animationValue3, setAnimationValue3] = useState(0)
-  // const [animationValue4, setAnimationValue4] = useState(0)
-  // const [animationValue5, setAnimationValue5] = useState(0)
-  // const [animationValue6, setAnimationValue6] = useState(0)
 
   const [animationValue, setAnimationValue] = useState(new Animated.Value(0));
   const [animationValue1, setAnimationValue1] = useState(new Animated.Value(0));
@@ -48,10 +39,10 @@ function Moods () {
 //TODO refactor the loop to use animation.loop
 
   useEffect(() => {
-    fadeIn(animationValue, 5000, 4000, 2000)
-    setInterval(()=>fadeIn(animationValue, 5000, 4000, 2000), 11000)
+    fadeIn(animationValue, 1500, 8500, 1000)
+    setInterval(()=>fadeIn(animationValue, 1500, 8500, 1000), 11000)
     fadeIn(animationValue1, 6000, 5000, 0)
-    setInterval(()=>fadeIn(animationValue1, 6000, 5000, 0), 11000)
+    setInterval(()=>fadeIn(animationValue1, 6000, 5000, 0), 12000)
     fadeIn(animationValue2, 6000, 5000, 3000)
     setInterval(()=>fadeIn(animationValue2, 6000, 5000, 1000), 14000)
     fadeIn(animationValue3, 4000, 4000, 5000)
@@ -81,71 +72,74 @@ function Moods () {
     }).start() 
   }
 
+  const [modalVisible, setModalVisible] = useState(false)
+
   return (
     <View style={styles.container}>
       <View>
-        <BoldAppText>My moods</BoldAppText>
+      <MediumAppText style={{color: colors.darkGrayFont}}>MY MOODS</MediumAppText>
       </View>
+      
       <View style={styles.contentWrapper}>
         <View style={styles.leftWrapper}>
           <View style={styles.wrapper}>
             <MediumAppText>Are you feeling good?</MediumAppText>
-            <Picker
-              selectedValue={stateOne}
-              style={styles.picker}
-              mode="dropdown"
-              onValueChange={(itemValue, itemIndex) =>
-              setStateOne(itemValue)
-            }>
-              <Item label="Select a mood..." value='' />
-              <Item label="Happy" value="Happy" />
-              <Item label="Positive" value="Positive" />
-              <Item label="Energetic" value="Energetic" />
-              <Item label="Calm" value="Calm" />
-            </Picker>
+            <MediumAppText>Or are things a little difficult?</MediumAppText>
           </View>
-          <View style={styles.wrapper}>
-            <MediumAppText>Or are things a little bit tough?</MediumAppText>
-            <Picker
-              selectedValue={stateTwo}
-              style={styles.picker}
-              mode="dropdown"
-              onValueChange={(v, itemIndex) =>
-              setStateTwo(v)
-            }>
-              <Item label="Select a mood..." value='' />
-              <Item label="Anxious" value="Anxious" />
-              <Item label="Worried" value="Worried" />
-              <Item label="Stressed" value="Stressed" />
-            </Picker>
-          </View>
-          <View style={styles.wrapper}>
-            <MediumAppText>You can input any other moods here...</MediumAppText>
+          <View style={styles.inputWrapper}>
             <TextInput
+              style={styles.textInput}
+              placeholder='Enter a mood'
+              value= {stateOne ? stateOne : ''}
+              onChangeText={text => setStateOne(text)}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder='Enter a mood'
+              value= {stateTwo ? stateTwo : ''}
+              onChangeText={text => setStateTwo(text)}
+            />
+            <TextInput
+              style={styles.textInput}
               placeholder='Enter a mood'
               value= {stateThree ? stateThree : ''}
               onChangeText={text => setStateThree(text)}
             />
           </View>
-          <View style={styles.wrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => submitHandler(moodAggregator)}>
-            <MediumAppText>Register your moods for today</MediumAppText>
-          </TouchableOpacity>
-          </View>
         </View>
         <View style={styles.rightWrapper}>
             <Animated.Text style={[styles.animatedText, {opacity:animationValue}]}>Calm</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue1}]}>Joyful</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue2}]}>Relaxed</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue3}]}>Peaceful</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue4}]}>Energised</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue5}]}>Content</Animated.Text>
+            <Animated.Text style={[styles.animatedText1, {opacity:animationValue1}]}>Joyful</Animated.Text>
+            <Animated.Text style={[styles.animatedText2, {opacity:animationValue2}]}>Relaxed</Animated.Text>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue3}]}>Peacefull</Animated.Text>
+            <Animated.Text style={[styles.animatedText3, {opacity:animationValue4}]}>Energised</Animated.Text>
+            <Animated.Text style={[styles.animatedText1, {opacity:animationValue5}]}>Content</Animated.Text>
             <Animated.Text style={[styles.animatedText, {opacity:animationValue6}]}>Happy</Animated.Text>
         </View>
+      </View>
+      <View >
+      <Modal visible={modalVisible} animationType={"slide"} transparent={true}>
+        <View style={styles.modalWrapper}>
+          <MediumAppText>
+            MOODS UPDATED
+          </MediumAppText>
+          <TouchableOpacity style={styles.return} onPress={() => {
+              setModalVisible(false)
+            }}>
+          <Image style={styles.image} source={require('../assets/close.png')}/>
+        </TouchableOpacity>
+        </View>
+        
+      </Modal>
+        <TouchableOpacity style={styles.button} onPress={() => submitHandler(moodAggregator)}>
+          <MediumAppText style={{marginBottom: 0}}>Update your moods</MediumAppText>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
+
+//TODO rework modal dimensions so that they are based on screen size
 
 const styles = StyleSheet.create({
   container: {
@@ -155,35 +149,110 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    color: colors.darkGrayFont, 
+    fontSize: 12,
+  },
   contentWrapper: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-around',
+    marginTop: 10,
   },
   leftWrapper: {
-    flex: 3,
+    flex: 2,
+    height: '100%',
     flexDirection: 'column',
   },
   rightWrapper: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignContent: 'space-between' 
   },
-  picker: {
-    height: 50,
-    width: 150,
-    borderColor: '#FFF4E4',
-    borderWidth: 1,              
+  wrapper: {
+    paddingLeft: 5,
+  },
+  textInput: {
+    backgroundColor: 'transparent',
+    borderRadius:5,
+    height:40,
+    paddingLeft: 5,
+    marginTop:5,
+    width: '80%',
+    fontSize: 10,
+    fontFamily: 'Montserrat_500Medium',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.cosmicLatte,
   },
   button: {
-    width: '20%',
-    height: 50,
+    width: 150,
+    height: 40,
     borderRadius: 5,
+    marginTop: 10,
     marginHorizontal: 20,
-    backgroundColor: '#ADF1FF',
+    left: 0,
+    bottom: 10,
+    backgroundColor: colors.cosmicLatte,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  animatedText: {
+    color: colors.blue,
+    fontFamily: 'Montserrat_500Medium',
+    marginVertical: 7,
+    fontSize: 11,
+    marginLeft: 20,
+  },
+  animatedText1: {
+    color: colors.green,
+    fontFamily: 'Montserrat_500Medium',
+    marginVertical: 7,
+    fontSize: 11,
+    marginLeft: 0,
+  },
+  animatedText2: {
+    color: colors.blue,
+    fontFamily: 'Montserrat_500Medium',
+    marginVertical: 7,
+    fontSize: 11,
+    marginLeft: 40,
+  },
+  animatedText3: {
+    color: colors.blue,
+    fontFamily: 'Montserrat_500Medium',
+    marginVertical: 7,
+    fontSize: 11,
+    marginLeft: 10,
+  },
+  modalWrapper: {
+    position: 'absolute',
+    left: 90,
+    top: 300,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    height: 90,
+    width: 200,
+    backgroundColor: colors.cosmicLatte,
+    opacity: 0.95,
+    elevation: 9,
+    borderRadius: 5,
+  },
+  return: {
+    marginTop: 20,
+    height: 30,
+    width: 30,
+    borderRadius: 50,
+    backgroundColor: colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  image: {
+    height: 15,
+    width: 15,
   },
 });
 

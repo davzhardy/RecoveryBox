@@ -1,3 +1,4 @@
+import { YellowBox } from "react-native";
 
 export default {
   blue: '#2F80ED',
@@ -9,7 +10,8 @@ export default {
   lightWarmGray :'#f5f5f5',
   darkGrayFont: "#2A2A30",
   lightGrayFont: "#7B7C86",
-  green: '#27AE60'
+  green: '#27AE60',
+  yellow: '#F2C94C',
 }
 
 

@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
-
   buttonWrapper: {
     flex: 1
   }

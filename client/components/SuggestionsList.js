@@ -31,7 +31,7 @@ function SuggestionsList () {
   return (
     <View style={styles.container}>
       <View style={styles.topcontainer}>
-        <MediumAppText styles={{color: "#2A2A30"}} onPress={() => navigation.navigate('ModifySuggestions')}>MY DAILY SUGGESTIONS</MediumAppText>
+        <MediumAppText style={{color: colors.darkGrayFont}} onPress={() => navigation.navigate('ModifySuggestions')}>MY DAILY SUGGESTIONS</MediumAppText>
       </View>
       {/* <View style={styles.cog}>
         <TouchableOpacity onPress={() => navigation.navigate('ModifySuggestions')}>

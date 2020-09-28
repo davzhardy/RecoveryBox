@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { MediumAppText } from '../styles/text'
 import ModifySuggestionItem from '../components/ModifySuggestionItem'
-import { LinearGradient } from 'expo-linear-gradient';
 import {useDispatch, useSelector} from "react-redux";
+import colors from '../styles/colors';
 
-function ModifySuggestionsList ( {navigation} ) {
+function ModifySuggestionsList ({ navigation: { goBack } }) {
+
+// TODO refactor to be a modal screen
 
   const dispatch = useDispatch()
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
@@ -28,8 +30,7 @@ function ModifySuggestionsList ( {navigation} ) {
   return (
     <View style={styles.container}>
       <View style={{alignItems: 'center'}}>
-        <MediumAppText style={{fontSize: 10, marginTop: 40}}>DAILY SUGGESTIONS</MediumAppText>
-        <Text style={{marginTop: 25}}>CUSTOMISE YOUR HOMESCREEN DAILY SUGGESTIONS HERE</Text>
+        <MediumAppText style={{marginTop: 25}}>CUSTOMISE YOUR DAILY SUGGESTIONS</MediumAppText>
       </View>
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         {fullSuggestionsList.map(
@@ -41,11 +42,9 @@ function ModifySuggestionsList ( {navigation} ) {
             selected={suggestionList.includes(suggestion) ? true : false}
           />
         )}
-      <TouchableOpacity onPress={()=> {navigation.navigate('Home')}}>
-        <LinearGradient colors={['#5555FF', '#9787FF']} style={styles.return}>
-          <Text style={{color:'white', fontSize: 10}}>Home</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.return} onPress={()=> {goBack()}}>
+          <Image style={styles.image} source={require('../assets/close.png')}/>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -57,16 +56,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: 25,
   },
-  icons: {
-    height: 34,
-    width: 34,
+  image: {
+    height: 30,
+    width: 30,
   },
   return: {
     marginTop: 20,
     height: 50,
     width: 50,
     borderRadius: 50,
+    backgroundColor: colors.blue,
     alignItems: 'center',
     justifyContent: 'center'
   }

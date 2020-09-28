@@ -22,9 +22,6 @@ function SummaryScreen () {
     // paddingTop: statusBarHeight,
   };
 
-  const chartHeight = {
-    height: fullHeight/4,
-  };
 
   const dispatch = useDispatch();
   const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
@@ -37,14 +34,13 @@ function SummaryScreen () {
     })
   }
 
-  //TODO run an animated view which fades in all the data and charts whenever someone changes their preference for the timeperiod
   //TODO change the current onpress to something swipeable?
+  // TODO add key for first graph
+  // TODO add values on graphs when clicked
 
   return (
     <View style={[styles.container,  dynamicStyle]}>
-      <ScrollView style={styles.scrollView}>
         <View style={styles.options}>
-          {/* add option to show data for a week, month or alltime */}
           <View >
             <TouchableOpacity onPress={()=>clickHandler('week')}>
               <MediumAppText style={chartTimePeriod === 'week' ? styles.optionsTextSelected : styles.optionsTextUnselected}>WEEK</MediumAppText>
@@ -61,6 +57,7 @@ function SummaryScreen () {
             </TouchableOpacity>
           </View>
         </View>
+      <ScrollView style={styles.scrollView}>
         <View>
           <View style={styles.textWrapper}>
             <View style={{flexDirection: 'row'}}>
@@ -97,15 +94,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
     elevation: 1,
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 70,
+    marginBottom: 10,
     paddingHorizontal: 10,
     paddingVertical: 12,
   },
   options: {
+    position: 'absolute',
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
+    margin: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
     flex: 1,
     flexDirection: 'row',
-    alignSelf: 'flex-end',
-    marginRight: 5,
+    justifyContent: 'center',
+    width: '95%'
   },
   optionsTextSelected: {
     marginTop: -3,

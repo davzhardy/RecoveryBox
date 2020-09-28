@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Modal, Image, TouchableOpacity, ScrollView, TouchableHighlight } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
 import Feeling from '../components/Feeling'
 import Moods from '../components/Moods'
@@ -15,7 +15,8 @@ import colors from '../styles/colors'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CalendarScreen from './CalendarScreen'
-
+import { MediumAppText, BoldAppText } from '../styles/text'
+import { color } from 'react-native-reanimated';
 
 function HomeScreen () {
 
@@ -30,8 +31,6 @@ function HomeScreen () {
       })
     )
   },[])
-
-
   
   const quoteItem = useSelector((state) => state.dailyQuote.todaysQuote);
 
@@ -48,9 +47,16 @@ function HomeScreen () {
       type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
       payload: arg
     })
+    dispatch({
+      type: "UPDATE_DAY",
+      payload: true
+    })
+    dispatch({
+      type: "REGISTER_MODAL",
+      payload: true
+    })
   }
 
-//TODO refactor the data flow, there must be a better way to do this
   function createDailyData (dailyData) {
     ApiService.postDailyData( {
       date: dailyData.date,
@@ -60,19 +66,13 @@ function HomeScreen () {
       suggestions: JSON.stringify(dailyData.suggestions),
       UserId: userId,
     })
-    .then(data => {
-      let objToDispatch = {}
-
-            // dispatch({
-      //   type: "UPDATE_HISTORICALDATA_WITH_DAILYINFO",
-      //   payload: data
-      // })
-    })
   };
 
 //TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
 
   const Tab = createBottomTabNavigator();
+
+  const registerModalVisible = useSelector((state) => state.helper.registerModal);
 
 
   return (
@@ -96,9 +96,25 @@ function HomeScreen () {
       </View>
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
-          <Text>Submit your data for the day</Text>
+          <BoldAppText style={{fontSize: 14, color: colors.cosmicLatte, marginBottom:0,}}>REGISTER YOUR DAY</BoldAppText>
         </TouchableOpacity>
       </View>
+      <Modal visible={registerModalVisible} animationType={"slide"} transparent={true}>
+        <View style={styles.modalWrapper}>
+          <MediumAppText style={{color:'white'}}>
+            DAY REGISTERED
+          </MediumAppText>
+          <TouchableOpacity style={styles.return} onPress={() => {
+            dispatch({
+              type: "REGISTER_MODAL",
+              payload: false
+            })
+          }}>
+          <Image style={styles.image} source={require('../assets/close.png')}/>
+        </TouchableOpacity>
+        </View>
+        
+      </Modal>
       </ScrollView>
       <Footer/>
     </View>
@@ -112,13 +128,17 @@ const styles = StyleSheet.create({
     paddingBottom: 65,
   },
   button: {
-    width: '20%',
+    width: '50%',
     height: 50,
     borderRadius: 5,
     marginHorizontal: 20,
-    backgroundColor: '#FFF4E4',
+    backgroundColor: colors.orange,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
+    elevation: 10,
+    borderWidth: 2,
+    borderColor: 'white',
   },
   wrapperZero: {
     flexDirection: 'row',
@@ -156,6 +176,33 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     marginTop: 5,
+  },
+  modalWrapper: {
+    position: 'absolute',
+    left: 90,
+    top: 300,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    height: 90,
+    width: 200,
+    backgroundColor: colors.orange,
+    opacity: 0.95,
+    elevation: 9,
+    borderRadius: 5,
+  },
+  return: {
+    marginTop: 20,
+    height: 30,
+    width: 30,
+    borderRadius: 50,
+    backgroundColor: colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  image: {
+    height: 15,
+    width: 15,
   },
 
 });

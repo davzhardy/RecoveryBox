@@ -22,8 +22,6 @@ function MeetingsSummary () {
   const timePeriod = convertTime(chartTimePeriod)
   const lastDay = useSelector((state) => state.helper.now) - timePeriod
 
-  console.log(useSelector((state) => state.helper.now))
-
   const historicalData = useSelector((state) => state.historicalData);
   const filteredData = _.filter(historicalData, el => el.date > lastDay)
   const meetingsData = _.map(filteredData, el => el.meetings);

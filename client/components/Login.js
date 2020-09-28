@@ -10,6 +10,7 @@ import { NavigationContainer, StackActions } from '@react-navigation/native';
 function LoginScreen ({ navigation }) {
 
   // TODO: refactor to not have to useState for passwordInput and usernameInput?
+  // TODO: add a warning if your user is not on the db and don't trigger the navigation 
   const dispatch = useDispatch();
 
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
@@ -18,7 +19,7 @@ function LoginScreen ({ navigation }) {
 
   const submitHandler = async () => {
     if (usernameInput && passwordInput) {
-      await receiveInfoandData(usernameInput)
+      await receiveInfoandData(usernameInput);
       navigation.dispatch(
         StackActions.replace('Home'))
     } else {

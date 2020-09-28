@@ -9,15 +9,10 @@ import {DateTime} from 'luxon'
 function HistoryScreen () {
 
   const selectedDate = useSelector((state) => state.helper.selectedDate)
-  // const UTCadjustment = 7200000
-  // const seladj = selectedDate - UTCadjustment
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
-  console.log(fullHistoricalInfo)
-  console.log(selectedDate)
   const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === selectedDate)
-  console.log(requiredInfo)
 
-  //TODO remove UTC adjustment when data is sitting on server
+  //TODO format and add put request
 
   if (requiredInfo.length > 0) {
     return (

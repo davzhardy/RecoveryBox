@@ -31,8 +31,6 @@ function Feeling () {
     }
   }
 
-  //https://www.skptricks.com/2019/03/add-blinking-animation-on-text-in-react-native-app.html
-
   return (
     <View style={styles.container}>
       <View>

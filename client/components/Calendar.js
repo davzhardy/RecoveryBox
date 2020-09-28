@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import {Calendar } from 'react-native-calendars'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -8,10 +8,20 @@ import colors from '../styles/colors';
 function CalendarDH() {
 
   const dispatch = useDispatch();
-  const now = useSelector((state) => state.helper.now)
-  const selectedDate = useSelector((state) => state.helper.selectedDate)
+  const now = useSelector((state) => state.helper.now);
+  const historicalData = useSelector((state) => state.historicalData);
+
+  const datesToMark = ['2020-09-16'];
+  let markedDatesObj = {};
 
   const navigation = useNavigation();
+
+  datesToMark.forEach((day) => {
+    markedDatesObj[day] = {
+        dotColor: colors.green,
+        marked: true
+    };
+  });
 
   const pressHandler = (arg) => {
     dispatch({
@@ -21,7 +31,7 @@ function CalendarDH() {
     navigation.navigate('History');
   }
 
-//TODO add a function which maps through dates where there are entries, converts them and marks them with dots
+//TODO finish the function which maps through dates where there are entries, converts them and marks them with dots
 
   return (
     <View style={styles.container}>
@@ -34,7 +44,10 @@ function CalendarDH() {
         monthFormat={'MMMM yyyy'}
           hideArrows={false}
           // Replace default arrows with custom ones (direction can be 'left' or 'right')
-        renderArrow={(direction) => (<Text>Go</Text>)}
+        renderArrow={(direction) => {
+          if (direction==='right') return <Image style={styles.image} source={require('../assets/forward.png')}/>
+          if (direction==='left') return <Image style={styles.image} source={require('../assets/back.png')}/>
+          }}
         hideExtraDays={false}
         disableMonthChange={true}
         firstDay={1}
@@ -54,9 +67,7 @@ function CalendarDH() {
           textMonthFontSize: 18,
 
         }}
-        markedDates={{
-          '2020-09-17': {marked: true, dotColor: colors.green},
-        }}
+        markedDates={markedDatesObj}
       />
     </View>
   );
@@ -66,6 +77,10 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 70,
     alignSelf: 'center',
+  },
+  image: {
+    height: 20,
+    width:20,
   },
 });
 
