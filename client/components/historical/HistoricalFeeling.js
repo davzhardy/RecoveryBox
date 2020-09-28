@@ -4,10 +4,8 @@ import { MediumAppText, BoldAppText } from '../styles/text'
 import colors from '../styles/colors'
 import _ from 'lodash'
 
-function HistoricalMeetings ({ }) {
+function HistoricalFeeling ({ }) {
 
-
-  
   return (
     <View style={styles.container}>
      
@@ -20,4 +18,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default HistoricalMeetings;
+export default HistoricalFeeling;

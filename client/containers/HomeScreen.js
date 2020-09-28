@@ -38,7 +38,6 @@ function HomeScreen () {
   const dailyInfo = useSelector((state) => state.dailyInfo);
   const todaysDate = useSelector((state) => state.helper.now);
   const userId = useSelector((state) => state.user.id);
-  console.log(fullHistoricalInfo)
 
   function clickHandler (arg) {
     arg.date = DateTime.fromMillis(todaysDate).toUTC().startOf('day').ts

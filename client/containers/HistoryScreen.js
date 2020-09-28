@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import HomeWelcome from '../components/HomeWelcome'
 import _ from 'lodash'
 import SuggestionItem from '../components/SuggestionItem'
@@ -10,6 +10,9 @@ import { MediumAppText, BoldAppText } from '../styles/text'
 
 
 function HistoryScreen () {
+
+  //TODO buggy nd broken at the moment, needs to bt split into separate components and put into reducers
+  //TODO once the above is completed, need to update the current put request
 
   const selectedDate = useSelector((state) => state.helper.selectedDate)
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
@@ -22,7 +25,7 @@ function HistoryScreen () {
   if (requiredInfo.length) startingMeetings = requiredInfo[0].meetings;
 
   let startingMoods = []; 
-  if (requiredInfo.length) startingMoods = requiredInfo[0].moods;
+  if (requiredInfo.length) startingMoods = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1));
 
   let startingSuggestions = []; 
   if (requiredInfo.length) startingSuggestions = requiredInfo[0].suggestions;
@@ -31,6 +34,10 @@ function HistoryScreen () {
   const [meetings, setMeetings ] = useState(startingMeetings)
   const [moodsArr, setMoods] = useState(startingMoods)
   const [suggestionsArr, setSuggestions] = useState(startingSuggestions)
+  const [newMoodsArr, setNewMoodsArr] = useState(false)
+
+  const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
+  const unusedSuggestions = fullSuggestionsList.filter(el => !suggestionsArr.includes(el))
 
   function onMeetingsAdd () {
     setMeetings(meetings+1) 
@@ -51,14 +58,23 @@ function HistoryScreen () {
     else return
   }
 
-  //TODO format and add put request
+  function onMoodsRemove () { 
+    
+  }
+
+  function onSuggestionsRemove () { 
+    
+  }
+
+
+
 
     return (
       <View style={styles.container}>
         <HomeWelcome historicalDate={selectedDate}/>
         {requiredInfo.length ? <></> : <Text>You have no data for today. You can always add to your historical record though...</Text>}
-      <View style={styles.infoWrapper}>  
-        <View style={styles.infosubWrapper}>
+      <ScrollView style={styles.infoWrapper}>  
+        <View style={styles.infoSubWrapper}>
           <View style={styles.textWrapper}>
             <MediumAppText>Meetings attended:</MediumAppText>
             <BoldAppText style={{marginTop: -10,}}>{meetings}</BoldAppText>
@@ -72,9 +88,14 @@ function HistoryScreen () {
             </TouchableOpacity>
           </View>
         </View>
-        <View>
-          <MediumAppText>Feeling:</MediumAppText>
-          <BoldAppText style={{marginTop: -10,}}>{feeling} / 10</BoldAppText>
+        <View style={styles.infoSubWrapper}>
+          <View style={styles.textWrapper}>
+            <MediumAppText>Feeling:</MediumAppText>
+            <View style={{flexDirection:'row'}}>
+            <BoldAppText style={{marginTop: -10,}}>{feeling}</BoldAppText>
+            <BoldAppText style={{marginTop: -3, fontSize:14}}> / 10</BoldAppText>
+            </View>
+          </View>
           <View style={styles.iconWrapper}>
             <TouchableOpacity style={styles.icon} onPress={()=>onFeelingMinus()}>
               <Image source={require('../assets/remove.png')}/>
@@ -87,16 +108,50 @@ function HistoryScreen () {
         <View>
           <MediumAppText>Moods:</MediumAppText>
           {moodsArr.map(
-            mood => <BoldAppText key={mood} style={{marginTop: -10, fontSize: 17}}>{mood}</BoldAppText>
+            mood => (
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+                <BoldAppText key={mood} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{mood}</BoldAppText>
+                <TouchableOpacity style={styles.removeIcon} onPress={()=>onMoodsRemove()}>
+                  <Image style={styles.remove} source={require('../assets/close.png')}/>
+                </TouchableOpacity>
+              </View>
+            )
           )}
+          <TextInput
+              style={styles.moodsTextInput}
+              placeholder='Enter a mood'
+              value= {moodsArr ? moodsArr : ''}
+              onChangeText={text => setNewMoodsArr(text)}
+            />
         </View>
         <View>
-        <MediumAppText>Suggestions completed:</MediumAppText>
-          {suggestionsArr.map(
-            suggestion => <BoldAppText key={suggestion} style={{marginTop: -10, fontSize: 16}}>{suggestion}</BoldAppText>
-          )}
+          <View>
+            <MediumAppText>Suggestions completed:</MediumAppText>
+              {suggestionsArr.map(
+                suggestion => (
+                <View style={{flexDirection:'row', alignItems:'center'}}>
+                    <BoldAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{suggestion}</BoldAppText>
+                    <TouchableOpacity style={styles.removeIcon} onPress={()=>onSuggestionsRemove()}>
+                      <Image style={styles.remove} source={require('../assets/close.png')}/>
+                    </TouchableOpacity>
+                  </View>
+                )
+              )}
+          </View>
+          <View style={styles.unusedSuggestionsWrapper}>
+            {unusedSuggestions.map(
+                suggestion => (
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
+                    <MediumAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 12}}>{suggestion}</MediumAppText>
+                    <TouchableOpacity style={[styles.removeIcon, {backgroundColor: colors.green}]} onPress={()=>onSuggestionsRemove()}>
+                      <Image style={styles.add} source={require('../assets/add.png')}/>
+                    </TouchableOpacity>
+                  </View>
+                )
+              )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
           <BoldAppText style={{fontSize: 14, color: colors.cosmicLatte, marginBottom:0,}}>UPDATE YOUR DAY</BoldAppText>
@@ -142,9 +197,9 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   infoSubWrapper: {
-    flex: 1,
+    width:'100%',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    alignContent: 'center',
   },
   icon: {
     backgroundColor: colors.blue,
@@ -155,17 +210,115 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
   },
   textWrapper: {
-    width: '45%'
+    width: '55%'
   },
   iconWrapper: {
-    
+    alignContent: 'center',
     width: '45%',
     flexDirection: 'row',
-    justifyContent: 'space-around'
-
+    justifyContent: 'space-around',
+    marginTop: 10,
   },
+  remove: {
+    height: 9,
+    width: 9,
+  },
+  add: {
+    height: 9,
+    width: 9,
+  },
+  removeIcon: {
+    backgroundColor: colors.lightGray,
+    opacity: 1,
+    width: 12,
+    height: 12,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center', 
+    marginTop: -15,
+  },
+  moodsTextInput: {
+    position:'absolute',
+    right: 20,
+    backgroundColor: 'transparent',
+    borderRadius:5,
+    height:40,
+    paddingLeft: 5,
+    marginTop:5,
+    width: '35%',
+    fontSize: 10,
+    fontFamily: 'Montserrat_500Medium',
+    borderBottomWidth: 2,
+    borderBottomColor: colors.cosmicLatte,
+  },
+  unusedSuggestionsWrapper: {
+    position:'absolute',
+    right: 15,
+    marginTop:25,
+    
+  }
 });
 
 
 
 export default HistoryScreen;
+
+
+
+// const dispatch = useDispatch();
+
+// const selectedDate = useSelector((state) => state.helper.selectedDate)
+// const fullHistoricalInfo = useSelector((state) => state.historicalData)
+// const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === selectedDate)
+
+
+// let feeling = useSelector((state) => state.calendar.feeling); 
+// if (requiredInfo.length) dispatch({
+//   type: "UPDATE_HISTORICAL_FEELING",
+//   payload: requiredInfo[0].feeling
+// })
+
+// let meetings = useSelector((state) => state.calendar.meetings);
+// if (requiredInfo.length) dispatch({
+//   type: "UPDATE_HISTORICAL_MEETINGS",
+//   payload: requiredInfo[0].meetings
+// })
+
+// let moodsArr = useSelector((state) => state.calendar.moods);
+// if (requiredInfo.length) dispatch({
+//   type: "UPDATE_HISTORICAL_MOODS",
+//   payload: requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
+// }) 
+
+// let suggestionsArr = useSelector((state) => state.calendar.suggestions); 
+// if (requiredInfo.length) dispatch({
+//   type: "UPDATE_HISTORICAL_SUGGESTIONS",
+//   payload: requiredInfo[0].suggestions
+// })
+
+// function onMeetingsAdd () {
+//   dispatch({
+//     type: "INCREMENT_HISTORICAL_MEETINGS"
+//   })
+// }
+
+// function onMeetingsMinus () { 
+//   if (meetings>0) dispatch({
+//     type: "DECREMENT_HISTORICAL_MEETINGS"
+//   })
+//   else return
+// }
+
+// function onFeelingAdd () { 
+//   if (feeling<10) dispatch({
+//     type: "INCREMENT_HISTORICAL_FEELING"
+//   })
+//   else return
+// }
+
+// function onFeelingMinus () { 
+//   if (feeling>0) dispatch({
+//     type: "DECREMENT_HISTORICAL_FEELING"
+//   })
+//   else return
+// }

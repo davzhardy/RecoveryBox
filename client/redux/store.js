@@ -6,6 +6,8 @@ import userReducer from './userReducer'
 import quoteReducer from './quoteReducer'
 import historicalDataReducer from './historicalDataReducer'
 import helperReducer from './helperReducer'
+import calendarReducer from './calendarReducer'
+
 
 const rootReducer = (combineReducers)({
   user: userReducer,
@@ -13,7 +15,8 @@ const rootReducer = (combineReducers)({
   settings: settingsReducer,
   dailyQuote: quoteReducer,
   historicalData: historicalDataReducer,
-  helper: helperReducer
+  helper: helperReducer,
+  calendar: calendarReducer,
 })
 
 const store = createStore(rootReducer);

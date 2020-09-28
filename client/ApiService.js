@@ -37,8 +37,18 @@ function getUserInfo (username) {
   })
 }
 
+function postHistoricalData (body) {
+
+}
+
+function updateHistoricalData (body) {
+
+}
+
 export default {
   getQuote,
   postDailyData,
   getUserInfo,
+  postHistoricalData,
+  updateHistoricalData,
 }
