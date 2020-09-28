@@ -74,6 +74,7 @@ function HomeScreen () {
 
   const registerModalVisible = useSelector((state) => state.helper.registerModal);
 
+// TODO refactor to have modal as seperate component
 
   return (
     !quoteItem ?

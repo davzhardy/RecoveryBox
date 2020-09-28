@@ -34,7 +34,7 @@ function HomeWelcome ( { historicalDate = false }) {
 
   if (historicalDate) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.containerhistorical]}>
         <View>
           <BoldAppText>{formattedDate}</BoldAppText>
           <MediumAppText >{displayDate}</MediumAppText>
@@ -67,7 +67,6 @@ function HomeWelcome ( { historicalDate = false }) {
       <View>
         {displayUsername}
       </View>
-      <Divider/>
     </View>
   );
   }
@@ -75,9 +74,9 @@ function HomeWelcome ( { historicalDate = false }) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderRadius: 5,
-    // backgroundColor: 'white',
-    // elevation: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    elevation: 1,
     margin: 10,
     paddingHorizontal: 10,
     paddingVertical: 12,
@@ -95,6 +94,11 @@ const styles = StyleSheet.create({
     width: 34,
     height: 34,
     resizeMode: "contain",
+  },
+  containerhistorical: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
 });
 

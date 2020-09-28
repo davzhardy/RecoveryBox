@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import CalendarDH from '../components/Calendar'
 import colors from '../styles/colors'
 
@@ -11,9 +11,9 @@ function CalendarScreen ({ navigation } ) {
       <View>
         <CalendarDH style={styles.calendar}/>
       </View>
-      <View style={styles.buttonWrapper}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Text>Back to HomeScreen</Text>
+      <View >
+        <TouchableOpacity style={styles.return} onPress={() => navigation.navigate('Home')}>
+          <Image style={styles.image} source={require('../assets/close.png')}/>
         </TouchableOpacity>
       </View>
     </View>
@@ -29,6 +29,19 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     flex: 1
+  },
+  image: {
+    height: 30,
+    width: 30,
+  },
+  return: {
+    marginTop: 20,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    backgroundColor: colors.blue,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 
 });

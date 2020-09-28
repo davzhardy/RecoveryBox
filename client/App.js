@@ -75,7 +75,13 @@ export default function App() {
               },
               headerLeft:null,
             }}/>
-            <Stack.Screen name="History" options={{ title: 'How were you feeling?' }} component={HistoryScreen}/>
+            <Stack.Screen name="History" component={HistoryScreen} options={{ 
+              title: 'Your History',
+              headerTitleStyle: {
+                color: colors.orange,
+                fontFamily: 'Montserrat_700Bold',
+              } 
+            }} />
           </Stack.Navigator>
       </NavigationContainer>
       </Provider> 

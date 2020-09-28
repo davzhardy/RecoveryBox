@@ -11,8 +11,6 @@ function Footer () {
   const state = navigationRef.current?.getCurrentRoute();
   const state1 = navigationRef.current?.getRootState();
 
-  console.log(state)
-  console.log(state1)
 // TODO add highlights, opacity etc. depending on which navigation state you are in
 
   return (
