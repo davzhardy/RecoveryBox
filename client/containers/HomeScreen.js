@@ -76,9 +76,7 @@ function HomeScreen () {
 // TODO refactor to have modal as seperate component
 
   return (
-    !quoteItem ?
-    <AppLoading/>
-    :
+
     <View style={styles.container}>        
       <ScrollView>
       <View style={styles.wrapperZero}>
@@ -184,11 +182,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    height: 90,
+    height: 175,
     width: 200,
     backgroundColor: colors.orange,
     opacity: 0.95,
-    elevation: 9,
+    elevation: 15,
     borderRadius: 5,
   },
   return: {

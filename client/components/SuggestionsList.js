@@ -31,13 +31,13 @@ function SuggestionsList () {
   return (
     <View style={styles.container}>
       <View style={styles.topcontainer}>
-        <MediumAppText style={{color: colors.darkGrayFont}} onPress={() => navigation.navigate('ModifySuggestions')}>MY DAILY SUGGESTIONS</MediumAppText>
+        <MediumAppText style={{color: colors.darkGrayFont}}>MY DAILY SUGGESTIONS</MediumAppText>
       </View>
-      {/* <View style={styles.cog}>
+      <View style={styles.cog}>
         <TouchableOpacity onPress={() => navigation.navigate('ModifySuggestions')}>
-          <Image style={styles.icons} source={require('../assets/cog.png')} />
+          <Image style={styles.icons} source={require('../assets/settings.png')} />
         </TouchableOpacity>
-      </View> */}
+      </View>
       <View style={styles.suggestionWrapper}>
         {suggestionListToDisplay.map(
           suggestion =>
@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  // cog: {
-  //   position: 'absolute',
-  //   right: 10,
-  //   top: 5,
-  // },
+  cog: {
+    position: 'absolute',
+    right: 2,
+    top: 2,
+  },
   icons: {
-    height: 30,
-    width: 30,
+    height: 15,
+    width: 15,
   },
   suggestionWrapper: {
     flexDirection: 'row',

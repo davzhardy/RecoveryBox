@@ -9,7 +9,6 @@ import ModifySuggestionsList from './containers/ModifySuggestionsList'
 import SummaryScreen from './containers/SummaryScreen'
 import HistoryScreen from './containers/HistoryScreen'
 import {useFonts, Montserrat_500Medium, Montserrat_700Bold} from '@expo-google-fonts/montserrat'
-import { AppLoading } from 'expo';
 import { Provider } from "react-redux";
 import store from './redux/store'
 import colors from './styles/colors'
@@ -26,7 +25,7 @@ export default function App() {
   });
 
   if(!fontsLoaded) {
-    return <AppLoading />
+    return null
   } else {
     return (
       <Provider store={store}>

@@ -14,10 +14,25 @@ function MoodVisuals () {
 
   const moodsToShow = 5;
   // TODO make the number of moods you show customisable
-  // TODO alltime broken, to fix
+
+  const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
+  const millisPerDay = 1000 * 60 * 60 * 24
+  const week = 7*millisPerDay;
+  const month = 30*millisPerDay;
+  const now = useSelector((state) => state.helper.now)
+
+  function convertTime (string) {
+    if (string === 'week') return week;
+    else if (string === 'month') return month;
+    else return now;
+  }
+
+  const timePeriod = convertTime(chartTimePeriod)
+  const lastDay = now - timePeriod
 
   const historicalData = useSelector((state) => state.historicalData);
-  const moodsData = _.map(historicalData, el => el.moods)
+  const periodData = _.filter(historicalData, el => el.date > lastDay)
+  const moodsData = _.map(periodData, el => el.moods)
   
   function create (array) {
     let obj = {}

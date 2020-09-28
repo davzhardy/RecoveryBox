@@ -22,7 +22,7 @@ function getQuote () {
 }
 
 function postDailyData (body) {
-  return fetchRequest('/adddata', {
+  return fetchRequest('/adddailydata', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body)
@@ -36,7 +36,11 @@ function getUserInfo (username) {
 }
 
 function postHistoricalData (body) {
-
+  return fetchRequest('/addhistoricaldata', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  })
 }
 
 function updateHistoricalData (body) {

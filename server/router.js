@@ -5,7 +5,9 @@ router.get('/apirequest', query.getQuote);
 router.get('/user/:username', query.getUserInfo);
 router.get('/data/:id', query.getAllData);
 router.post('/adduser', query.postUserInfo);
-router.post('/adddata', query.postData);
+router.post('/adddailydata', query.postDailyData);
+router.post('/addhistoricaldata', query.postHistoricalData);
+
 
 //TODO do these routes
 router.put('/addsettings', query.postSettingsInfo);

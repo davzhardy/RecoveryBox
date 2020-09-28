@@ -7,6 +7,7 @@ import {useDispatch, useSelector } from "react-redux";
 import {DateTime} from 'luxon'
 import colors from '../styles/colors'
 import { MediumAppText, BoldAppText } from '../styles/text'
+import ApiService from '../ApiService'
 
 
 function HistoryScreen () {
@@ -34,7 +35,7 @@ function HistoryScreen () {
   const [meetings, setMeetings ] = useState(startingMeetings)
   const [moodsArr, setMoods] = useState(startingMoods)
   const [suggestionsArr, setSuggestions] = useState(startingSuggestions)
-  const [newMoodsArr, setNewMoodsArr] = useState(false)
+  const [newMoodsArr, setNewMoodsArr] = useState([])
 
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
   const unusedSuggestions = fullSuggestionsList.filter(el => !suggestionsArr.includes(el))
@@ -66,14 +67,32 @@ function HistoryScreen () {
     
   }
 
+  function onSuggestionsAdd () { 
+    
+  }
 
+  const userId = useSelector((state) => state.user.id);
 
+  function createHistoricalData () {
+    ApiService.postHistoricalData({
+      date: DateTime.fromMillis(selectedDate).toUTC().startOf('day').ts,
+      meetings: meetings,
+      feeling: feeling,
+      moods: JSON.stringify(newMoodsArr),
+      suggestions: JSON.stringify(suggestionsArr),
+      UserId: userId,
+    })
+  }
+
+  function clickHandler () {
+    createHistoricalData()
+  }
 
     return (
       <View style={styles.container}>
         <HomeWelcome historicalDate={selectedDate}/>
         {requiredInfo.length ? <></> : <View style={styles.noData}>
-            <Text>You have no data for today.</Text>
+            <MediumAppText>You have no data for today.</MediumAppText>
           </View>
         }
       <ScrollView style={styles.infoWrapper}>  
@@ -112,7 +131,7 @@ function HistoryScreen () {
           <MediumAppText>Moods:</MediumAppText>
           {moodsArr.map(
             mood => (
-              <View style={{flexDirection:'row', minHeight:30, alignItems:'center'}}>
+              <View key={mood} style={{flexDirection:'row', minHeight:30, alignItems:'center'}}>
                 <BoldAppText key={mood} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{mood}</BoldAppText>
                 <TouchableOpacity style={styles.removeIcon} onPress={()=>onMoodsRemove()}>
                   <Image style={styles.remove} source={require('../assets/close.png')}/>
@@ -123,7 +142,7 @@ function HistoryScreen () {
           <TextInput
               style={moodsArr.length ? styles.moodsTextInput : styles.moodsTextInput1}
               placeholder='Enter a mood'
-              value= {moodsArr ? moodsArr : ''}
+              value=''
               onChangeText={text => setNewMoodsArr(text)}
             />
         </View>
@@ -132,7 +151,7 @@ function HistoryScreen () {
             <MediumAppText>Suggestions completed:</MediumAppText>
               {suggestionsArr.map(
                 suggestion => (
-                <View style={{flexDirection:'row', alignItems:'center'}}>
+                <View key={suggestion} style={{flexDirection:'row', alignItems:'center'}}>
                     <BoldAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{suggestion}</BoldAppText>
                     <TouchableOpacity style={styles.removeIcon} onPress={()=>onSuggestionsRemove()}>
                       <Image style={styles.remove} source={require('../assets/close.png')}/>
@@ -144,9 +163,9 @@ function HistoryScreen () {
           <View style={styles.unusedSuggestionsWrapper}>
             {unusedSuggestions.map(
                 suggestion => (
-                <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
+                <View key={suggestion} style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
                     <MediumAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 12}}>{suggestion}</MediumAppText>
-                    <TouchableOpacity style={[styles.removeIcon, {backgroundColor: colors.green}]} onPress={()=>onSuggestionsRemove()}>
+                    <TouchableOpacity style={[styles.removeIcon, {backgroundColor: colors.green}]} onPress={()=>onSuggestionsAdd()}>
                       <Image style={styles.add} source={require('../assets/add.png')}/>
                     </TouchableOpacity>
                   </View>
@@ -156,7 +175,7 @@ function HistoryScreen () {
         </View>
       </ScrollView>
       <View style={styles.wrapper}>
-        <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
+        <TouchableOpacity style={styles.button} onPress={() => clickHandler()}>
           <BoldAppText style={{fontSize: 14, color: colors.cosmicLatte, marginBottom:0,}}>UPDATE YOUR DAY</BoldAppText>
         </TouchableOpacity>
       </View>

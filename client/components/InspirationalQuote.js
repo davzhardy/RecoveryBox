@@ -10,14 +10,14 @@ function InpsirationalQuote ({ quote, author }) {
     <View style={styles.container}>
       <MediumAppText>{quote}</MediumAppText>
       <BoldAppText>{author}</BoldAppText>
-      <Divider/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });
 

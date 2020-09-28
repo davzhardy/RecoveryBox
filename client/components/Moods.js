@@ -234,11 +234,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    height: 90,
+    height: 150,
     width: 200,
     backgroundColor: colors.cosmicLatte,
     opacity: 0.95,
-    elevation: 9,
+    elevation: 15,
     borderRadius: 5,
   },
   return: {

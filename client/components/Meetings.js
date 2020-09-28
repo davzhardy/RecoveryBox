@@ -24,8 +24,8 @@ function Meetings () {
 
   function meetingsReducer (arr) {
     const copyArr = arr.slice(0) 
-    const number = copyArr.reduce((acc, value) => acc + value)
-    return number
+    if (copyArr.length) return copyArr.reduce((acc, value) => acc + value)
+    else return 0
   } 
 
   const totalMeetings = meetingsReducer(meetingsData)

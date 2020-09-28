@@ -22,5 +22,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+  },
+  "android": {
+    "splash": {
+      "resizeMode": "cover",
+      "mdpi":  "./assets/androidsplash.png"
+    }
   }
+
 }

@@ -14,10 +14,26 @@ import {Defs, LinearGradient, Stop } from "react-native-svg";
 function SuggestionsVisuals () {
 
   const suggestionsToShow = 5;
+
+  const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
+  const millisPerDay = 1000 * 60 * 60 * 24
+  const week = 7*millisPerDay;
+  const month = 30*millisPerDay;
+  const now = useSelector((state) => state.helper.now)
+
+  function convertTime (string) {
+    if (string === 'week') return week;
+    else if (string === 'month') return month;
+    else return now;
+  }
+
+  const timePeriod = convertTime(chartTimePeriod)
+  const lastDay = now - timePeriod
+
   const historicalData = useSelector((state) => state.historicalData);
-  const suggestionsData = _.map(historicalData, el => el.suggestions) 
+  const periodData = _.filter(historicalData, el => el.date > lastDay)
+  const suggestionsData = _.map(periodData, el => el.suggestions) 
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
-  console.log('suggest', suggestionsData)
 
   // TODO alltime broken, to fix
 
