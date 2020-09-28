@@ -43,10 +43,10 @@ export default function App() {
                 color: colors.orange,
                 fontFamily: 'Montserrat_700Bold',
               },
-              headerRight:({ navigation }) => {
+              headerRight:() => {
                 return (
-                <TouchableOpacity onPress={() => navigation.navigate('ModifySuggestions')}>
-                  <Image style={{height:30, width:30, marginRight:35}} source={require('./assets/settings.png')}/>
+                <TouchableOpacity>
+                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
                 </TouchableOpacity>) }             
               }}
             />
@@ -61,6 +61,12 @@ export default function App() {
                 fontFamily: 'Montserrat_700Bold',
               },
               headerLeft:null,
+              headerRight:() => {
+                return (
+                <TouchableOpacity>
+                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                </TouchableOpacity>) }  
+              
             }}/>
             <Stack.Screen name="ModifySuggestions" options={{ headerShown: false }} component={ModifySuggestionsList}/>
             <Stack.Screen name="Summary" component={SummaryScreen} options={{
@@ -74,13 +80,23 @@ export default function App() {
                 fontFamily: 'Montserrat_700Bold',
               },
               headerLeft:null,
+              headerRight:() => {
+                return (
+                <TouchableOpacity>
+                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                </TouchableOpacity>) }  
             }}/>
             <Stack.Screen name="History" component={HistoryScreen} options={{ 
               title: 'Your History',
               headerTitleStyle: {
                 color: colors.orange,
                 fontFamily: 'Montserrat_700Bold',
-              } 
+              },
+              headerRight:() => {
+                return (
+                <TouchableOpacity>
+                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                </TouchableOpacity>) }  
             }} />
           </Stack.Navigator>
       </NavigationContainer>

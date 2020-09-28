@@ -17,8 +17,9 @@ function SuggestionsVisuals () {
   const historicalData = useSelector((state) => state.historicalData);
   const suggestionsData = _.map(historicalData, el => el.suggestions) 
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
-  
-  // TODO add some kind of toggle to show more data on the graphs or change their format
+  console.log('suggest', suggestionsData)
+
+  // TODO alltime broken, to fix
 
   function create (array) {
     let obj = {}
@@ -75,8 +76,9 @@ function SuggestionsVisuals () {
   return (
     <View style={styles.container}>
       <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Suggestions</BoldAppText>
-      <VictoryGroup width={350} height={200} styles={styles.container} >
+      <VictoryGroup width={300} height={200} styles={styles.container} >
         <VictoryScatter 
+          domainPadding={{ x: [-5,-5] }}
           data={randomTopSuggestions} 
           animate={{
           duration: 2000,

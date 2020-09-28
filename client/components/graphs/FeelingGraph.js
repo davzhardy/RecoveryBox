@@ -17,20 +17,31 @@ function FeelingGraph () {
   const millisPerDay = 1000 * 60 * 60 * 24
   const week = 7*millisPerDay;
   const month = 30*millisPerDay;
+  const now = useSelector((state) => state.helper.now)
 
   function convertTime (string) {
     if (string === 'week') return week;
     else if (string === 'month') return month;
-    else return false;
+    else return now;
   }
 
   const timePeriod = convertTime(chartTimePeriod)
-  const lastDay = useSelector((state) => state.helper.now) - timePeriod
+  const lastDay = now - timePeriod
 
   const historicalData = useSelector((state) => state.historicalData);
-  const filteredData = _.filter(historicalData, el => el.date > lastDay)
-// TODO if put requests are implemented for historical calendar days then this data will need to be sorted by date before being used
+  const periodData = _.filter(historicalData, el => el.date > lastDay)
 
+  function compareItem(a, b){
+    if(a.date < b.date){
+      return -1;
+    }else if(a.date > b.date){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
+
+  const filteredData = periodData.sort(compareItem)
   const feelingData = _.map(filteredData, el => el.feeling) 
   const dateData = _.map(filteredData, el => el.date)
   const formattedDateData = dateData.map(date => DateTime.fromMillis(date).toFormat('LLL dd'))
@@ -51,7 +62,6 @@ function FeelingGraph () {
   }
 
   const combinedList = create(formattedDateData, feelingData, meetingData)
-  console.log(combinedList)
 
   return (
     <View style={styles.container}>
@@ -95,7 +105,6 @@ function FeelingGraph () {
           parent: {}
           }}
         interpolation="natural"
-
         />
         <VictoryAxis
           tickCount={4}
@@ -103,11 +112,18 @@ function FeelingGraph () {
             tickLabels: {fontSize: 10},
             axis: {stroke: "none"},
           }}
-          
-
         />
-
       </VictoryChart>
+      <View style={styles.key}>
+        <View>
+          <View/>
+          <Text>Feeling</Text>
+        </View>
+        <View>
+          <View/>
+          <Text>Meetings</Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -118,6 +134,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  key: {
+    position: 'absolute',
   },
 });
 

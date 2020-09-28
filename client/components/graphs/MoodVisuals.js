@@ -14,9 +14,10 @@ function MoodVisuals () {
 
   const moodsToShow = 5;
   // TODO make the number of moods you show customisable
+  // TODO alltime broken, to fix
 
   const historicalData = useSelector((state) => state.historicalData);
-  const moodsData = _.map(historicalData, el => el.moods) 
+  const moodsData = _.map(historicalData, el => el.moods)
   
   function create (array) {
     let obj = {}
@@ -36,7 +37,8 @@ function MoodVisuals () {
     let arr = [];
     for (let i in obj) {
       let newobj = {}
-      newobj.mood = i
+      let j = [i].map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
+      newobj.mood = j.join('')
       newobj.value = obj[i]
       arr.push(newobj)
     }
@@ -73,9 +75,10 @@ function MoodVisuals () {
   return (
     <View style={styles.container}>
       <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Moods</BoldAppText>
-      <VictoryGroup width={325} height={200} styles={styles.container}>
+      <VictoryGroup width={300} height={200} styles={styles.container}>
         <VictoryScatter
-        data={randomTopMoods} 
+        data={randomTopMoods}
+        domainPadding={{ x: [-5,-5] }}
         animate={{
           duration: 2000,
           onLoad: { duration: 1000 }
@@ -115,7 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 });
 

@@ -12,15 +12,16 @@ function MeetingsSummary () {
   const millisPerDay = 1000 * 60 * 60 * 24
   const week = 7*millisPerDay;
   const month = 30*millisPerDay;
+  const now = useSelector((state) => state.helper.now)
 
   function convertTime (string) {
     if (string === 'week') return week;
     else if (string === 'month') return month;
-    else return false;
+    else return now;
   }
 
   const timePeriod = convertTime(chartTimePeriod)
-  const lastDay = useSelector((state) => state.helper.now) - timePeriod
+  const lastDay = now - timePeriod
 
   const historicalData = useSelector((state) => state.historicalData);
   const filteredData = _.filter(historicalData, el => el.date > lastDay)

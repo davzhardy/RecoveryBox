@@ -40,8 +40,12 @@ function LoginScreen ({ navigation }) {
       }
       for (let i of data[0].Data) {
         i.date = Number(i.date)
-        i.moods = i.moods.replace(/[\[\]',]+/g,'').split(' ')
-        i.suggestions = eval(i.suggestions).join(","). split(",")
+        let parseMoods = i.moods.replace(/[\[\]',"]+/g,'')
+        let arrayMoods;
+        if (parseMoods.length) arrayMoods = parseMoods.split(' ')
+        if (arrayMoods===undefined) arrayMoods = []
+        i.moods = arrayMoods
+        i.suggestions = eval(i.suggestions)
       }
       let dispatchtoHistoricalData = data[0].Data
       dispatch({
@@ -80,6 +84,9 @@ function LoginScreen ({ navigation }) {
       </View>
       <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
         <Text style={styles.text}>LOGIN</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, {marginTop:7}]}>
+        <Text style={styles.text}>REGISTER</Text>
       </TouchableOpacity>
       <View>
         { 
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:40,
+    marginTop:30,
     marginBottom:10,
   },
   text: {

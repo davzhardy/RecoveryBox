@@ -10,6 +10,8 @@ import { Dimensions } from "react-native";
 import Constants from 'expo-constants';
 import { BoldAppText, MediumAppText } from '../styles/text';
 import colors from '../styles/colors';
+import _ from 'lodash';
+import { Duration, DateTime } from 'luxon'
 
 function SummaryScreen () {
 
@@ -27,12 +29,19 @@ function SummaryScreen () {
   const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
 
   function clickHandler (timePeriod) {
-    console.log('hello')
     dispatch({
       type: 'UPDATE_TIMEPERIOD',
       payload: timePeriod
     })
   }
+
+  const historicalData = useSelector((state) => state.historicalData);
+  const dateData = _.map(historicalData, el => el.date)
+  const firstDate = dateData.sort((a,b)=>a-b)[0]
+  const now = useSelector((state) => state.helper.now)
+  const durationMillis = now-firstDate
+  const millisPerDay = 1000 * 60 * 60 * 24
+  const durationDays = Math.round(durationMillis/millisPerDay)
 
   //TODO change the current onpress to something swipeable?
   // TODO add key for first graph
@@ -61,7 +70,7 @@ function SummaryScreen () {
         <View>
           <View style={styles.textWrapper}>
             <View style={{flexDirection: 'row'}}>
-            <BoldAppText style={{fontSize: 15, color:colors.orange}}>xxx </BoldAppText>
+            <BoldAppText style={{fontSize: 15, color:colors.orange}}>{durationDays} </BoldAppText>
             <BoldAppText style={{fontSize: 15}}>days in recovery</BoldAppText>
             </View>
             <View>
@@ -71,7 +80,7 @@ function SummaryScreen () {
           <View style={styles.feelingGraph}>
             <FeelingGraph />
           </View>
-          <View >
+          <View style={styles.moodGraph}>
             <MoodVisuals />
           </View>
           <View >
@@ -137,6 +146,9 @@ const styles = StyleSheet.create({
   feelingGraph: {
     marginBottom: -20
   },
+  moodGraph: {
+    width:'100%'
+  }
 });
 
 
