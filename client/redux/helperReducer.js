@@ -5,7 +5,8 @@ const initialState = {
   selectedDate: false,
   chartTimePeriod: 'week',
   dayRegistered: false,
-  registerModal: false
+  registerModal: false,
+  routeName: '',
 }
 
 const helperReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const helperReducer = (state = initialState, action) => {
       return {
         ...state,
         registerModal: action.payload
+      }
+    case 'UPDATE_ROUTE':
+      return {
+        ...state,
+        routeName: action.payload
       }
     default:
       return state;

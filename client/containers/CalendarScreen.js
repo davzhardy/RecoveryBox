@@ -2,17 +2,22 @@ import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import CalendarDH from '../components/Calendar'
 import colors from '../styles/colors'
+import {useDispatch, useSelector } from "react-redux";
 
-function CalendarScreen ({ navigation } ) {
+
+function CalendarScreen ({ navigation, route } ) {
 
   //TODO if you press on calendar with todays date it takes you back to the home screen and not to a history screen
+  
+  const rootName = useSelector((state) => state.helper.routeName);
+  
   return (
     <View style={styles.container}>
       <View>
         <CalendarDH style={styles.calendar}/>
       </View>
       <View >
-        <TouchableOpacity style={styles.return} onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.return} onPress={() => navigation.navigate(rootName)}>
           <Image style={styles.image} source={require('../assets/close.png')}/>
         </TouchableOpacity>
       </View>

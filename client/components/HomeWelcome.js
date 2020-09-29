@@ -30,7 +30,7 @@ function HomeWelcome ( { historicalDate = false }) {
   const username = useSelector((state) => state.user.username)
 
   const displayDate = historicalDate ? `${duration} days ago` : 'Today'
-  const displayUsername = historicalDate ? <></> : <View><BoldAppText>Hello {username}!</BoldAppText></View>
+  const displayUsername = historicalDate ? <></> : <View><BoldAppText>Hello {username} !</BoldAppText></View>
 
   if (historicalDate) {
     return (
@@ -44,30 +44,9 @@ function HomeWelcome ( { historicalDate = false }) {
     )
   } else {
   return (
-    <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <TouchableOpacity
-          title="Calendar Icon"
-          onPress={() => navigation.navigate('Calendar')}
-        >
-          <Image style={styles.icons} source={require('../assets/calendarIcon.png')}/>
-        </TouchableOpacity>
-        <View>
-          <BoldAppText>{displayDate}</BoldAppText>
-          <MediumAppText >{formattedDate}</MediumAppText>
-        </View>
-
-        <TouchableOpacity
-          title="Settings Icon"
-          onPress={() => navigation.navigate('Summary')}
-        >
-          <Image style={styles.icons} source={require('../assets/settingsIcon.png')}/>
-        </TouchableOpacity>
-      </View> */}
       <View>
         {displayUsername}
       </View>
-    </View>
   );
   }
 }

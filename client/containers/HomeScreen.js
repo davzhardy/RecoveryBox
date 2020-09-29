@@ -8,7 +8,8 @@ import SuggestionsList from '../components/SuggestionsList'
 import Footer from '../components/Footer'
 import InspirationalQuote from '../components/InspirationalQuote'
 import ApiService from '../ApiService'
-import { AppLoading } from 'expo';
+import Loader from '../components/Loader';
+import { AppLoading } from 'expo'
 import {useDispatch, useSelector } from "react-redux";
 import {DateTime} from 'luxon';
 import colors from '../styles/colors'
@@ -16,11 +17,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CalendarScreen from './CalendarScreen'
 import { MediumAppText, BoldAppText } from '../styles/text'
-import { color } from 'react-native-reanimated';
 
-function HomeScreen () {
 
-  // TODO:  use react query
+function HomeScreen ({ route }) {
+
   const dispatch = useDispatch();
   useEffect(() => {
     ApiService.getQuote()
@@ -30,6 +30,10 @@ function HomeScreen () {
         payload: quote
       })
     )
+    dispatch({
+      type: "UPDATE_ROUTE",
+      payload: route.name,
+    })
   },[])
   
   const quoteItem = useSelector((state) => state.dailyQuote.todaysQuote);
@@ -69,20 +73,23 @@ function HomeScreen () {
 
 //TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
 
-  const Tab = createBottomTabNavigator();
-
   const registerModalVisible = useSelector((state) => state.helper.registerModal);
 
 // TODO refactor to have modal as seperate component
 
   return (
-
+    !quoteItem ? 
+    <Loader/>
+    :
     <View style={styles.container}>        
       <ScrollView>
       <View style={styles.wrapperZero}>
+        <HomeWelcome/>
+        <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/>
+      </View>
+      <View style={styles.wrapperOne}> 
         <Meetings/>
       </View>
-      {/* <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/> */}
       <View style={styles.wrapperOne}> 
         <Feeling/>
       </View>
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   wrapperZero: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     borderRadius: 5,
     backgroundColor: 'white',
     elevation: 1,

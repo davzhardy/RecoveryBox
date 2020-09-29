@@ -5,7 +5,7 @@ const initialState = {
   suggestions: [],
 }
 
-const calendarReducer = (state = initialState, action) => {
+const calendarHistoricalDayReducer = (state = initialState, action) => {
   switch (action.type) {
     case "INCREMENT_HISTORICAL_MEETINGS":
       return {
@@ -20,12 +20,12 @@ const calendarReducer = (state = initialState, action) => {
     case "INCREMENT_HISTORICAL_FEELING":
       return {
         ...state,
-        meetings: state.meetings +1
+        feeling: state.feeling +1
       }
     case "DECREMENT_HISTORICAL_FEELING":
       return {
         ...state,
-        meetings: state.meetings -1
+        feeling: state.feeling -1
       }
     case "UPDATE_HISTORICAL_FEELING":
       return {
@@ -35,22 +35,22 @@ const calendarReducer = (state = initialState, action) => {
     case "UPDATE_HISTORICAL_MEETINGS":
       return {
         ...state,
-        feeling: action.payload
+        meetings: action.payload
       }
     case "UPDATE_HISTORICAL_MOODS":
       return {
         ...state,
-        feeling: action.payload
+        moods: action.payload
       }
     case "UPDATE_HISTORICAL_SUGGESTIONS":
       return {
         ...state,
-        feeling: action.payload
+        suggestions: action.payload
       }  
     case "ADDTO_HISTORICAL_MOODS":
       return {
         ...state,
-        moods: [...state.moods, action.payload]
+        moods: [...state.moods, ...action.payload]
       }
     case "REMOVEFROM_HISTORICAL_MOODS":
     return {
@@ -62,4 +62,4 @@ const calendarReducer = (state = initialState, action) => {
   }
 }
 
-export default calendarReducer;
+export default calendarHistoricalDayReducer;

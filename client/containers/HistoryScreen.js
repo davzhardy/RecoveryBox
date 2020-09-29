@@ -8,67 +8,124 @@ import {DateTime} from 'luxon'
 import colors from '../styles/colors'
 import { MediumAppText, BoldAppText } from '../styles/text'
 import ApiService from '../ApiService'
+import HistoricalMoodItem from '../components/historical/HistoricalMoodItem'
+import HistoricalSuggestionItem from '../components/historical/HistoricalSuggestionItem'
+import HistoricalUnusedSuggestionItem from '../components/historical/HistoricalUnusedSuggestionItem'
+import { useNavigation } from '@react-navigation/native';
 
 
 function HistoryScreen () {
 
   //TODO buggy nd broken at the moment, needs to bt split into separate components and put into reducers
   //TODO once the above is completed, need to update the current put request
+  const navigation = useNavigation();
 
   const selectedDate = useSelector((state) => state.helper.selectedDate)
   const fullHistoricalInfo = useSelector((state) => state.historicalData)
   const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === selectedDate)
 
-  let startingFeeling = 0; 
-  if (requiredInfo.length) startingFeeling = requiredInfo[0].feeling;
-  
-  let startingMeetings = 0; 
-  if (requiredInfo.length) startingMeetings = requiredInfo[0].meetings;
+  const dispatch = useDispatch();
 
-  let startingMoods = []; 
-  if (requiredInfo.length) startingMoods = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1));
+  useEffect(()=>{
+    if (requiredInfo.length) dispatch({
+      type: "UPDATE_HISTORICAL_FEELING",
+      payload: requiredInfo[0].feeling
+    })
+    if (requiredInfo.length) dispatch({
+      type: "UPDATE_HISTORICAL_MEETINGS",
+      payload: requiredInfo[0].meetings
+    })
+    if (requiredInfo.length) dispatch({
+      type: "UPDATE_HISTORICAL_MOODS",
+      payload: requiredInfo[0].moods
+    }) 
+    if (requiredInfo.length) dispatch({
+      type: "UPDATE_HISTORICAL_SUGGESTIONS",
+      payload: requiredInfo[0].suggestions
+    })
+    return function cleanup () {
+      dispatch({
+        type: "UPDATE_HISTORICAL_FEELING",
+        payload: 0
+    })
+    dispatch({
+      type: "UPDATE_HISTORICAL_MEETINGS",
+      payload: 0
+    })
+    dispatch({
+      type: "UPDATE_HISTORICAL_MOODS",
+      payload: []
+    })
+    dispatch({
+      type: "UPDATE_HISTORICAL_SUGGESTIONS",
+      payload: []
+    })
+  }
+  },[])
 
-  let startingSuggestions = []; 
-  if (requiredInfo.length) startingSuggestions = requiredInfo[0].suggestions;
+  const feeling = useSelector((state) => state.calendarHistoricalDay.feeling); 
+  const meetings = useSelector((state) => state.calendarHistoricalDay.meetings);
+  const moodsArr = useSelector((state) => state.calendarHistoricalDay.moods);
+  // const formatted = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
+  const suggestionsArr = useSelector((state) => state.calendarHistoricalDay.suggestions); 
 
-  const [feeling, setFeeling] = useState(startingFeeling)
-  const [meetings, setMeetings ] = useState(startingMeetings)
-  const [moodsArr, setMoods] = useState(startingMoods)
-  const [suggestionsArr, setSuggestions] = useState(startingSuggestions)
-  const [newMoodsArr, setNewMoodsArr] = useState([])
-
-  const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
-  const unusedSuggestions = fullSuggestionsList.filter(el => !suggestionsArr.includes(el))
 
   function onMeetingsAdd () {
-    setMeetings(meetings+1) 
+    if (meetings<10)
+    dispatch({
+      type: "INCREMENT_HISTORICAL_MEETINGS"
+    })
   }
 
   function onMeetingsMinus () { 
-    if (meetings>0) setMeetings(meetings-1) 
+    if (meetings>0) 
+    dispatch({
+      type: "DECREMENT_HISTORICAL_MEETINGS"
+    })
     else return
   }
 
   function onFeelingAdd () { 
-    if (feeling<10) setFeeling(feeling+1)
+    if (feeling<10) {
+      dispatch({
+        type: "INCREMENT_HISTORICAL_FEELING"
+      })
+    }
     else return
   }
 
   function onFeelingMinus () { 
-    if (feeling>0) setFeeling(feeling-1)
+    if (feeling>0) 
+    dispatch({
+      type: "DECREMENT_HISTORICAL_FEELING"
+    })
     else return
   }
 
+  const [newMoodsArr, setNewMoodsArr] = useState([])
+  const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.suggestionsList);
+  const unusedSuggestions = fullSuggestionsList.filter(el => !suggestionsArr.includes(el))
+  const historicalInfo = useSelector((state) => state.calendarHistoricalDay);
   function onMoodsRemove () { 
+
+  }
+
+  function onMoodsAdd () { 
+    dispatch({
+      type: "ADDTO_HISTORICAL_MOODS",
+      payload: newMoodsArr
+    })
+  }
+
+  function onSuggestionRemove () { 
     
   }
 
-  function onSuggestionsRemove () { 
-    
-  }
-
-  function onSuggestionsAdd () { 
-    
+  function onSuggestionAdd () { 
+    // dispatch({
+    //   type: "ADDTO_HISTORICAL_MOODS",
+    //   payload: newMoodsArr
+    // })
   }
 
   const userId = useSelector((state) => state.user.id);
@@ -85,6 +142,11 @@ function HistoryScreen () {
   }
 
   function clickHandler () {
+    onMoodsAdd()
+    dispatch({
+      type: "UPDATE_HISTORICALDATA_WITH_HISTORICALINFO",
+      payload: historicalInfo
+    })
     createHistoricalData()
   }
 
@@ -128,15 +190,10 @@ function HistoryScreen () {
           </View>
         </View>
         <View style={{flex: 1, minHeight:75}}>
-          <MediumAppText>Moods:</MediumAppText>
+          <MediumAppText style={{marginBottom:15}}>Moods:</MediumAppText>
           {moodsArr.map(
             mood => (
-              <View key={mood} style={{flexDirection:'row', minHeight:30, alignItems:'center'}}>
-                <BoldAppText key={mood} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{mood}</BoldAppText>
-                <TouchableOpacity style={styles.removeIcon} onPress={()=>onMoodsRemove()}>
-                  <Image style={styles.remove} source={require('../assets/close.png')}/>
-                </TouchableOpacity>
-              </View>
+              <HistoricalMoodItem key={mood} onMoodsRemove={onMoodsRemove} mood={mood}/>
             )
           )}
           <TextInput
@@ -147,28 +204,23 @@ function HistoryScreen () {
             />
         </View>
         <View style={{flex:1, minHeight: 180,}}>
+          <View style={styles.cog}>
+          <TouchableOpacity onPress={() =>  navigation.navigate('ModifySuggestions')}>
+            <Image style={styles.icons} source={require('../assets/settings.png')} />
+          </TouchableOpacity>
+          </View>
           <View>
-            <MediumAppText>Suggestions completed:</MediumAppText>
+            <MediumAppText style={{marginBottom:15, maxWidth:200,}}>Suggestions completed:</MediumAppText>
               {suggestionsArr.map(
                 suggestion => (
-                <View key={suggestion} style={{flexDirection:'row', alignItems:'center'}}>
-                    <BoldAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 17}}>{suggestion}</BoldAppText>
-                    <TouchableOpacity style={styles.removeIcon} onPress={()=>onSuggestionsRemove()}>
-                      <Image style={styles.remove} source={require('../assets/close.png')}/>
-                    </TouchableOpacity>
-                  </View>
+                  <HistoricalSuggestionItem key={suggestion} onSuggestionRemove={onSuggestionRemove} suggestion={suggestion}/>
                 )
               )}
           </View>
           <View style={styles.unusedSuggestionsWrapper}>
             {unusedSuggestions.map(
                 suggestion => (
-                <View key={suggestion} style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
-                    <MediumAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 12}}>{suggestion}</MediumAppText>
-                    <TouchableOpacity style={[styles.removeIcon, {backgroundColor: colors.green}]} onPress={()=>onSuggestionsAdd()}>
-                      <Image style={styles.add} source={require('../assets/add.png')}/>
-                    </TouchableOpacity>
-                  </View>
+                  <HistoricalUnusedSuggestionItem key={suggestion} onSuggestionRemove={onSuggestionAdd} suggestion={suggestion}/>
                 )
               )}
           </View>
@@ -305,6 +357,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 12,
   },
+  cog: {
+    position: 'absolute',
+    right: 5,
+    top: 0,
+    elevation: 5
+  },
+  icons: {
+    height: 15,
+    width: 15,
+  },
 });
 
 
@@ -313,60 +375,37 @@ export default HistoryScreen;
 
 
 
-// const dispatch = useDispatch();
+    // let startingFeeling = 0; 
+  // if (requiredInfo.length) startingFeeling = requiredInfo[0].feeling;
+  
+  // let startingMeetings = 0; 
+  // if (requiredInfo.length) startingMeetings = requiredInfo[0].meetings;
 
-// const selectedDate = useSelector((state) => state.helper.selectedDate)
-// const fullHistoricalInfo = useSelector((state) => state.historicalData)
-// const requiredInfo = _.filter(fullHistoricalInfo, el => el.date === selectedDate)
+  // let startingMoods = []; 
+  // if (requiredInfo.length) startingMoods = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1));
 
+  // let startingSuggestions = []; 
+  // if (requiredInfo.length) startingSuggestions = requiredInfo[0].suggestions;
 
-// let feeling = useSelector((state) => state.calendar.feeling); 
-// if (requiredInfo.length) dispatch({
-//   type: "UPDATE_HISTORICAL_FEELING",
-//   payload: requiredInfo[0].feeling
-// })
+  // const [feeling, setFeeling] = useState(startingFeeling)
+  // const [meetings, setMeetings ] = useState(startingMeetings)
+  // const [moodsArr, setMoods] = useState(startingMoods)
+  // const [suggestionsArr, setSuggestions] = useState(startingSuggestions)
+  // function onMeetingsAdd () {
+  //   setMeetings(meetings+1) 
+  // }
 
-// let meetings = useSelector((state) => state.calendar.meetings);
-// if (requiredInfo.length) dispatch({
-//   type: "UPDATE_HISTORICAL_MEETINGS",
-//   payload: requiredInfo[0].meetings
-// })
+  // function onMeetingsMinus () { 
+  //   if (meetings>0) setMeetings(meetings-1) 
+  //   else return
+  // }
 
-// let moodsArr = useSelector((state) => state.calendar.moods);
-// if (requiredInfo.length) dispatch({
-//   type: "UPDATE_HISTORICAL_MOODS",
-//   payload: requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
-// }) 
+  // function onFeelingAdd () { 
+  //   if (feeling<10) setFeeling(feeling+1)
+  //   else return
+  // }
 
-// let suggestionsArr = useSelector((state) => state.calendar.suggestions); 
-// if (requiredInfo.length) dispatch({
-//   type: "UPDATE_HISTORICAL_SUGGESTIONS",
-//   payload: requiredInfo[0].suggestions
-// })
-
-// function onMeetingsAdd () {
-//   dispatch({
-//     type: "INCREMENT_HISTORICAL_MEETINGS"
-//   })
-// }
-
-// function onMeetingsMinus () { 
-//   if (meetings>0) dispatch({
-//     type: "DECREMENT_HISTORICAL_MEETINGS"
-//   })
-//   else return
-// }
-
-// function onFeelingAdd () { 
-//   if (feeling<10) dispatch({
-//     type: "INCREMENT_HISTORICAL_FEELING"
-//   })
-//   else return
-// }
-
-// function onFeelingMinus () { 
-//   if (feeling>0) dispatch({
-//     type: "DECREMENT_HISTORICAL_FEELING"
-//   })
-//   else return
-// }
+  // function onFeelingMinus () { 
+  //   if (feeling>0) setFeeling(feeling-1)
+  //   else return
+  // }

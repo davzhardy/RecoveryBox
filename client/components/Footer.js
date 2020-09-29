@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch, useSelector } from "react-redux";
 import { View, StyleSheet, Image, Pressable } from 'react-native';
 import colors from '../styles/colors'
 import { useNavigation } from '@react-navigation/native';
@@ -6,26 +7,36 @@ import { BoldAppText, MediumAppText } from '../styles/text'
 
 function Footer () {
 
-  const navigationRef = React.useRef(null);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const state = navigationRef.current?.getCurrentRoute();
-  const state1 = navigationRef.current?.getRootState();
+  const rootName = useSelector((state) => state.helper.routeName);
+  console.log(rootName)
 
+  const home = 'Home'
+  const summary = 'Summary'
 // TODO add highlights, opacity etc. depending on which navigation state you are in
+
+  function homePress () {
+    dispatch({
+        type: "UPDATE_ROUTE",
+        payload: 'Home',
+      })
+      navigation.navigate('Home')
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Pressable style={styles.icon} onPress={() => navigation.navigate('Home')}>
-          <Image style={styles.icon} source={require('../assets/homelightgrey.png')}/>
+        <Pressable style={styles.icon} onPress={() => homePress()}>
+          <Image style={styles.icon} source={home===rootName ? require('../assets/homedarkgrey.png') : require('../assets/homelightgrey.png')}/>
         </Pressable>
-        <BoldAppText style={styles.text} onPress={() => navigation.navigate('Home')}>Home</BoldAppText>
+        <BoldAppText style={home===rootName ? styles.selText : styles.text} onPress={() => homePress()}>Home</BoldAppText>
       </View>
       <View style={styles.wrapper}>
         <Pressable style={styles.icon} onPress={() => navigation.navigate('Summary')}>
-          <Image style={styles.icon} source={require('../assets/dashboardlightgrey.png')}/>
+          <Image style={styles.icon} source={summary===rootName ? require('../assets/dashboarddarkgrey.png') : require('../assets/dashboardlightgrey.png')}/>
         </Pressable>
-        <BoldAppText style={styles.text} onPress={() => navigation.navigate('Summary')}>Summary</BoldAppText>
+        <BoldAppText style={summary===rootName ? styles.selText : styles.text} onPress={() => navigation.navigate('Summary')}>Summary</BoldAppText>
       </View>
       <View style={styles.wrapper}>
         <Pressable onPress={() => navigation.navigate('Calendar')}>
@@ -59,6 +70,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     color: colors.cosmicLatte
+  },
+  selText: {
+    fontSize: 16,
+    color: colors.darkGrayFont
   },
   icon: {
     height: 25,

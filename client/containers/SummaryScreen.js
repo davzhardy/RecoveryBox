@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import MeetingsSummary from '../components/MeetingsSummary'
@@ -13,7 +13,17 @@ import colors from '../styles/colors';
 import _ from 'lodash';
 import { Duration, DateTime } from 'luxon'
 
-function SummaryScreen () {
+function SummaryScreen ({ route }) {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: "UPDATE_ROUTE",
+      payload: route.name,
+    })
+    console.log(route.name)
+  },[])
+
 
   const windowHeight = Dimensions.get('window').height;
   const statusBarHeight = Constants.statusBarHeight
@@ -24,8 +34,6 @@ function SummaryScreen () {
     // paddingTop: statusBarHeight,
   };
 
-
-  const dispatch = useDispatch();
   const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
 
   function clickHandler (timePeriod) {
