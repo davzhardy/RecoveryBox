@@ -37,7 +37,7 @@ function HistoryScreen () {
     })
     if (requiredInfo.length) dispatch({
       type: "UPDATE_HISTORICAL_MOODS",
-      payload: requiredInfo[0].moods
+      payload: requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
     }) 
     if (requiredInfo.length) dispatch({
       type: "UPDATE_HISTORICAL_SUGGESTIONS",
@@ -66,7 +66,6 @@ function HistoryScreen () {
   const feeling = useSelector((state) => state.calendarHistoricalDay.feeling); 
   const meetings = useSelector((state) => state.calendarHistoricalDay.meetings);
   const moodsArr = useSelector((state) => state.calendarHistoricalDay.moods);
-  // const formatted = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
   const suggestionsArr = useSelector((state) => state.calendarHistoricalDay.suggestions); 
 
 
@@ -102,7 +101,7 @@ function HistoryScreen () {
     else return
   }
 
-  const [newMoodsArr, setNewMoodsArr] = useState([])
+  const [newMoods, setNewMoods] = useState('')
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.suggestionsList);
   const unusedSuggestions = fullSuggestionsList.filter(el => !suggestionsArr.includes(el))
   const historicalInfo = useSelector((state) => state.calendarHistoricalDay);
@@ -113,7 +112,7 @@ function HistoryScreen () {
   function onMoodsAdd () { 
     dispatch({
       type: "ADDTO_HISTORICAL_MOODS",
-      payload: newMoodsArr
+      payload: newMoods
     })
   }
 
@@ -121,11 +120,11 @@ function HistoryScreen () {
     
   }
 
-  function onSuggestionAdd () { 
-    // dispatch({
-    //   type: "ADDTO_HISTORICAL_MOODS",
-    //   payload: newMoodsArr
-    // })
+  function onSuggestionAdd (name) { 
+    dispatch({
+      type: "ADDTO_HISTORICAL_SUGGESTIONS",
+      payload: name
+    })
   }
 
   const userId = useSelector((state) => state.user.id);
@@ -135,19 +134,21 @@ function HistoryScreen () {
       date: DateTime.fromMillis(selectedDate).toUTC().startOf('day').ts,
       meetings: meetings,
       feeling: feeling,
-      moods: JSON.stringify(newMoodsArr),
+      moods: JSON.stringify([newMoods]),
       suggestions: JSON.stringify(suggestionsArr),
       UserId: userId,
     })
   }
 
   function clickHandler () {
-    onMoodsAdd()
+    let localObj = historicalInfo
+    localObj.date = DateTime.fromMillis(selectedDate).toUTC().startOf('day').ts,
+    localObj.moods = [newMoods]
+    createHistoricalData()
     dispatch({
       type: "UPDATE_HISTORICALDATA_WITH_HISTORICALINFO",
-      payload: historicalInfo
+      payload: localObj
     })
-    createHistoricalData()
   }
 
     return (
@@ -197,13 +198,13 @@ function HistoryScreen () {
             )
           )}
           <TextInput
-              style={moodsArr.length ? styles.moodsTextInput : styles.moodsTextInput1}
+              style={styles.moodsTextInput}
               placeholder='Enter a mood'
-              value=''
-              onChangeText={text => setNewMoodsArr(text)}
+              value={newMoods}
+              onChangeText={text => setNewMoods(text)}
             />
         </View>
-        <View style={{flex:1, minHeight: 180,}}>
+        <View style={{flex:1, minHeight: 200,}}>
           <View style={styles.cog}>
           <TouchableOpacity onPress={() =>  navigation.navigate('ModifySuggestions')}>
             <Image style={styles.icons} source={require('../assets/settings.png')} />
@@ -220,7 +221,7 @@ function HistoryScreen () {
           <View style={styles.unusedSuggestionsWrapper}>
             {unusedSuggestions.map(
                 suggestion => (
-                  <HistoricalUnusedSuggestionItem key={suggestion} onSuggestionRemove={onSuggestionAdd} suggestion={suggestion}/>
+                  <HistoricalUnusedSuggestionItem key={suggestion} name={suggestion} onSuggestionAdd={onSuggestionAdd} />
                 )
               )}
           </View>

@@ -33,8 +33,9 @@ function CalendarDH() {
       type: 'SELECT_DATE',
       payload: arg
     });
-    if (DateTime.fromMillis(arg).toFormat('yyyy-LL-dd') === DateTime.fromMillis(now).toFormat('yyyy-LL-dd')) navigation.navigate('Home');
-    else navigation.navigate('History');
+    // if (DateTime.fromMillis(arg).toFormat('yyyy-LL-dd') === DateTime.fromMillis(now).toFormat('yyyy-LL-dd')) navigation.navigate('Home');
+    // else 
+    navigation.navigate('History');
   }
 
   return (

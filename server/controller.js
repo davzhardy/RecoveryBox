@@ -105,15 +105,40 @@ async function postUserInfo (req, res) {
 async function postHistoricalData (req, res) {
   const data = req.body
   try {
-    const newData = await db.Data.create({
-      date: data.date,
-      meetings: data.meetings,
-      feeling: data.feeling,
-      moods: data.moods,
-      suggestions: data.suggestions,
-      UserId: data.UserId
+    const date = data.date
+    const UserId = data.UserId
+    const dataCheck = await db.Data.findAll({
+      where: { 
+        date: `${date}`,
+        UserId: `${UserId}`
+      }
     });
-    res.status(201).send(newData);
+    if (dataCheck.length) {
+      const newData = await db.Data.update({
+        date: data.date,
+        meetings: data.meetings,
+        feeling: data.feeling,
+        moods: data.moods,
+        suggestions: data.suggestions,
+        UserId: data.UserId
+      },
+      {where: { 
+          date: `${date}`,
+          UserId: `${UserId}`
+        },
+      });
+      res.status(201).send(newData);
+    } else {
+      const newData = await db.Data.create({
+        date: data.date,
+        meetings: data.meetings,
+        feeling: data.feeling,
+        moods: data.moods,
+        suggestions: data.suggestions,
+        UserId: data.UserId
+      });
+      res.status(201).send(newData);
+    }
   } catch (e) {
     console.log('Error', e); // eslint-disable-line no-console
     res.sendStatus(500);

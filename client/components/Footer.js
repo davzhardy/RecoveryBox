@@ -10,7 +10,6 @@ function Footer () {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const rootName = useSelector((state) => state.helper.routeName);
-  console.log(rootName)
 
   const home = 'Home'
   const summary = 'Summary'

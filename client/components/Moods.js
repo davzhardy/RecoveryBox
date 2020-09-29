@@ -108,13 +108,23 @@ function Moods () {
           </View>
         </View>
         <View style={styles.rightWrapper}>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue}]}>Calm</Animated.Text>
-            <Animated.Text style={[styles.animatedText1, {opacity:animationValue1}]}>Joyful</Animated.Text>
-            <Animated.Text style={[styles.animatedText2, {opacity:animationValue2}]}>Relaxed</Animated.Text>
+          <View style={{flexDirection:'column', alignItems: 'center'}}>
+            <Animated.Text style={[styles.animatedText, {opacity:animationValue}]}>Relaxed</Animated.Text>
+            <View style={{flexDirection:'row'}}>
+              <Animated.Text style={[styles.animatedText1, {marginRight: 5,opacity:animationValue1}]}>Joyful</Animated.Text>
+              <Animated.Text style={[styles.animatedText1, {opacity:animationValue2}]}>Calm</Animated.Text>
+            </View>
+          </View>
+          <View style={{marginVertical:15, alignItems: 'center'}}>
             <Animated.Text style={[styles.animatedText, {opacity:animationValue3}]}>Peacefull</Animated.Text>
-            <Animated.Text style={[styles.animatedText3, {opacity:animationValue4}]}>Energised</Animated.Text>
-            <Animated.Text style={[styles.animatedText1, {opacity:animationValue5}]}>Content</Animated.Text>
-            <Animated.Text style={[styles.animatedText, {opacity:animationValue6}]}>Happy</Animated.Text>
+          </View>
+          <View style={{alignItems:'center'}}>
+            <View style={{flexDirection:'row'}}>
+              <Animated.Text style={[styles.animatedText1, {marginRight: 5,opacity:animationValue4}]}>Happy</Animated.Text>
+              <Animated.Text style={[styles.animatedText1, {opacity:animationValue5}]}>Chill</Animated.Text>
+            </View>
+              <Animated.Text style={[styles.animatedText, {opacity:animationValue6}]}>Energised</Animated.Text>
+          </View>
         </View>
       </View>
       <View >
@@ -131,7 +141,7 @@ function Moods () {
         </View>
         
       </Modal>
-        <TouchableOpacity style={styles.button} onPress={() => submitHandler(moodAggregator)}>
+        <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={() => submitHandler(moodAggregator)}>
           <MediumAppText style={{marginBottom: 0}}>Update your moods</MediumAppText>
         </TouchableOpacity>
       </View>
@@ -203,29 +213,25 @@ const styles = StyleSheet.create({
     color: colors.blue,
     fontFamily: 'Montserrat_500Medium',
     marginVertical: 7,
-    fontSize: 11,
-    marginLeft: 20,
+    fontSize: 12,
   },
   animatedText1: {
     color: colors.green,
     fontFamily: 'Montserrat_500Medium',
     marginVertical: 7,
-    fontSize: 11,
-    marginLeft: 0,
+    fontSize: 12,
   },
   animatedText2: {
     color: colors.blue,
     fontFamily: 'Montserrat_500Medium',
     marginVertical: 7,
-    fontSize: 11,
-    marginLeft: 40,
+    fontSize: 12,
   },
   animatedText3: {
     color: colors.blue,
     fontFamily: 'Montserrat_500Medium',
     marginVertical: 7,
-    fontSize: 11,
-    marginLeft: 10,
+    fontSize: 12,
   },
   modalWrapper: {
     position: 'absolute',

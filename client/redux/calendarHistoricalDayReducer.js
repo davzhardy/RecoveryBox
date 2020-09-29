@@ -50,12 +50,22 @@ const calendarHistoricalDayReducer = (state = initialState, action) => {
     case "ADDTO_HISTORICAL_MOODS":
       return {
         ...state,
-        moods: [...state.moods, ...action.payload]
+        moods: [...state.moods, action.payload]
       }
     case "REMOVEFROM_HISTORICAL_MOODS":
     return {
       ...state,
       moods: state.moods.filter(elInList => elInList !== action.payload)
+    }
+    case "ADDTO_HISTORICAL_SUGGESTIONS":
+      return {
+        ...state,
+        suggestions: [...state.suggestions, action.payload]
+      }
+    case "REMOVEFROM_HISTORICAL_SUGGESTIONS":
+    return {
+      ...state,
+      suggestions: state.suggestions.filter(elInList => elInList !== action.payload)
     }
     default:
       return state;

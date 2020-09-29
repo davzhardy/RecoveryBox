@@ -6,12 +6,14 @@ import {DateTime} from 'luxon'
 import colors from '../../styles/colors'
 import { MediumAppText, BoldAppText } from '../../styles/text'
 
-function HistoricalUnusedSuggesitonItem ({ onSuggestionAdd, suggestion }) {
+function HistoricalUnusedSuggesitonItem ({ onSuggestionAdd, name }) {
   
   return (
-    <View key={suggestion} style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
-    <MediumAppText key={suggestion} style={{marginTop: -10, marginRight: 10, fontSize: 12}}>{suggestion}</MediumAppText>
-    <TouchableOpacity style={[styles.removeIcon, {backgroundColor: colors.green}]} onPress={()=>onSuggestionAdd()}>
+    <View style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
+    <MediumAppText style={{marginTop: -10, marginRight: 10, fontSize: 12}}>{name}</MediumAppText>
+    <TouchableOpacity 
+      style={[styles.removeIcon, {backgroundColor: colors.green}]} 
+      onPress={()=>{onSuggestionAdd(name)}}>
       <Image style={styles.add} source={require('../../assets/add.png')}/>
     </TouchableOpacity>
   </View>

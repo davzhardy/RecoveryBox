@@ -21,7 +21,6 @@ function SummaryScreen ({ route }) {
       type: "UPDATE_ROUTE",
       payload: route.name,
     })
-    console.log(route.name)
   },[])
 
 

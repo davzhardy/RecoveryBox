@@ -23,13 +23,13 @@ function HomeScreen ({ route }) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    ApiService.getQuote()
-    .then(quote => 
-      dispatch({
-        type: "UPDATE_QUOTE",
-        payload: quote
-      })
-    )
+    // ApiService.getQuote()
+    // .then(quote => 
+    //   dispatch({
+    //     type: "UPDATE_QUOTE",
+    //     payload: quote
+    //   })
+    // )
     dispatch({
       type: "UPDATE_ROUTE",
       payload: route.name,
@@ -42,6 +42,7 @@ function HomeScreen ({ route }) {
   const dailyInfo = useSelector((state) => state.dailyInfo);
   const todaysDate = useSelector((state) => state.helper.now);
   const userId = useSelector((state) => state.user.id);
+  const dayRegistered = useSelector((state) => state.helper.dayRegistered);
 
   function clickHandler (arg) {
     arg.date = DateTime.fromMillis(todaysDate).toUTC().startOf('day').ts
@@ -77,15 +78,17 @@ function HomeScreen ({ route }) {
 
 // TODO refactor to have modal as seperate component
 
+  const [confetti, setConfetti] = useState(false)
+
   return (
-    !quoteItem ? 
-    <Loader/>
-    :
+    // !quoteItem ? 
+    // <Loader/>
+    // :
     <View style={styles.container}>        
       <ScrollView>
       <View style={styles.wrapperZero}>
         <HomeWelcome/>
-        <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/>
+        {/* <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/> */}
       </View>
       <View style={styles.wrapperOne}> 
         <Meetings/>
@@ -101,7 +104,7 @@ function HomeScreen ({ route }) {
       </View>
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.button} onPress={() => clickHandler(dailyInfo)}>
-          <BoldAppText style={{fontSize: 14, color: colors.cosmicLatte, marginBottom:0,}}>REGISTER YOUR DAY</BoldAppText>
+          <BoldAppText style={{fontSize: 14, color: colors.cosmicLatte, marginBottom:0,}}>{dayRegistered ? 'AMEND YOUR DAY' : 'REGISTER YOUR DAY'}</BoldAppText>
         </TouchableOpacity>
       </View>
       <Modal visible={registerModalVisible} animationType={"slide"} transparent={true}>
@@ -110,6 +113,7 @@ function HomeScreen ({ route }) {
             DAY REGISTERED
           </MediumAppText>
           <TouchableOpacity style={styles.return} onPress={() => {
+            setConfetti(true)
             dispatch({
               type: "REGISTER_MODAL",
               payload: false
