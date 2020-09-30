@@ -4,6 +4,7 @@ Codeworks: Solo Project
 TODOs (inexhaustive)
 
 implement user registration (currently it just errors if the user doesnt exist on the db) and authentication
+
 implement best practise security measures for transfer of sensitive user information
 refactor regex used when recieving user inputted data
 refactor animations on summaryscreen to use loops rather than settimeouts
