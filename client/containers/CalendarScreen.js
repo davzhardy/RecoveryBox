@@ -6,8 +6,6 @@ import {useDispatch, useSelector } from "react-redux";
 
 
 function CalendarScreen ({ navigation, route } ) {
-
-  //TODO if you press on calendar with todays date it takes you back to the home screen and not to a history screen
   
   const rootName = useSelector((state) => state.helper.routeName);
   

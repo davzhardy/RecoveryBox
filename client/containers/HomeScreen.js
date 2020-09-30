@@ -23,13 +23,13 @@ function HomeScreen ({ route }) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // ApiService.getQuote()
-    // .then(quote => 
-    //   dispatch({
-    //     type: "UPDATE_QUOTE",
-    //     payload: quote
-    //   })
-    // )
+    ApiService.getQuote()
+    .then(quote => 
+      dispatch({
+        type: "UPDATE_QUOTE",
+        payload: quote
+      })
+    )
     dispatch({
       type: "UPDATE_ROUTE",
       payload: route.name,
@@ -81,14 +81,14 @@ function HomeScreen ({ route }) {
   const [confetti, setConfetti] = useState(false)
 
   return (
-    // !quoteItem ? 
-    // <Loader/>
-    // :
+    !quoteItem ? 
+    <Loader/>
+    :
     <View style={styles.container}>        
       <ScrollView>
       <View style={styles.wrapperZero}>
         <HomeWelcome/>
-        {/* <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/> */}
+        <InspirationalQuote quote={quoteItem[0].q} author={quoteItem[0].a}/>
       </View>
       <View style={styles.wrapperOne}> 
         <Meetings/>

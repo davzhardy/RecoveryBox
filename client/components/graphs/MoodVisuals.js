@@ -32,6 +32,7 @@ function MoodVisuals () {
 
   const historicalData = useSelector((state) => state.historicalData);
   const periodData = _.filter(historicalData, el => el.date > lastDay)
+  console.log(periodData)
   const moodsData = _.map(periodData, el => el.moods)
   
   function create (array) {
@@ -86,6 +87,7 @@ function MoodVisuals () {
   const sortedMoods = _.orderBy(moods, ['value'], ['desc'])
   const topMoods = topFive(sortedMoods, moodsToShow)
   const randomTopMoods = randomNumGen(topMoods, 0, moodsToShow)
+  console.log(randomTopMoods)
 
   return (
     <View style={styles.container}>

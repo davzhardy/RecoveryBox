@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Data = sequelize.define('Data', {
     date: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
     meetings: {
