@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const db = require('./models/index');
 
-
+//RELL he really use that?
 async function getQuote (req, res) {
   try {
     const QUOTE_URL = 'https://zenquotes.io/api/random'
@@ -14,6 +14,8 @@ async function getQuote (req, res) {
   }
 }
 
+
+//RELL this functions getUserInfo and getAllData does the same thing?
 async function getUserInfo (req, res) {
   try {
     const username = req.params.username
@@ -83,6 +85,7 @@ async function postDailyData (req, res) {
   }
 }
 
+// RELL ther is no check in 
 async function postUserInfo (req, res) {
   //TODO add ability to reject request if username already taken
   const user = req.body
@@ -102,6 +105,7 @@ async function postUserInfo (req, res) {
   }
 }
 
+//RELL This postHistoricalData looks equal like postDailyData why? 
 async function postHistoricalData (req, res) {
   const data = req.body
   try {
