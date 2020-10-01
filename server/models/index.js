@@ -5,7 +5,7 @@ const basename = path.basename(__filename);
 const db = {};
 require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.SEQUELIZE_DB, process.env.SEQUELIZE_ROLE, 'admin', { //REL reminder to change the table name
+const sequelize = new Sequelize(process.env.SEQUELIZE_DB, process.env.SEQUELIZE_ROLE, process.env.SEQUELIZE_PASSWORD, { //REL reminder to change the table name
   host: 'localhost',
   dialect: 'postgres',
   logging: false,
@@ -13,7 +13,7 @@ const sequelize = new Sequelize(process.env.SEQUELIZE_DB, process.env.SEQUELIZE_
     max: 5,
     min: 0,
     acquire: 30000,
-    idle: 10000
+    gtidle: 10000
   },
 });
 
