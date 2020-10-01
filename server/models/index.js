@@ -3,8 +3,9 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
+require('dotenv').config();
 
-const sequelize = new Sequelize('soloprojecttest', 'davidhardy', 'admin', { //REL reminder to change the table name
+const sequelize = new Sequelize(process.env.SEQUELIZE_DB, process.env.SEQUELIZE_ROLE, 'admin', { //REL reminder to change the table name
   host: 'localhost',
   dialect: 'postgres',
   logging: false,
