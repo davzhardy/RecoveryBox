@@ -1,5 +1,4 @@
 const initialState = {
-
   1600300800000: {
     date: 1600300800000,
     meetings: 2,
