@@ -53,8 +53,12 @@
   "devDependencies": {
     "@babel/core": "~7.9.0"
   },
+  "private": true,
   "jest": {
-    "preset": "react-native"
-  },
-  "private": true
+    "preset": "react-native",
+    "transformIgnorePatterns":[
+      "node_modules/(?!(jest-)?react-redux|react-native)"
+    ],
+    "automock": false
+  }
 }
