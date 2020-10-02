@@ -22,6 +22,7 @@ async function getUserInfo (req, res) {
     const user = await db.User.findAll({
        where: { username: `${username}`},
       include: db.Data})
+      console.log(' ---> user', user);
     res.status(200);
     res.send(user);
   } catch (e) {
