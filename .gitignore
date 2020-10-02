@@ -1,4 +1,5 @@
 node_modules/**/*
+client/.expo/*
 .expo/*
 npm-debug.*
 *.jks
