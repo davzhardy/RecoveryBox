@@ -44,6 +44,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-testing-library": "^6.0.0",
     "react-native-web": "~0.13.12",
+    "react-navigation-hooks": "^1.1.0",
     "react-redux": "^7.2.1",
     "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
@@ -51,14 +52,16 @@
     "victory-native": "^35.0.1"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "identity-obj-proxy": "^3.0.0"
   },
   "private": true,
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-redux|react-native)"
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
-    "automock": false
+    "moduleNameMapper": {     
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"}
   }
 }
