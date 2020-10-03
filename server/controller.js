@@ -17,8 +17,8 @@ async function getQuote (req, res) {
 
 //RELL this functions getUserInfo and getAllData does the same thing?
 async function getUserInfo (req, res) {
-  try {
-    const username = req.params.username
+    try {
+    const username = req.params.username;
     const user = await db.User.findAll({
        where: { username: `${username}`},
       include: db.Data})
