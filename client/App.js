@@ -1,8 +1,8 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import LoginScreen from './components/Login'
 import HomeScreen from './containers/HomeScreen'
 import CalendarScreen from './containers/CalendarScreen'
@@ -30,7 +30,7 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-       <NavigationContainer>
+        <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{headerShown : false}} component={LoginScreen}/>
             <Stack.Screen name="Home" component={HomeScreen} options={{ 
