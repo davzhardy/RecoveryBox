@@ -1,40 +1,26 @@
 const { getUserInfo } = require ('../controller');
 const db = require('../models/index');
+const { mockRequest, mockResponse } = require('../util/interceptor');
 
 jest.mock('../models/index');
 
-const mockResponse = [
-  {
-      "id": 5412,
-      "username": "Raph",
-      "email": "raphael@codeworks.com",
-      "password": "password",
-      "firstName": "Raphael",
-      "lastName": "Mazet",
-      "registrationDate": "1601576812578",
-      "createdAt": "2017-08-19T16:17:55.000Z",
-      "updatedAt": "2017-08-19T16:17:55.000Z",
-      "Data": [
-          {
-              "id": 1,
-              "date": 400000,
-              "meetings": 5,
-              "feeling": 7,
-              "moods": "[\"tired\", \"happy\", \"sad\"]",
-              "suggestions": "[\"Prayer\", \"Meditation\", \"Useful\", \"Kind to Myself\"]",
-              "createdAt": "2017-08-19T16:17:55.000Z",
-              "updatedAt": "2017-08-19T16:17:55.000Z",
-              "UserId": 5412
-          }
-      ]
-  }
-]
+const mockDbResponse = 'mockDbResponse';
 
+//TODO: will need to implement a 404 test on the router if no params to this route
 describe("getUserInfo controller function", () => {
-  test("it returns all data for a specific user", async () => {
-    db.User.findAll.mockResolved(mockResponse);
-    
-    const userData = await getUserInfo();
-    expect(userData).toEqual(mockResponse);
+  test("should 200 and return all data for a specific user from the DB", async () => {
+    let req = mockRequest();
+    req.params.username = 'Raph';
+    db.User.findAll.mockResolvedValue(mockDbResponse);
+    const res = mockResponse();
+
+    await getUserInfo(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send.mock.calls.length).toBe(1);
+    expect(res.send).toHaveBeenCalledWith(mockDbResponse);
   });
 });
+
+
+
