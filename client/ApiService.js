@@ -1,4 +1,4 @@
-import config from './config'
+import config from './config/api/config'
 
 // TODO: refactor and integrate with react-query
 
