@@ -1,6 +1,8 @@
+import config from './config'
+
 // TODO: refactor and integrate with react-query
 
-const BASE_URL = 'http://192.168.1.244:3001' //FIX add this to .env
+const BASE_URL = config.RbServerBase + config.RbServerPort;
 
 function fetchRequest (path, options) {
   return fetch(BASE_URL + path, options)

@@ -56,7 +56,7 @@
   "private": true,
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns":[
+    "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-redux|react-native)"
     ],
     "automock": false
