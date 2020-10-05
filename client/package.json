@@ -64,9 +64,6 @@
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/",
       "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers)"
-    ],
-    "moduleNameMapper": {
-      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
-    }
+    ]
   }
 }

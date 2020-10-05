@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View>
+    <Text
+      style={
+        Object {
+          "color": "#2A2A30",
+          "fontFamily": "Montserrat_700Bold",
+          "fontSize": 17,
+          "fontStyle": "normal",
+          "marginBottom": 10,
+        }
+      }
+    >
+      How are you feeling?
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginTop": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "width": 60,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#7B7C86",
+            "fontFamily": "Montserrat_500Medium",
+            "fontSize": 12,
+            "fontStyle": "normal",
+            "marginBottom": 10,
+          }
+        }
+      >
+        Its been a tough day
+      </Text>
+    </View>
+    <RNCSlider
+      disabled={false}
+      enabled={true}
+      inverted={false}
+      maximumTrackTintColor="#DBDBDB"
+      maximumValue={10}
+      minimumTrackTintColor="#2F80ED"
+      minimumValue={0}
+      onChange={[Function]}
+      onRNCSliderSlidingComplete={[Function]}
+      onRNCSliderSlidingStart={null}
+      onRNCSliderValueChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      step={1}
+      style={
+        Array [
+          Object {
+            "height": 40,
+          },
+          Object {
+            "height": 40,
+            "width": 200,
+          },
+        ]
+      }
+      thumbImage={null}
+      thumbTintColor="#FF8787"
+      value={5}
+    />
+    <View
+      style={
+        Object {
+          "width": 60,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#7B7C86",
+            "fontFamily": "Montserrat_500Medium",
+            "fontSize": 12,
+            "fontStyle": "normal",
+            "marginBottom": 10,
+            "textAlign": "left",
+          }
+        }
+      >
+        Super awesome
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginTop": -15,
+        "width": 150,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/sad.png",
+        }
+      }
+      style={
+        Object {
+          "height": 30,
+          "opacity": 0,
+          "width": 30,
+        }
+      }
+    />
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/neutral.png",
+        }
+      }
+      style={
+        Object {
+          "height": 30,
+          "opacity": 1,
+          "width": 30,
+        }
+      }
+    />
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/happy.png",
+        }
+      }
+      style={
+        Object {
+          "height": 30,
+          "opacity": 0,
+          "width": 30,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "white",
+        "height": 1,
+        "width": "80%",
+      }
+    }
+  />
+</View>
+`;

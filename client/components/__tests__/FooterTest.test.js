@@ -33,3 +33,8 @@
 //   const tree = renderer.create(<Provider store={store}><MockedNavigator component={Footer} params={{routeName: ''}} ></MockedNavigator></Provider>).toJSON();
 //   expect(tree).toMatchSnapshot();
 // });
+
+// BUG,
+//     "moduleNameMapper": {
+//       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+//     }
