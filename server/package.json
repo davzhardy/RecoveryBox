@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "auto": "npx nodemon server.js"
+    "auto": "npx nodemon server.js",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
