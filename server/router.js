@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const query = require('./controller');
+const query = require('./controllers/queryController');
 
 router.get('/apirequest', query.getQuote);
 router.get('/user/:username', query.getUserInfo);

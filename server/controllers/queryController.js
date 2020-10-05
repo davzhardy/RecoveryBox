@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const db = require('./models/index');
+const db = require('../models/index');
 
 //RELL he really use that?
 async function getQuote (req, res) {
