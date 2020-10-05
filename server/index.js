@@ -14,7 +14,7 @@ app.use(router);
     await db.sequelize.authenticate();
     console.log('Connection to db has been established successfully.'); // eslint-disable-line no-console
     await db.sequelize.sync(); //{force: true}
-    const port = 3001;
+    const port = process.env.PORT || 9000;
     app.listen(port);
     console.log(`Server listening on port ${port}`); // eslint-disable-line no-console
   } catch (e) {
