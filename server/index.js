@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const app = express();
 
+//FIX WE CAN ADD HEAR A CORS CONFIG
 app.use(cors())
 app.use(express.json());
 app.use(router);
