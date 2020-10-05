@@ -21,17 +21,15 @@ const store = createStore(helperReducer, initialState);
 
 const Stack = createStackNavigator();
 
-const MockedNavigator = ({component, params = {}}) => {  
+const MockedNavigator = ({component, params = {} }) => {  
 	return (    
 	<NavigationContainer><Stack.Navigator>
-		<Stack.Screen name="MockedScreen" component={component}initialParams={params}/>    
+		<Stack.Screen name="MockedScreen" component={component} initialParams={params}/>    
 	</Stack.Navigator></NavigationContainer> 
 	);
 };
 
 test('renders correctly', () => {
-	// const navigation = useNavigation();
-  const tree = renderer.create(<Provider store={store}><MockedNavigator component={Footer}></MockedNavigator></Provider>).toJSON();
-  // const tree = renderer.create(<Provider store={store}><NavigationContainer><Footer/></NavigationContainer></Provider>).toJSON();
+  const tree = renderer.create(<Provider store={store}><MockedNavigator component={Footer} params={{routeName: ''}} ></MockedNavigator></Provider>).toJSON();
   expect(tree).toMatchSnapshot();
 });
