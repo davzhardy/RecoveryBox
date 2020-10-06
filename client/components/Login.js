@@ -20,6 +20,7 @@ function LoginScreen ({ navigation }) {
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
 
+  
   const submitHandler = async () => {
     if (usernameInput && passwordInput) {
       await receiveInfoandData(usernameInput);
@@ -41,8 +42,10 @@ function LoginScreen ({ navigation }) {
       });
   
       if (result.type === 'success') {
-        console.log('result:', result)
-        console.log(result);
+        console.log('user', result);
+        await receiveInfoandData(result.user.email);
+        navigation.dispatch(
+        StackActions.replace('Home'))
       } else {
         console.log('TYPE', result.type);
         console.log('cancelled');

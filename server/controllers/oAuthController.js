@@ -1,32 +1,25 @@
-	async function askUserPermission () {
-		passport.authenticate('google', { scope: ['profile', 'email'] });
-	} 
-	
-	// FIX react nativ works with url path?
-  //FIX: figure out what the client does with this response or if this is in right format
-	async function handleUserPermission () {
-		passport.authenticate('google', { 
-			failureRedirect: '/loginFailed',
-			failureFlash: true }),
-		function(req, res) {
-			// Successful authentication, redirect home.
-			res.redirect('/'); //FIX where exacly we can go homeScreen?
-	};
+const {OAuth2Client} = require('google-auth-library');
+require('dotenv').config();
+const client = new OAuth2Client(process.env.CLIENT_ID); 
+
+
+async function googleVerify(req, res) {
+
+	console.log('req:', req.body)
+	const { idToken } = req.body; //REL WHY IS NOT DEFINED?
+  const ticket = await client.verifyIdToken({
+      idToken: idToken,
+      audience: '47709316996-ph0bh64seqcv93le2tsasetmvb9enoc9.apps.googleusercontent.com',
+  });
+  const payload = ticket.getPayload();
+  console.log('payload:', payload)
+  const userid = payload['sub'];
+  console.log('userid:', userid)
+  // If request specified a G Suite domain:
+  // const domain = payload['hd'];
 }
-  
-  function loginFailed (req, res) {
-    try {
-      res.status(401);
-      res.failedLogin = true;
-      // res.send('loginFailed');
-    } catch (err) {
-      console.error(`Error at ${path.basename(__dirname)}/${path.basename(__filename)} ${err}`);
-      res.sendstatus(500);
-    }
-  }
-	
-	module.exports = {
-		askUserPermission,
-		handleUserPermission,
-		loginFailed
-	}
+
+
+module.exports = {
+	googleVerify,
+}
