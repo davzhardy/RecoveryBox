@@ -9,7 +9,7 @@ async function googleVerify(req, res) {
 	const { idToken } = req.body; //REL WHY IS NOT DEFINED?
   const ticket = await client.verifyIdToken({
       idToken: idToken,
-      audience: '47709316996-ph0bh64seqcv93le2tsasetmvb9enoc9.apps.googleusercontent.com',
+      audience: process.env.IOS_CLIENT_ID,
   });
   const payload = ticket.getPayload();
   console.log('payload:', payload)
