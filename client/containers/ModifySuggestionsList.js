@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import colors from '../styles/colors';
 
 function ModifySuggestionsList ({ navigation: { goBack } }) {
-
+//comment
 // TODO refactor to be a modal screen
 
   const dispatch = useDispatch()
