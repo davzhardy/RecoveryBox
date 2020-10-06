@@ -1,24 +1,31 @@
 const {OAuth2Client} = require('google-auth-library');
-require('dotenv').config();
 const client = new OAuth2Client(process.env.CLIENT_ID); 
-
+const jwt = require('jsonwebtoken');
+const JWT_KEY = process.env.JWT_KEY;
+const db = require('../models/index');
+require('dotenv').config();
 
 async function googleVerify(req, res) {
-
-	console.log('req:', req.body)
-	const { idToken } = req.body; //REL WHY IS NOT DEFINED?
-  const ticket = await client.verifyIdToken({
-      idToken: idToken,
-      audience: process.env.IOS_CLIENT_ID,
-  });
-  const payload = ticket.getPayload();
-  console.log('payload:', payload)
-  const userid = payload['sub'];
-  console.log('userid:', userid)
-  // If request specified a G Suite domain:
-  // const domain = payload['hd'];
+	try {
+		const { idToken } = req.body;
+		const ticket = await client.verifyIdToken({
+				idToken: idToken,
+				audience: process.env.IOS_CLIENT_ID,
+		});
+		//TODO: compare aud from the payload === client_ID
+		const payload = ticket.getPayload();
+		const userEmail = payload['email'];
+		
+		const user = await db.User.findAll({
+			where: { email: `${userEmail}`}})
+			const accessToken = jwt.sign({ id: user.id }, JWT_KEY);
+			res.status(200).send({ accessToken });
+	} catch (error) {
+    res
+      .status(401)
+      .send({ error: '401', message: 'Username or password is incorrect' });
+  }
 }
-
 
 module.exports = {
 	googleVerify,
