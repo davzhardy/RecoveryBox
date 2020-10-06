@@ -2,11 +2,16 @@ const express = require('express');
 const db = require('./models/index');
 const router = require('./router');
 const cors = require('cors')
+const passport = require ('passport')
 
 const app = express();
 
 //FIX WE CAN ADD HEAR A CORS CONFIG
 app.use(cors())
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.json());
 app.use(router);
 

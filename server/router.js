@@ -11,6 +11,7 @@ router.post('/addhistoricaldata', query.postHistoricalData);
 
 router.get('/auth/google', oAuth.askUserPermission);
 router.get('/auth/google/callback', oAuth.handleUserPermission)
+router.get('/loginFailed'), oAuth.loginFailed;
 
 //TODO do these routes
 router.put('/addsettings', query.postSettingsInfo);
