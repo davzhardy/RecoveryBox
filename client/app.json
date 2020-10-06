@@ -17,13 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mazethernandez.recoverybox",
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
   },
   "android": {
+    "package": "com.mazethernandez.recoverybox",
+    "versionCode": 1,
     "splash": {
       "resizeMode": "cover",
       "mdpi":  "./assets/androidsplash.png"

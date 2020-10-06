@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "auto": "npx nodemon server.js"
+    "auto": "npx nodemon server.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -13,6 +16,8 @@
     "jets": "^0.14.1",
     "mongoose": "^5.10.7",
     "node-fetch": "^2.6.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.3",
     "sequelize": "^6.3.5"
   },
