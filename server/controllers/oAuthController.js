@@ -5,21 +5,6 @@ const jwt = require('jsonwebtoken');
 const JWT_KEY = process.env.JWT_KEY;
 const db = require('../models/index');
 
-const login = async (req, res) => {
-  const { email, } = req.body;
-  try {
-		
-    if (!validatedPass) throw new Error();
-    
-    
-  } catch (error) {
-    res
-      .status(401)
-      .send({ error: '401', message: 'Username or password is incorrect' });
-  }
-  // REMOVE-END
-};
-
 async function googleVerify(req, res) {
 	try {
 		console.log('req:', req.body)
