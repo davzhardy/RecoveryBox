@@ -6,6 +6,9 @@ import ApiService from '../ApiService'
 import colors from '../styles/colors'
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 
+import Expo from 'expo';
+import * as Google from 'expo-google-app-auth';
+
 
 function LoginScreen ({ navigation }) {
 
@@ -26,6 +29,25 @@ function LoginScreen ({ navigation }) {
       setWarning(true);
     }
   }
+
+  const oAuthSignIn = async () => {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId: '47709316996-kg6kksaobqavqsbno78mpgt13i220nq7.apps.googleusercontent.com',
+        iosClientId: '47709316996-ph0bh64seqcv93le2tsasetmvb9enoc9.apps.googleusercontent.com',
+        scopes: ['profile', 'email'],
+      });
+  
+      if (result.type === 'success') {
+        console.log(result);
+      } else {
+        console.log('cancelled');
+      }
+    } catch (e) {
+      console.log('error', e);
+    }
+  }
+
 
   function receiveInfoandData (username) {
     ApiService.getUserInfo(username)
@@ -82,6 +104,9 @@ function LoginScreen ({ navigation }) {
           placeholderTextColor={colors.platinum}
         />
       </View>
+      <TouchableOpacity style={styles.oAuthButton} onPress={() => oAuthSignIn()}>
+        <Text style={styles.text}>oAuth LOGIN</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
         <Text style={styles.text}>LOGIN</Text>
       </TouchableOpacity>
@@ -126,6 +151,16 @@ const styles = StyleSheet.create({
   button: {
     width:"60%",
     backgroundColor: colors.orange,
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:30,
+    marginBottom:10,
+  },
+  oAuthButton: {
+    width:"60%",
+    backgroundColor: colors.green,
     borderRadius:25,
     height:50,
     alignItems:"center",
