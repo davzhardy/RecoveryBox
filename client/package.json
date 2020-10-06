@@ -50,7 +50,8 @@
     "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "victory": "^35.0.9",
-    "victory-native": "^35.0.1"
+    "victory-native": "^35.0.1",
+    "expo-permissions": "~9.3.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
