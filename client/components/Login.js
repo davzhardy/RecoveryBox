@@ -8,7 +8,7 @@ import { NavigationContainer, StackActions } from '@react-navigation/native';
 
 import Expo from 'expo';
 import * as Google from 'expo-google-app-auth';
-
+import { androidClientId, iosClientId } from '../config/secret.js'
 
 function LoginScreen ({ navigation }) {
 
@@ -33,14 +33,18 @@ function LoginScreen ({ navigation }) {
   const oAuthSignIn = async () => {
     try {
       const result = await Google.logInAsync({
-        androidClientId: '47709316996-kg6kksaobqavqsbno78mpgt13i220nq7.apps.googleusercontent.com',
-        iosClientId: '47709316996-ph0bh64seqcv93le2tsasetmvb9enoc9.apps.googleusercontent.com',
+        androidClientId: androidClientId,
+        iosClientId: iosClientId,
         scopes: ['profile', 'email'],
+        redirectUrl: `com.mazethernandez.recoverybox:/oauth2redirect/google` 
+        //check if this also work for android phone
       });
   
       if (result.type === 'success') {
+        console.log('result:', result)
         console.log(result);
       } else {
+        console.log('TYPE', result.type);
         console.log('cancelled');
       }
     } catch (e) {
