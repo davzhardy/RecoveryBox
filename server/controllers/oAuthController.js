@@ -8,13 +8,18 @@ require('dotenv').config();
 async function googleVerify(req, res) {
 	try {
 		const { idToken } = req.body;
+		console.log(' ---> idToken', idToken);
 		const ticket = await client.verifyIdToken({
 				idToken: idToken,
 				audience: process.env.IOS_CLIENT_ID,
 		});
 		//TODO: compare aud from the payload === client_ID
 		const payload = ticket.getPayload();
+		console.log('payload:', payload)
 		const userEmail = payload['email'];
+		const userId = payload.sub;
+		console.log(' ---> userId', userId);
+		console.log(' ---> typeof userId', typeof userId);
 		
 		const user = await db.User.findAll({
 			where: { email: `${userEmail}`}})
