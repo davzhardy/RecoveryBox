@@ -12,20 +12,28 @@ async function googleVerify(req, res) {
 				idToken: idToken,
 				audience: process.env.IOS_CLIENT_ID,
 		});
-		//TODO: compare aud from the payload === client_ID
+		//TODO: additional security measure - compare aud from the payload === client_ID
 		const payload = ticket.getPayload();
-		const userEmail = payload['email'];
+		console.log('payload:', payload)
 		const userId = payload.sub;
 		
-		const user = await db.User.findOne({
-			where: { email: `${userEmail}`}})
-			if (!user) throw new Error ('User not found WTF YOU STUPID HACKER HA... HA... HA...');
-			const accessToken = jwt.sign({ id: user.id }, JWT_KEY);
-      res.status(200).send({ accessToken });
+		let user = await db.User.findOne({
+			where: { id: `${userId}`}})
+			if (!user) {
+			const { email, given_name, family_name } = payload
+			user = await db.User.create({
+				id: userId,
+				email,
+				firstName: given_name,
+				lastName: family_name
+			})
+		} 
+		const accessToken = jwt.sign({ id: user.id }, JWT_KEY);
+    res.status(200).send({ accessToken });
 	} catch (error) {
     res
       .status(401)
-      .send({ error: '401', message: 'Username or password is incorrect' });
+      .send({ error: '401', message: 'Error logging in' });
   }
 }
 
