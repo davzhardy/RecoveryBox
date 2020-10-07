@@ -31,8 +31,8 @@ function postDailyData (body) {
   })
 }
 
-function getUserInfo (username) {
-  return fetchRequest(`/user/${username}`, {
+function getUserInfo (userId) {
+  return fetchRequest(`/user/${userId}`, {
     method: 'GET',
   })
 }
@@ -49,10 +49,19 @@ function updateHistoricalData (body) {
 
 }
 
+function receiveJwt (idToken) {
+  return fetchRequest ('/auth/google', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(idToken)
+  })
+}
+
 export default {
   getQuote,
   postDailyData,
   getUserInfo,
   postHistoricalData,
   updateHistoricalData,
+  receiveJwt
 }

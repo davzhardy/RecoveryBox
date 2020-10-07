@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'react-native';
 import { BoldAppText, MediumAppText } from '../styles/text'
 import {useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { NavigationContainer, StackActions } from '@react-navigation/native';
 import Expo from 'expo';
 import * as Google from 'expo-google-app-auth';
 import { androidClientId, iosClientId } from '../config/secret.js'
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 function LoginScreen ({ navigation }) {
 
@@ -19,8 +20,8 @@ function LoginScreen ({ navigation }) {
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
+  const [jwt, setJwt] = userState('');
 
-  
   const submitHandler = async () => {
     if (usernameInput && passwordInput) {
       await receiveInfoandData(usernameInput);
@@ -40,24 +41,33 @@ function LoginScreen ({ navigation }) {
         redirectUrl: `com.mazethernandez.recoverybox:/oauth2redirect/google` 
         //check if this also work for android phone
       });
-  
       if (result.type === 'success') {
         console.log('user', result);
-        await receiveInfoandData(result.user.id);
-        navigation.dispatch(
-        StackActions.replace('Home'))
+        receiveJwt(result.idToken);
       } else {
-        console.log('TYPE', result.type);
-        console.log('cancelled');
+      console.log('TYPE', result.type);
+      console.log('cancelled');
       }
     } catch (e) {
-      console.log('error', e);
+    console.log('error', e);
     }
   }
 
+  function receiveJwt (userToken) {
+    //if statemtn what if error?
+    ApiService.getJwt(userToken)
+      .then(serverResponse => setJwt(serverResponse.accessToken))
+  }
 
-  function receiveInfoandData (username) {
-    ApiService.getUserInfo(username)
+  useEffect(() => {
+    //TODO how to use the jwt?
+    await receiveInfoandData(/*jwt + userId*/);
+    navigation.dispatch(
+    StackActions.replace('Home'))
+  }, [jwt])
+
+  function receiveInfoandData (userId) {
+    ApiService.getUserInfo(userId)
     .then(data => {
       let dispatchtoUser = {
         id: data[0].id,
