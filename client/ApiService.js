@@ -31,10 +31,18 @@ function postDailyData (body) {
   })
 }
 
-function getUserInfo (userId) {
+function getUserInfo (userId, accessToken) {
   return fetchRequest(`/user/${userId}`, {
     method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headres: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    }
   })
+  // .then((res) => res.json())
+  .catch((err) => console.log(err));
 }
 
 function postHistoricalData (body) {
