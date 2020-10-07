@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const db = require('../models/index');
+const JWT_KEY = process.env.JWT_KEY
 
 const authMiddleware = async (req, res, next) => {
     // extract token from auth headers
@@ -8,9 +9,7 @@ const authMiddleware = async (req, res, next) => {
     const token = authHeaders.split(' ')[1];
   
     try {
-      // verify & decode token payload,
-      const { id } = jwt.verify(token, SECRET_KEY);
-      // attempt to find user object and set to req
+      const {id} = jwt.verify(token, JWT_KEY);
       const user = await db.User.findAll({
         where: { id: `${id}`},
         include: db.Data})

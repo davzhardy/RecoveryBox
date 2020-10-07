@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image } from 'react-native';
-import { BoldAppText, MediumAppText } from '../styles/text'
-import {useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { BoldAppText } from '../styles/text'
+import {useDispatch } from "react-redux";
 import ApiService from '../ApiService'
 import colors from '../styles/colors'
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
-import Expo from 'expo';
 import * as Google from 'expo-google-app-auth';
 import { androidClientId, iosClientId } from '../config/secret.js'
 
@@ -16,20 +15,9 @@ function LoginScreen ({ navigation }) {
   // TODO: add a warning if your user is not on the db and don't trigger the navigation 
   const dispatch = useDispatch();
 
-  const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
-  const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
-
-  
-  const submitHandler = async () => {
-    if (usernameInput && passwordInput) {
-      await receiveInfoandData(usernameInput);
-      navigation.dispatch(
-        StackActions.replace('Home'))
-    } else {
-      setWarning(true);
-    }
-  }
+  const [jwt, setJwt] = useState('');
+  const [tempUserId, setTempUserId] = useState('');
 
   const oAuthSignIn = async () => {
     try {
@@ -40,43 +28,58 @@ function LoginScreen ({ navigation }) {
         redirectUrl: `com.mazethernandez.recoverybox:/oauth2redirect/google` 
         //check if this also work for android phone
       });
-  
       if (result.type === 'success') {
         console.log('user', result);
-        await receiveInfoandData(result.user.id);
-        navigation.dispatch(
-        StackActions.replace('Home'))
+        await setTempUserId(result.user.id);
+        receiveJwt({idToken: result.idToken});
       } else {
-        console.log('TYPE', result.type);
-        console.log('cancelled');
+      console.log('TYPE', result.type);
+      console.log('cancelled');
       }
     } catch (e) {
-      console.log('error', e);
+    console.log('error', e);
     }
   }
+  
+  function receiveJwt (userToken) {
+    //FIX: deal with error
+    ApiService.getJwt(userToken)
+      .then(serverResponse => {
+        setJwt(serverResponse.accessToken)
+      })
+  }
 
+  useEffect(() => {
+    if (jwt.length && tempUserId.length) {
+      receiveInfoandData(tempUserId, jwt)
+      navigation.dispatch(
+        StackActions.replace('Home')
+      )
+    }
+  }, [jwt])
 
-  function receiveInfoandData (username) {
-    ApiService.getUserInfo(username)
+  function receiveInfoandData (userId, accessToken) {
+    ApiService.getUserInfo(userId, accessToken)
     .then(data => {
       let dispatchtoUser = {
         id: data[0].id,
-        email: data[0].id,
-        username: data[0].username,
+        email: data[0].email,
         firstName: data[0].firstName,
         lastName: data[0].lastName,
-        registrationDate: data[0].registrationDate,
       }
-      for (let i of data[0].Data) {
-        i.date = Number(i.date)
-        let parseMoods = i.moods.replace(/[\[\]',"]+/g,'')
-        let arrayMoods;
-        if (parseMoods.length) arrayMoods = parseMoods.split(' ')
-        if (arrayMoods===undefined) arrayMoods = []
-        i.moods = arrayMoods
-        i.suggestions = eval(i.suggestions)
+      if(data[0].Data.length) {
+        for (let i of data[0].Data) {
+          i.date = Number(i.date)
+          let parseMoods = i.moods.replace(/[\[\]',"]+/g,'')
+          let arrayMoods;
+          if (parseMoods.length) arrayMoods = parseMoods.split(' ')
+          if (arrayMoods===undefined) arrayMoods = []
+          i.moods = arrayMoods
+          i.suggestions = eval(i.suggestions)
+        }
       }
       let dispatchtoHistoricalData = data[0].Data
+      console.log('dispatchtoHistoricalData:', dispatchtoHistoricalData)
       dispatch({
         type: 'UPDATE_USERINFO',
         payload: dispatchtoUser
@@ -91,31 +94,8 @@ function LoginScreen ({ navigation }) {
   return (
     <View style={styles.container}>
       <BoldAppText style={styles.logo}>RecoveryBox</BoldAppText>
-      <View style={styles.inputView} >
-        <TextInput
-          placeholder='Enter a username'
-          value= {usernameInput ? usernameInput : ''}
-          onChangeText={text => onChangeUsername(text)}
-          style={styles.inputText}
-          placeholderTextColor={colors.platinum}
-          textContentType={'username'}
-        />
-      </View>
-      <View style={styles.inputView} >
-        <TextInput
-          placeholder='Enter a password'
-          value= {passwordInput ? passwordInput : ''}
-          secureTextEntry={true}
-          style={styles.inputText}
-          onChangeText={text => onChangePassword(text)}
-          placeholderTextColor={colors.platinum}
-        />
-      </View>
       <TouchableOpacity style={styles.oAuthButton} onPress={() => oAuthSignIn()}>
-        <Text style={styles.text}>oAuth LOGIN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
-        <Text style={styles.text}>LOGIN</Text>
+        <Text style={styles.text}>LOGIN WITH GOOGLE</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button, {marginTop:7}]}>
         <Text style={styles.text}>REGISTER</Text>
@@ -180,10 +160,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontSize: 16,
     color: "white",
-
   }
 });
-
-
 
 export default LoginScreen;
