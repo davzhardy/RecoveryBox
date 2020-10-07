@@ -16,15 +16,11 @@ async function getQuote (req, res) {
 //RELL this functions getUserInfo and getAllData does the same thing?
 async function getUserInfo (req, res) {
     try {
-    const userId = req.params.userId;
-    const user = await db.User.findAll({
-       where: { id: `${userId}`},
-      include: db.Data})
-    res.status(200);
-    res.send(user);
+      const user = req.user;
+      res.status(201).send(user)
   } catch (e) {
-    console.log('Error', e); // eslint-disable-line no-console
-    res.sendStatus(500);
+    console.log('Resource not found', e); // eslint-disable-line no-console
+    res.sendStatus(404);
   }
 }
 

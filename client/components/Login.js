@@ -61,21 +61,19 @@ function LoginScreen ({ navigation }) {
 
   useEffect(() => {
     //TODO how to use the jwt?
-    await receiveInfoandData(/*jwt + userId*/);
+    await receiveInfoandData(userId, jwt);
     navigation.dispatch(
     StackActions.replace('Home'))
   }, [jwt])
 
-  function receiveInfoandData (userId) {
-    ApiService.getUserInfo(userId)
+  function receiveInfoandData (userId, accessToken) {
+    ApiService.getUserInfo(userId, accessToken)
     .then(data => {
       let dispatchtoUser = {
         id: data[0].id,
         email: data[0].id,
-        username: data[0].username,
         firstName: data[0].firstName,
         lastName: data[0].lastName,
-        registrationDate: data[0].registrationDate,
       }
       for (let i of data[0].Data) {
         i.date = Number(i.date)
