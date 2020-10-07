@@ -97,9 +97,6 @@ function LoginScreen ({ navigation }) {
       <TouchableOpacity style={styles.oAuthButton} onPress={() => oAuthSignIn()}>
         <Text style={styles.text}>LOGIN WITH GOOGLE</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, {marginTop:7}]}>
-        <Text style={styles.text}>REGISTER</Text>
-      </TouchableOpacity>
       <View>
         { 
           warning ? <Text>Please submit both a username and password</Text> : null
@@ -147,7 +144,7 @@ const styles = StyleSheet.create({
   },
   oAuthButton: {
     width:"60%",
-    backgroundColor: colors.green,
+    backgroundColor: colors.orange,
     borderRadius:25,
     height:50,
     alignItems:"center",
