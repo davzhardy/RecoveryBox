@@ -27,10 +27,11 @@ function HomeWelcome ( { historicalDate = false }) {
   const formattedDate = now.toFormat(`d'${dayFormat}' MMM y`)  
   const duration = Duration.fromMillis((todaysDate - historicalDate)).toFormat('d')
 
-  const username = useSelector((state) => state.user.username)
+  const username = useSelector((state) => state.user.username);
+  const userFirstName = useSelector((state) => state.user.firstName);
 
   const displayDate = historicalDate ? `${duration} days ago` : 'Today'
-  const displayUsername = historicalDate ? <></> : <View><BoldAppText>Hello {username} !</BoldAppText></View>
+  const displayUsername = historicalDate ? <></> : <View><BoldAppText>Hello {userFirstName} !</BoldAppText></View>
 
   if (historicalDate) {
     return (

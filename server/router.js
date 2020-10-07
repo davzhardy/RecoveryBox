@@ -3,7 +3,8 @@ const query = require('./controllers/queryController');
 const oAuth = require('./controllers/oAuthController');
 
 router.get('/apirequest', query.getQuote);
-router.get('/user/:username', query.getUserInfo);
+//REL: change loginroute to take userId as param not userName
+router.get('/user/:userId', query.getUserInfo);
 router.get('/data/:id', query.getAllData);
 router.post('/adduser', query.postUserInfo);
 router.post('/adddailydata', query.postDailyData);

@@ -1,19 +1,15 @@
+//REL: updated the database by removing unwanted fields
+//REL: this is due to the fact that we no longer user username/password login but oAuth
+//REL: this implied changing the login and DB lookup logic
+//REL: DB searches will no longer be done on the username but on the Google ID of the user
+//REL: note this is heavily optimised for a Google login (would need to be amended for additional oAuth methods)
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -25,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    registrationDate: {
-      type: DataTypes.BIGINT,
-      allowNull: false
-    }
   })
 
   User.associate = db => {

@@ -43,7 +43,7 @@ function LoginScreen ({ navigation }) {
   
       if (result.type === 'success') {
         console.log('user', result);
-        await receiveInfoandData(result.user.email);
+        await receiveInfoandData(result.user.id);
         navigation.dispatch(
         StackActions.replace('Home'))
       } else {
