@@ -21,6 +21,7 @@ function LoginScreen ({ navigation }) {
   const [passwordInput, onChangePassword] = useState(useSelector((state) => state.user.password));
   const [warning, setWarning] = useState(false); 
   const [jwt, setJwt] = userState('');
+  const [tempUserId, setTempUserId] = useState('');
 
   const submitHandler = async () => {
     if (usernameInput && passwordInput) {
@@ -43,6 +44,7 @@ function LoginScreen ({ navigation }) {
       });
       if (result.type === 'success') {
         console.log('user', result);
+        await setTempUserId(result.user.id);
         receiveJwt(result.idToken);
       } else {
       console.log('TYPE', result.type);
@@ -52,7 +54,7 @@ function LoginScreen ({ navigation }) {
     console.log('error', e);
     }
   }
-
+  
   function receiveJwt (userToken) {
     //if statemtn what if error?
     ApiService.getJwt(userToken)
@@ -60,8 +62,7 @@ function LoginScreen ({ navigation }) {
   }
 
   useEffect(() => {
-    //TODO how to use the jwt?
-    await receiveInfoandData(userId, jwt);
+    await receiveInfoandData(tempUserId, jwt);
     navigation.dispatch(
     StackActions.replace('Home'))
   }, [jwt])
