@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { BoldAppText } from '../styles/text'
-import {useDispatch } from "react-redux";
+import {useDispatch, useSelector, connect } from "react-redux";
 import ApiService from '../ApiService'
 import colors from '../styles/colors'
 import { StackActions } from '@react-navigation/native';
@@ -9,15 +9,17 @@ import { StackActions } from '@react-navigation/native';
 import * as Google from 'expo-google-app-auth';
 import { androidClientId, iosClientId } from '../config/secret.js'
 
+// const jwt = useSelector((state) => state.jwt);
+  
 function LoginScreen ({ navigation }) {
 
   // TODO: refactor to not have to useState for passwordInput and usernameInput?
   // TODO: add a warning if your user is not on the db and don't trigger the navigation 
   const dispatch = useDispatch();
 
-  const [warning, setWarning] = useState(false); 
+  const [warning, setWarning] = useState(false);
   const [jwt, setJwt] = useState('');
-  const [tempUserId, setTempUserId] = useState('');
+  const [googleOauth, setGoogleOauth] = useState('');
 
   const oAuthSignIn = async () => {
     try {
@@ -30,7 +32,7 @@ function LoginScreen ({ navigation }) {
       });
       if (result.type === 'success') {
         console.log('user', result);
-        await setTempUserId(result.user.id);
+        await setGoogleOauth(result.user.id);
         receiveJwt({idToken: result.idToken});
       } else {
       console.log('TYPE', result.type);
@@ -46,12 +48,23 @@ function LoginScreen ({ navigation }) {
     ApiService.getJwt(userToken)
       .then(serverResponse => {
         setJwt(serverResponse.accessToken)
+        dispatch({
+          type: 'SAVE_JWT',
+          payload: serverResponse.accessToken
+        })
+        // dispatchJWT(serverResponse.accessToken);
+        // receiveInfoandData(googleOauth, jwt.jwt );
+        // console.log('jwt:', jwt.jwt)
+        // navigation.dispatch(
+          // StackActions.replace('Home')
+        // )
       })
+        // setJwt(serverResponse.accessToken)
   }
 
   useEffect(() => {
-    if (jwt.length && tempUserId.length) {
-      receiveInfoandData(tempUserId, jwt)
+    if (jwt.length && googleOauth.length) {
+      receiveInfoandData(googleOauth, jwt)
       navigation.dispatch(
         StackActions.replace('Home')
       )
@@ -105,7 +118,7 @@ function LoginScreen ({ navigation }) {
     </View>
   );
 }
-
+  
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -160,4 +173,18 @@ const styles = StyleSheet.create({
   }
 });
 
+// function mapStateToProps(state) {  
+//   return {   
+//       jwt: state.jwt,    
+//     };
+//   }
+// function mapDispatch(dispatch) {
+//     return {
+//       dispatchJWT: (token) => dispatch({
+//         type:'SAVE_JWT',
+//         payload: token
+//       })
+//     };
+// }
 export default LoginScreen;
+// export default connect(mapStateToProps, mapDispatch)(LoginScreen);
