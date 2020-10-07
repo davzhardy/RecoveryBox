@@ -36,12 +36,11 @@ function getUserInfo (userId, accessToken) {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headres: {
+    headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     }
-  })
-  // .then((res) => res.json())
+  })  
   .catch((err) => console.log(err));
 }
 
@@ -57,7 +56,7 @@ function updateHistoricalData (body) {
 
 }
 
-function receiveJwt (idToken) {
+function getJwt (idToken) {
   return fetchRequest ('/auth/google', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -71,5 +70,5 @@ export default {
   getUserInfo,
   postHistoricalData,
   updateHistoricalData,
-  receiveJwt
+  getJwt
 }

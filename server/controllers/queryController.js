@@ -79,12 +79,10 @@ async function postDailyData (req, res) {
   }
 }
 
-// RELL ther is no check in 
 async function postUserInfo (req, res) {
   //TODO add ability to reject request if username already taken
   const user = req.body
   try {
-    //REL: change this to reflect new DB schema
     const newUser = await db.User.create({
       id: user.id,
       email: user.email,
