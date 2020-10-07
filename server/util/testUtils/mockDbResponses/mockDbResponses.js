@@ -1,10 +1,10 @@
 const mockGetUserInfoResponse = [
   {
       "id": 5412,
-      "username": "Raph",
-      "email": "raphael@codeworks.com",
+      "username": "",
+      "email": "ael@codeworks.com",
       "password": "password",
-      "firstName": "Raphael",
+      "firstName": "ael",
       "lastName": "Mazet",
       "registrationDate": "1601576812578",
       "createdAt": "2017-08-19T16:17:55.000Z",

@@ -24,7 +24,8 @@ async function googleVerify(req, res) {
 		const user = await db.User.findAll({
 			where: { email: `${userEmail}`}})
 			const accessToken = jwt.sign({ id: user.id }, JWT_KEY);
-			res.status(200).send({ accessToken });
+      res.status(200).send({ accessToken });
+      console.log(' ---> accessToken', accessToken);
 	} catch (error) {
     res
       .status(401)
