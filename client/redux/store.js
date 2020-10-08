@@ -7,7 +7,7 @@ import quoteReducer from './quoteReducer'
 import historicalDataReducer from './historicalDataReducer'
 import helperReducer from './helperReducer'
 import calendarHistoricalDayReducer from './calendarHistoricalDayReducer'
-
+import jwtReducer from './jwtReducer';
 
 const rootReducer = (combineReducers)({
   user: userReducer,
@@ -17,6 +17,7 @@ const rootReducer = (combineReducers)({
   historicalData: historicalDataReducer,
   helper: helperReducer,
   calendarHistoricalDay: calendarHistoricalDayReducer,
+  jwt: jwtReducer,
 })
 
 const store = createStore(rootReducer);

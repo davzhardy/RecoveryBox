@@ -31,10 +31,17 @@ function postDailyData (body) {
   })
 }
 
-function getUserInfo (username) {
-  return fetchRequest(`/user/${username}`, {
+function getUserInfo (userId, accessToken) {
+  return fetchRequest(`/user/${userId}`, {
     method: 'GET',
-  })
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    }
+  })  
+  .catch((err) => console.log(err));
 }
 
 function postHistoricalData (body) {
@@ -49,10 +56,19 @@ function updateHistoricalData (body) {
 
 }
 
+function getJwt (idToken) {
+  return fetchRequest ('/auth/google', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(idToken)
+  })
+}
+
 export default {
   getQuote,
   postDailyData,
   getUserInfo,
   postHistoricalData,
   updateHistoricalData,
+  getJwt
 }

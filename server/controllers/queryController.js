@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 const db = require('../models/index');
 
-//RELL he really use that?
 async function getQuote (req, res) {
   try {
     const QUOTE_URL = 'https://zenquotes.io/api/random'
@@ -14,19 +13,14 @@ async function getQuote (req, res) {
   }
 }
 
-
 //RELL this functions getUserInfo and getAllData does the same thing?
 async function getUserInfo (req, res) {
     try {
-    const username = req.params.username;
-    const user = await db.User.findAll({
-       where: { username: `${username}`},
-      include: db.Data})
-    res.status(200);
-    res.send(user);
+      const user = req.user;
+      res.status(201).send(user)
   } catch (e) {
-    console.log('Error', e); // eslint-disable-line no-console
-    res.sendStatus(500);
+    console.log('Resource not found', e); // eslint-disable-line no-console
+    res.sendStatus(404);
   }
 }
 
@@ -85,18 +79,15 @@ async function postDailyData (req, res) {
   }
 }
 
-// RELL ther is no check in 
 async function postUserInfo (req, res) {
   //TODO add ability to reject request if username already taken
   const user = req.body
   try {
     const newUser = await db.User.create({
+      id: user.id,
       email: user.email,
-      username: user.username,
-      password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
-      registrationDate: user.registrationDate,
     })
     res.status(201).send(newUser)
   } catch (e) {

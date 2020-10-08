@@ -1,17 +1,15 @@
 const router = require('express').Router();
 const query = require('./controllers/queryController');
 const oAuth = require('./controllers/oAuthController');
-
+const authMiddleware = require('./middleware/auth');
 router.get('/apirequest', query.getQuote);
-router.get('/user/:username', query.getUserInfo);
-router.get('/data/:id', query.getAllData);
+router.get('/user/:userId', authMiddleware, query.getUserInfo);
+router.get('/data/:id', authMiddleware, query.getAllData);
 router.post('/adduser', query.postUserInfo);
 router.post('/adddailydata', query.postDailyData);
 router.post('/addhistoricaldata', query.postHistoricalData);
 
-router.get('/auth/google', oAuth.askUserPermission);
-router.get('/auth/google/callback', oAuth.handleUserPermission)
-router.get('/loginFailed'), oAuth.loginFailed;
+router.post('/auth/google', oAuth.googleVerify);
 
 //TODO do these routes
 router.put('/addsettings', query.postSettingsInfo);
