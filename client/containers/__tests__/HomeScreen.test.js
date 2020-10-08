@@ -1,3 +1,4 @@
+// FIXME: Leaving this for legacy, many, many expo issues
 // import React from 'react';
 // import HomeScreen from '../HomeScreen';
 // import { Provider } from "react-redux";
@@ -7,7 +8,6 @@
 // import { combineReducers } from "redux";
 // import {DateTime} from 'luxon';
 
-// //TODO: refactor to use redux-mock-store
 // const initialDailyInfoState = {
 //   meetings: 0,
 //   feeling: 0,

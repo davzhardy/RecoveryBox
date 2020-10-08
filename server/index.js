@@ -6,7 +6,7 @@ const passport = require ('passport')
 
 const app = express();
 
-//FIX WE CAN ADD HEAR A CORS CONFIG
+//FIX WE CAN ADD HER EA CORS CONFIG
 app.use(cors())
 
 app.use(passport.initialize());

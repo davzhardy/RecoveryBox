@@ -1,3 +1,4 @@
+//FIX: leaving this in for legacy - many, many Expo issues
 // import React from 'react';
 // import renderer from 'react-test-renderer';
 // import { Provider } from 'react-redux';

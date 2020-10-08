@@ -5,7 +5,6 @@ const { mockGetUserInfoResponse } = require('../util/testUtils/mockDbResponses/m
 
 jest.mock('../models/index');
 
-//TODO: will need to implement a 404 test on the router if no params to this route
 describe("getUserInfo controller function", () => {
   test("should 200 and return all data for a specific user from the DB", async () => {
     const req = mockRequest();

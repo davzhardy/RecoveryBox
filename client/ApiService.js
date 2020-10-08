@@ -1,7 +1,5 @@
 import config from './config/api/config'
 
-// TODO: refactor and integrate with react-query
-
 const BASE_URL = config.RbServerBase + config.RbServerPort;
 
 function fetchRequest (path, options) {
@@ -11,13 +9,6 @@ function fetchRequest (path, options) {
       console.log('Error:', JSON.stringify(err)) //eslint-disable-line no-console
     })
 };
-
-// function fetchRequest () {
-//   return useQuery("getQuotes", async () => {
-//     const { data } = await axios.get(QUOTE_URL, options);
-//     return data;
-//   });
-// }
 
 function getQuote () {
   return fetchRequest('/apirequest')
@@ -53,7 +44,6 @@ function postHistoricalData (body) {
 }
 
 function updateHistoricalData (body) {
-
 }
 
 function getJwt (idToken) {

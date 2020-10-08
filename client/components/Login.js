@@ -8,27 +8,22 @@ import { StackActions } from '@react-navigation/native';
 
 import * as Google from 'expo-google-app-auth';
 import { androidClientId, iosClientId } from '../config/secret.js'
-
-// const jwt = useSelector((state) => state.jwt);
   
 function LoginScreen ({ navigation }) {
 
-  // TODO: refactor to not have to useState for passwordInput and usernameInput?
-  // TODO: add a warning if your user is not on the db and don't trigger the navigation 
   const dispatch = useDispatch();
-
   const [warning, setWarning] = useState(false);
   const [jwt, setJwt] = useState('');
   const [googleOauth, setGoogleOauth] = useState('');
 
   const oAuthSignIn = async () => {
     try {
+      //TODO: check if this also work for android phones
       const result = await Google.logInAsync({
         androidClientId: androidClientId,
         iosClientId: iosClientId,
         scopes: ['profile', 'email'],
         redirectUrl: `com.mazethernandez.recoverybox:/oauth2redirect/google` 
-        //check if this also work for android phone
       });
       if (result.type === 'success') {
         console.log('user', result);
@@ -44,22 +39,16 @@ function LoginScreen ({ navigation }) {
   }
   
   function receiveJwt (userToken) {
-    //FIX: deal with error
     ApiService.getJwt(userToken)
       .then(serverResponse => {
         setJwt(serverResponse.accessToken)
+        //FIXME: this is temporary solution to ensure jwt stored globally but should be integrated with redux map
         dispatch({
           type: 'SAVE_JWT',
           payload: serverResponse.accessToken
         })
-        // dispatchJWT(serverResponse.accessToken);
-        // receiveInfoandData(googleOauth, jwt.jwt );
-        // console.log('jwt:', jwt.jwt)
-        // navigation.dispatch(
-          // StackActions.replace('Home')
         // )
       })
-        // setJwt(serverResponse.accessToken)
   }
 
   useEffect(() => {
@@ -173,18 +162,4 @@ const styles = StyleSheet.create({
   }
 });
 
-// function mapStateToProps(state) {  
-//   return {   
-//       jwt: state.jwt,    
-//     };
-//   }
-// function mapDispatch(dispatch) {
-//     return {
-//       dispatchJWT: (token) => dispatch({
-//         type:'SAVE_JWT',
-//         payload: token
-//       })
-//     };
-// }
 export default LoginScreen;
-// export default connect(mapStateToProps, mapDispatch)(LoginScreen);
