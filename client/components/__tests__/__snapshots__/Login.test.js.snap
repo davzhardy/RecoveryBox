@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#DFE2E2",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#FF8787",
+        "fontFamily": "Montserrat_700Bold",
+        "fontSize": 40,
+        "fontStyle": "normal",
+        "marginBottom": 60,
+      }
+    }
+  >
+    RecoveryBox
+  </Text>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#2F80ED",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+        "marginBottom": 20,
+        "padding": 20,
+        "width": "80%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Enter a username"
+      placeholderTextColor="#DFE2E2"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "color": "white",
+          "height": 50,
+          "textAlign": "center",
+        }
+      }
+      textContentType="username"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#2F80ED",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+        "marginBottom": 20,
+        "padding": 20,
+        "width": "80%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Enter a password"
+      placeholderTextColor="#DFE2E2"
+      rejectResponderTermination={true}
+      secureTextEntry={true}
+      style={
+        Object {
+          "color": "white",
+          "height": 50,
+          "textAlign": "center",
+        }
+      }
+      underlineColorAndroid="transparent"
+      value="TODO: replace me"
+    />
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FF8787",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "marginTop": 30,
+        "opacity": 1,
+        "width": "60%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Montserrat_500Medium",
+          "fontSize": 16,
+          "fontStyle": "normal",
+        }
+      }
+    >
+      LOGIN
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FF8787",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "marginTop": 7,
+        "opacity": 1,
+        "width": "60%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Montserrat_500Medium",
+          "fontSize": 16,
+          "fontStyle": "normal",
+        }
+      }
+    >
+      REGISTER
+    </Text>
+  </View>
+  <View />
+</View>
+`;

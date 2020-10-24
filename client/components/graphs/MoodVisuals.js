@@ -53,7 +53,7 @@ function MoodVisuals () {
     let arr = [];
     for (let i in obj) {
       let newobj = {}
-      let j = [i].map(mood => mood.charAt(0).toUpperCase() + mood.slice(1))
+      let j = [i].map(mood => moodConfirmore)
       newobj.mood = j.join('')
       newobj.value = obj[i]
       arr.push(newobj)
