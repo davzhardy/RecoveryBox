@@ -1,58 +1,46 @@
 # RecoveryBox
-Codeworks: Solo Project
+Followed by a brief description (max 600 characters) 
 
-TODOs (inexhaustive)
+## Screenshots
 
-implement user registration (currently it just errors if the user doesnt exist on the db) and authentication
 
-implement best practise security measures for transfer of sensitive user information
+## Getting started
 
-refactor regex used when recieving user inputted data
 
-refactor animations on summaryscreen to use loops rather than settimeouts
+## Installation
 
-link user settings changes to the database,  this will require a new model to be inserted into thre models.js (edited) 
+1. Clone this repo!
 
-refactor the reducer for historical calendar updates as currently it will only accept one update in the local data (although it will be correctly saved in the db)
+   ```bash
+   git clone https://github.com/davzhardy/RecoveryBox.git
+   ```
 
-charts currently only work if they have more than 5 data points, refactor
+2. Install dependencies in the server and client.
 
-implement functionality to click on charts and display their values
+   ```bash
+   cd client      # ! Change into the client folder !
+   npm install
+   ..             # ! Go back to the root folder ! 
+   cd server			# ! Change into the server folder !
+   npm install
+   ```
 
-Play around with removing libraries and building your own custom components (calendar/graphs/panhandler)
+3. While in the client folder, run ````expo start```` to start the Expo development environment that will build the JS bundle for your app.
 
-Refactor all touchable opacity components to use pressables instead (i think they are becoming the new standard?)
+4. xxx
 
-Use react query rather than redux for async state management 
+## Tech Stack
 
-clean unused node modules
+FrontEnd
+* [React Native](https://facebook.github.io/react-native/) 
+* [Redux](https://redux.js.org/)
+* Other dependencies:
+  * xxx
 
-implement different types of navigation like swipe or tab navigation
+BackEnd
 
-refactor modifysuggestionlist component to be a modal screen
+## Author
 
-make things more modular,there is alot of code which could be split out and made into new discrete components
+David Hardy - [Github](https://github.com/davzhardy) - [Linkedin](www.linkedin.com/in/david-hardy50)
 
-make data processing/conversion functions in the graph components more efficient
-
-axis on 1st graph on summary screen goes off the side of the screen, refactor
-
-layout is highly customised for a huawei p20, refactor code to use Dimensions information and be more responsive
-
-add the ability to change the quote of the day if it is a rubbish one
-
-add the ability to redirect to certain resources relating to your recovery programme of choice (AA website etc.)
-
-find a way to include links in the header section of the app and put a link to the settings rather than the logo
-
-Add in ability to remove items from the history screen and not just add them
-
-Mood updating from the your history screen may well be a mess - use a debounce or a throttle function to make this better
-
-Add some cool animations on the submit buttons?
-
-Logout functionality
-
-linting
-
-refactor redux coding to use connect() method alongside mapstatetoprops and mapdispatchtoprops
+Also check-out the development branch where [Daniel Alejandro Hernández Llerena](https://github.com/llere-alt) and [Raphael Mazet](https://github.com/raphael-mazet) extended the project to add Authentication and Testing.
