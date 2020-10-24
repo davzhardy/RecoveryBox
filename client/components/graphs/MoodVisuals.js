@@ -32,7 +32,6 @@ function MoodVisuals () {
 
   const historicalData = useSelector((state) => state.historicalData);
   const periodData = _.filter(historicalData, el => el.date > lastDay)
-  console.log(periodData)
   const moodsData = _.map(periodData, el => el.moods)
   
   function create (array) {
@@ -83,50 +82,59 @@ function MoodVisuals () {
   }
 
   const moodsObject = create(moodsData)
+  console.log(moodsObject,'moodsobj')
   const moods = createMoods(moodsObject)
+  console.log(moods,'moods')
   const sortedMoods = _.orderBy(moods, ['value'], ['desc'])
+  console.log(sortedMoods,'sortedmoods')
   const topMoods = topFive(sortedMoods, moodsToShow)
+  console.log(topMoods,'topmoods')
   const randomTopMoods = randomNumGen(topMoods, 0, moodsToShow)
-  console.log(randomTopMoods)
 
-  return (
-    <View style={styles.container}>
-      <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Moods</BoldAppText>
-      <VictoryGroup width={300} height={200} styles={styles.container}>
-        <VictoryScatter
-        data={randomTopMoods}
-        domainPadding={{ x: [-5,-5] }}
-        animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-        }}
-        x={"mood"} 
-        y={"value"}
-        bubbleProperty="value"
-        maxBubbleSize={40}
-        minBubbleSize={10}
-        style={{ 
-          data: { 
-            fill: colors.cosmicLatte,
-            stroke: 'white',
-            strokeWidth: 2,
-            opacity: 0.8,
-          },
-          parent: {
-          },
-          labels: { 
-            fill: colors.darkGrayFont, 
-            fontSize: 10,
-            color: colors.green,
-          }
-        }}
-        interpolation="natural"
-        labels={({ datum }) => `${datum.mood}`}
-        />
+  if (moodsData.length) {
+    return (
+      <View style={styles.container}>
+        <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Moods</BoldAppText>
+        <VictoryGroup width={300} height={200} styles={styles.container}>
+          <VictoryScatter
+          data={randomTopMoods}
+          domainPadding={{ x: [-5,-5] }}
+          animate={{
+            duration: 2000,
+            onLoad: { duration: 1000 }
+          }}
+          x={"mood"} 
+          y={"value"}
+          bubbleProperty="value"
+          maxBubbleSize={40}
+          minBubbleSize={10}
+          style={{ 
+            data: { 
+              fill: colors.cosmicLatte,
+              stroke: 'white',
+              strokeWidth: 2,
+              opacity: 0.8,
+            },
+            parent: {
+            },
+            labels: { 
+              fill: colors.darkGrayFont, 
+              fontSize: 10,
+              color: colors.green,
+            }
+          }}
+          interpolation="natural"
+          labels={({ datum }) => `${datum.mood}`}
+          />
 
-      </VictoryGroup>
-    </View>
-  );
+        </VictoryGroup>
+      </View>
+    );
+  } else {
+    return (
+      <MediumAppText>Please add some data to display this chart</MediumAppText>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

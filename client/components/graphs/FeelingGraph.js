@@ -34,9 +34,9 @@ function FeelingGraph () {
   function compareItem(a, b){
     if(a.date < b.date){
       return -1;
-    }else if(a.date > b.date){
+    } else if(a.date > b.date) {
       return 1;
-    }else{
+    } else {
       return 0;
     }
   }
@@ -63,69 +63,79 @@ function FeelingGraph () {
 
   const combinedList = create(formattedDateData, feelingData, meetingData)
 
-  return (
-    <View style={styles.container}>
-      <BoldAppText style={{color: colors.lightGray, marginBottom:-40, fontSize:14, alignSelf:'flex-start',}}>Feeling & Meetings</BoldAppText>
-      <VictoryChart width={400} height={280} style= {{
-        parent: {
-          overflow: 'visible',
-        }
-      }}>
-        <VictoryArea 
-        data={combinedList} 
-        animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-        }}
-        x="date" 
-        y="feeling"
-        style={{ 
-          data: { 
-            fill: colors.green,
-            opacity: 0.75,
-          },
-          parent: {}
+  if (periodData.length) {
+    return (
+      <View style={styles.container}>
+        <BoldAppText style={{color: colors.lightGray, marginBottom:-40, fontSize:14, alignSelf:'flex-start',}}>Feeling & Meetings</BoldAppText>
+        <VictoryChart width={400} height={280} style= {{
+          parent: {
+            overflow: 'visible',
+          }
+        }}>
+          <VictoryArea 
+          data={combinedList} 
+          animate={{
+            duration: 2000,
+            onLoad: { duration: 1000 }
           }}
-        interpolation="natural"
-        domain={{y: [-2, 12]}}
-        />
-        <VictoryArea
-        data={combinedList} 
-        animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-        }}
-        x="date" 
-        y="meetings"
-        style={{ 
-          data: { 
-            fill: colors.blue,
-            opacity: 0.6
-          },
-          parent: {}
+          x="date" 
+          y="feeling"
+          style={{ 
+            data: { 
+              fill: colors.green,
+              opacity: 0.75,
+            },
+            parent: {}
+            }}
+          interpolation="natural"
+          domain={{y: [-2, 12]}}
+          />
+          <VictoryArea
+          data={combinedList} 
+          animate={{
+            duration: 2000,
+            onLoad: { duration: 1000 }
           }}
-        interpolation="natural"
-        />
-        <VictoryAxis
-          tickCount={4}
-          style = {{
-            tickLabels: {fontSize: 10},
-            axis: {stroke: "none"},
-          }}
-        />
-      </VictoryChart>
-      <View style={styles.key}>
-        <View style={[styles.keyWrapper, {marginBottom:-10}]}>
-          <View style={styles.box1}/>
-          <MediumAppText>Feeling</MediumAppText>
-        </View>
-        <View style={styles.keyWrapper}>
-          <View style={styles.box2}/>
-          <MediumAppText>Meetings</MediumAppText>
+          x="date" 
+          y="meetings"
+          style={{ 
+            data: { 
+              fill: colors.blue,
+              opacity: 0.6
+            },
+            parent: {}
+            }}
+          interpolation="natural"
+          />
+          <VictoryAxis
+            tickCount={4}
+            style = {{
+              tickLabels: {fontSize: 10},
+              axis: {stroke: "none"},
+            }}
+          />
+        </VictoryChart>
+        <View style={styles.key}>
+          <View style={[styles.keyWrapper, {marginBottom:-10}]}>
+            <View style={styles.box1}/>
+            <MediumAppText>Feeling</MediumAppText>
+          </View>
+          <View style={styles.keyWrapper}>
+            <View style={styles.box2}/>
+            <MediumAppText>Meetings</MediumAppText>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  } else {
+    return (
+      <>
+        <MediumAppText>Please add some data to display this chart</MediumAppText>
+        <br></br>
+      </>
+    )
+  }
+  
 }
 
 const styles = StyleSheet.create({

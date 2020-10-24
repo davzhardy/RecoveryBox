@@ -89,44 +89,50 @@ function SuggestionsVisuals () {
   const topSuggestions = topFive(sortedSuggestions, suggestionsToShow)
   const randomTopSuggestions = randomNumGen(topSuggestions, 0, suggestionsToShow)
 
-  return (
-    <View style={styles.container}>
-      <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Suggestions</BoldAppText>
-      <VictoryGroup width={300} height={200} styles={styles.container} >
-        <VictoryScatter 
-          domainPadding={{ x: [-5,-5] }}
-          data={randomTopSuggestions} 
-          animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-        }}
-        x={"suggestion"} 
-        y={"value"}
-        bubbleProperty="value"
-        maxBubbleSize={40}
-        minBubbleSize={10}
-        style={{ 
-          data: { 
-            fill: colors.blue,
-            stroke: 'white',
-            strokeWidth: 2,
-            opacity: 0.8,
-          },
-          parent: {
-          },
-          labels: { 
-            fill: colors.darkGrayFont, 
-            fontSize: 10,
-            color: colors.green,
-          }
-        }}
-        interpolation="natural"
-        labels={({ datum }) => `${datum.suggestion}`}
-        />
+  if (suggestionsData.length) {
+    return (
+      <View style={styles.container}>
+        <BoldAppText style={{color: colors.lightGray, marginBottom:0, fontSize:14, alignSelf:'flex-start',}}>Top 5 Suggestions</BoldAppText>
+        <VictoryGroup width={300} height={200} styles={styles.container} >
+          <VictoryScatter 
+            domainPadding={{ x: [-5,-5] }}
+            data={randomTopSuggestions} 
+            animate={{
+            duration: 2000,
+            onLoad: { duration: 1000 }
+          }}
+          x={"suggestion"} 
+          y={"value"}
+          bubbleProperty="value"
+          maxBubbleSize={40}
+          minBubbleSize={10}
+          style={{ 
+            data: { 
+              fill: colors.blue,
+              stroke: 'white',
+              strokeWidth: 2,
+              opacity: 0.8,
+            },
+            parent: {
+            },
+            labels: { 
+              fill: colors.darkGrayFont, 
+              fontSize: 10,
+              color: colors.green,
+            }
+          }}
+          interpolation="natural"
+          labels={({ datum }) => `${datum.suggestion}`}
+          />
 
-      </VictoryGroup>
-    </View>
-  );
+        </VictoryGroup>
+      </View>
+    );
+  } else {
+    return (
+      <MediumAppText>Please add some data to display this chart</MediumAppText>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
