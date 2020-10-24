@@ -1,6 +1,6 @@
-// TODO: refactor and integrate with react-query
+import config from './config/api/config'
 
-const BASE_URL = 'http://192.168.1.244:3001'
+const BASE_URL = config.RbServerBase + config.RbServerPort;
 
 function fetchRequest (path, options) {
   return fetch(BASE_URL + path, options)
@@ -9,13 +9,6 @@ function fetchRequest (path, options) {
       console.log('Error:', JSON.stringify(err)) //eslint-disable-line no-console
     })
 };
-
-// function fetchRequest () {
-//   return useQuery("getQuotes", async () => {
-//     const { data } = await axios.get(QUOTE_URL, options);
-//     return data;
-//   });
-// }
 
 function getQuote () {
   return fetchRequest('/apirequest')
@@ -29,10 +22,17 @@ function postDailyData (body) {
   })
 }
 
-function getUserInfo (username) {
-  return fetchRequest(`/user/${username}`, {
+function getUserInfo (userId, accessToken) {
+  return fetchRequest(`/user/${userId}`, {
     method: 'GET',
-  })
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    }
+  })  
+  .catch((err) => console.log(err));
 }
 
 function postHistoricalData (body) {
@@ -44,7 +44,14 @@ function postHistoricalData (body) {
 }
 
 function updateHistoricalData (body) {
+}
 
+function getJwt (idToken) {
+  return fetchRequest ('/auth/google', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(idToken)
+  })
 }
 
 export default {
@@ -53,4 +60,5 @@ export default {
   getUserInfo,
   postHistoricalData,
   updateHistoricalData,
+  getJwt
 }

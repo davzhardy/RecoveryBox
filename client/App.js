@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -29,7 +30,7 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-       <NavigationContainer>
+        <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{headerShown : false}} component={LoginScreen}/>
             <Stack.Screen name="Home" component={HomeScreen} options={{ 

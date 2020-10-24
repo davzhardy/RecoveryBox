@@ -72,13 +72,9 @@ function HomeScreen ({ route }) {
     })
   };
 
-//TODO make sure the user can only submit the data once, if they try and submit twice it warns them and then it updates the existing information for that date
-
   const registerModalVisible = useSelector((state) => state.helper.registerModal);
 
 // TODO refactor to have modal as seperate component
-
-  const [confetti, setConfetti] = useState(false)
 
   return (
     !quoteItem ? 
@@ -113,7 +109,6 @@ function HomeScreen ({ route }) {
             DAY REGISTERED
           </MediumAppText>
           <TouchableOpacity style={styles.return} onPress={() => {
-            setConfetti(true)
             dispatch({
               type: "REGISTER_MODAL",
               payload: false
