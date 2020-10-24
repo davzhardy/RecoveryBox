@@ -72,12 +72,9 @@ function MoodVisuals () {
   function randomNumGen (arr, min, max) {
     let copyArr = arr.slice()
     max = Math.min(Math.floor(max-1), arr.length-1);
-    console.log('max',max)
-    console.log(newArr, 'newArr')
     let newArr = [];
     for (let i = 0; i < arr.length; i++){
       const choose = Math.floor(Math.random() * (max - min + 1)) + min;
-      console.log('choose',choose)
       newArr.push(copyArr.splice(choose,1)[0])
       max-- 
     }
@@ -88,9 +85,7 @@ function MoodVisuals () {
   const moods = createMoods(moodsObject)
   const sortedMoods = _.orderBy(moods, ['value'], ['desc'])
   const topMoods = topFive(sortedMoods, moodsToShow)
-  console.log(topMoods,'topmoods')
   const randomTopMoods = randomNumGen(topMoods, 0, moodsToShow)
-  console.log(randomTopMoods,'randomTopmoods')
 
   if (moodsData.length) {
     return (
