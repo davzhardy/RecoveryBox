@@ -21,7 +21,7 @@ Followed by a brief description (max 600 characters)
    cd client      # ! Change into the client folder !
    npm install
    ..             # ! Go back to the root folder ! 
-   cd server			# ! Change into the server folder !
+   cd server		# ! Change into the server folder !
    npm install
    ```
 

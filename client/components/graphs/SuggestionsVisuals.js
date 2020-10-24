@@ -64,7 +64,7 @@ function SuggestionsVisuals () {
 
   function topFive (arr, num) {
     let newArr= [];
-    let max = num;
+    let max = Math.min(num, arr.length);
     for (let i =0; i < max; i++) {
       newArr.push(arr[i]);
     }
@@ -73,7 +73,7 @@ function SuggestionsVisuals () {
 
   function randomNumGen (arr, min, max) {
     let copyArr = arr.slice()
-    max = Math.floor(max-1);
+    max = Math.min(Math.floor(max-1), arr.length-1);
     let newArr = [];
     for (let i = 0; i < arr.length; i++){
       const choose = Math.floor(Math.random() * (max - min + 1)) + min;
