@@ -74,7 +74,7 @@ The App was tested on a Huawei P20 with android.
 
 David Hardy - [Github](https://github.com/davzhardy) - [Linkedin](www.linkedin.com/in/david-hardy50) 
 
-Also check-out the development branch where [Daniel Alejandro Hernández Llerena](https://github.com/llere-alt) extended the project to add Authentication and Testing.
+Also check-out the development branch where [Daniel Alejandro Hernández Llerena](https://github.com/llere-alt) did a great job extending the project to add Authentication and Testing.
 
 ## License
 
