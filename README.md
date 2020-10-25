@@ -16,7 +16,7 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Presentation
 
-RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp.
+RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp. You can find a short video describing the project in further detail on [youtube](https://www.youtube.com/watch?v=FD78fHjs5BA).
 
 <p align="center">
   <img src="./public/screenshot1.jpeg" width="30%" />
