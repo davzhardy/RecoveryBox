@@ -14,7 +14,11 @@ RecoveryBox is a mobile app aimed to help people in their journeys through twelv
 
 It documents the efforts made by programme participants and encourages continuing, sustainable interaction and self-reflection to stay on top of their recovery.
 
-## Screenshots
+## Presentation
+
+RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp.
+
+<Screenshots>
 
 
 ## Installation
