@@ -45,7 +45,7 @@ export default function App() {
               headerRight:() => {
                 return (
                 <TouchableOpacity>
-                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                  <Image style={{height:50, width:80, marginRight:35, marginTop:0}} source={require('./assets/logo.jpeg')}/>
                 </TouchableOpacity>) }             
               }}
             />
@@ -63,7 +63,7 @@ export default function App() {
               headerRight:() => {
                 return (
                 <TouchableOpacity>
-                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                  <Image style={{height:50, width:80, marginRight:35, marginTop:0}} source={require('./assets/logo.jpeg')}/>
                 </TouchableOpacity>) }  
               
             }}/>
@@ -82,7 +82,7 @@ export default function App() {
               headerRight:() => {
                 return (
                 <TouchableOpacity>
-                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                  <Image style={{height:50, width:80, marginRight:35, marginTop:0}} source={require('./assets/logo.jpeg')}/>
                 </TouchableOpacity>) }  
             }}/>
             <Stack.Screen name="History" component={HistoryScreen} options={{ 
@@ -94,7 +94,7 @@ export default function App() {
               headerRight:() => {
                 return (
                 <TouchableOpacity>
-                  <Image style={{height:70, width:70, marginRight:35, marginTop:-20}} source={require('./assets/logo.jpeg')}/>
+                  <Image style={{height:50, width:80, marginRight:35, marginTop:0}} source={require('./assets/logo.jpeg')}/>
                 </TouchableOpacity>) }  
             }} />
           </Stack.Navigator>
