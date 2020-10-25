@@ -27,6 +27,10 @@ function LoginScreen ({ navigation }) {
     }
   }
 
+  const registerHandler = () => {
+    navigation.navigate('Register')
+  }
+
   function receiveInfoandData (username) {
     ApiService.getUserInfo(username)
     .then(data => {
@@ -85,7 +89,7 @@ function LoginScreen ({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={() => submitHandler()}>
         <Text style={styles.text}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, {marginTop:7}]}>
+      <TouchableOpacity style={[styles.button, {marginTop:7}]} onPress={() => registerHandler()}>
         <Text style={styles.text}>REGISTER</Text>
       </TouchableOpacity>
       <View>
@@ -112,6 +116,7 @@ const styles = StyleSheet.create({
     marginBottom:20,
     justifyContent:"center",
     padding:20,
+    fontFamily: 'Montserrat_500Medium',
   },
   logo: {
     color: colors.orange, 
@@ -122,6 +127,7 @@ const styles = StyleSheet.create({
     height:50,
     color:'white',
     textAlign: 'center',
+    fontFamily: 'Montserrat_500Medium',
   },
   button: {
     width:"60%",

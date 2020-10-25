@@ -20,48 +20,6 @@ function Register ({ navigation }) {
   const [emailInput, onChangeEmail] = useState(useSelector((state) => state.user.email));
   const [warning, setWarning] = useState(false); 
 
-  const submitHandler = async () => {
-    if (usernameInput && passwordInput) {
-      await receiveInfoandData(usernameInput);
-      navigation.dispatch(
-        StackActions.replace('Home'))
-    } else {
-      setWarning(true);
-    }
-  }
-
-  function receiveInfoandData (username) {
-    ApiService.getUserInfo(username)
-    .then(data => {
-      let dispatchtoUser = {
-        id: data[0].id,
-        email: data[0].id,
-        username: data[0].username,
-        firstName: data[0].firstName,
-        lastName: data[0].lastName,
-        registrationDate: data[0].registrationDate,
-      }
-      for (let i of data[0].Data) {
-        i.date = Number(i.date)
-        let parseMoods = i.moods.replace(/[\[\]',"]+/g,'')
-        let arrayMoods;
-        if (parseMoods.length) arrayMoods = parseMoods.split(' ')
-        if (arrayMoods===undefined) arrayMoods = []
-        i.moods = arrayMoods
-        i.suggestions = eval(i.suggestions)
-      }
-      let dispatchtoHistoricalData = data[0].Data
-      dispatch({
-        type: 'UPDATE_USERINFO',
-        payload: dispatchtoUser
-      })
-      dispatch({
-        type: 'CREATE_HISTORICALDATA',
-        payload: dispatchtoHistoricalData
-      })
-    })
-  }
-
   return (
     <View style={styles.container}>
       <BoldAppText style={styles.logo}>RecoveryBox</BoldAppText>
@@ -138,7 +96,7 @@ const styles = StyleSheet.create({
     width:"80%",
     backgroundColor: colors.blue,
     borderRadius:25,
-    height:50,
+    height:40,
     marginBottom:20,
     justifyContent:"center",
     padding:20,
@@ -152,6 +110,7 @@ const styles = StyleSheet.create({
     height:50,
     color:'white',
     textAlign: 'center',
+    fontFamily: 'Montserrat_500Medium',
   },
   button: {
     width:"60%",
@@ -162,6 +121,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:30,
     marginBottom:10,
+    fontFamily: 'Montserrat_500Medium',
   },
   text: {
     fontFamily: 'Montserrat_500Medium',
