@@ -19,13 +19,13 @@ It documents the efforts made by programme participants and encourages continuin
 RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp.
 
 <p align="center">
-  <img src="./public/screenshot1.jpeg" width="40%" />
-  <img src="./public/screenshot2.jpeg" width="40%" />
+  <img src="./public/screenshot1.jpeg" width="30%" />
+  <img src="./public/screenshot2.jpeg" width="30%" />
 </p>
 
 <p align="center">
-  <img src="./public/screenshot4.jpeg" width="40%" />
-  <img src="./public/screenshot3.jpeg" width="40%" />
+  <img src="./public/screenshot4.jpeg" width="30%" />
+  <img src="./public/screenshot3.jpeg" width="30%" />
 </p>
 
 ## Installation
