@@ -43,11 +43,11 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Tech Stack
 
-<span style="text-decoration:underline">FrontEnd</span>
+*FrontEnd*
 * [React Native](https://facebook.github.io/react-native/) 
 * [Redux](https://redux.js.org/)
 
-<u>BackEnd</u>
+*BackEnd*
 * [Node.js](https://nodejs.org/)
 * [Express](https://expressjs.com)
 * [Sequelize ORM](https://sequelize.org)
