@@ -33,7 +33,7 @@ It documents the efforts made by programme participants and encourages continuin
    ```bash
    cd server      # ! Change into the server folder !
    npm install
-   cd ../client		# ! Change into the client folder !
+   cd ../client	# ! Change into the client folder !
    npm install
    ```
 
