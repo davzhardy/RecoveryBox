@@ -10,7 +10,7 @@
   <img src="./client/assets/logo.jpeg" />
 </p>
 
-RecoveryBox is a mobile app aimed to help people in their journeys through twelve-step recovery programmes such as Alcoholics Anonymousus. The app is a tool for people to document their meeting attendance, moods and the difficulties they encounter in their day-to-day lives. 
+RecoveryBox is a mobile app aimed to help people in their journeys through twelve-step recovery programmes such as Alcoholics Anonymous. The app is a tool for people to document their meeting attendance, moods and the difficulties they encounter in their day-to-day lives. 
 
 It documents the efforts made by programme participants and encourages continuing, sustainable interaction and self-reflection to stay on top of their recovery.
 
@@ -47,13 +47,19 @@ It documents the efforts made by programme participants and encourages continuin
 FrontEnd
 * [React Native](https://facebook.github.io/react-native/) 
 * [Redux](https://redux.js.org/)
-* Other dependencies:
-  * xxx
 
 BackEnd
+* [Node.js](https://nodejs.org/)
+* [Express](https://expressjs.com)
+* [Sequelize ORM](https://sequelize.org)
+* [PostgreSQL](https://www.postgresql.org)
 
 ## Author
 
-David Hardy - [Github](https://github.com/davzhardy) - [Linkedin](www.linkedin.com/in/david-hardy50)
+David Hardy - [Github](https://github.com/davzhardy) - [Linkedin](www.linkedin.com/in/david-hardy50) 
 
-Also check-out the development branch where [Daniel Alejandro Hernández Llerena](https://github.com/llere-alt) and [Raphael Mazet](https://github.com/raphael-mazet) extended the project to add Authentication and Testing.
+Also check-out the development branch where [Daniel Alejandro Hernández Llerena](https://github.com/llere-alt) extended the project to add Authentication and Testing.
+
+## License
+
+MIT © [David Hardy](https://github.com/davzhardy)
