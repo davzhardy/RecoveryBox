@@ -65,9 +65,7 @@ The app is built using react native, which means you'll need a way to run the ap
 
 3. The Metro Bundler will now load in a new browser window and you can choose the platform where you want launch app. 
 
-The App was tested on a Huawei P20 with android.
-
-4. xxx
+4. Scan the barcode with the Expo app on your phone or follow the terminal instructions to load up the emulator on your machine.
 
 ## Tech Stack
 
