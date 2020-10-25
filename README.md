@@ -2,7 +2,7 @@
 > Full-Stack RecoveryBox mobile app containing both client (front-end) and server (back-end).
 
 
-[![GitHub license](https://img.shields.io/github/license/davzhardy/RecoveryBox&color=<COLOR>)](https://github.com/davzhardy/RecoveryBox/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/davzhardy/RecoveryBox?&color=<BLUE>)](https://github.com/davzhardy/RecoveryBox/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/davzhardy/RecoveryBox)](https://GitHub.com/davzhardy/RecoveryBox/issues)
 
 <p align="center">
