@@ -24,18 +24,20 @@ It documents the efforts made by programme participants and encourages continuin
 
 1. Clone this repo!
 
-   ```bash
+   ```
    git clone https://github.com/davzhardy/RecoveryBox.git
    ```
 
 2. Install dependencies in the server and client.
 
-   ```bash
+   ```
    cd server      # ! Change into the server folder !
    npm install
    cd ../client	# ! Change into the client folder !
    npm install
    ```
+
+3. 
 
 3. While in the client folder, run ````expo start```` to start the Expo development environment that will build the JS bundle for your app.
 
