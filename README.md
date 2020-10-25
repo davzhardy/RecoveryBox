@@ -2,7 +2,7 @@
 > Full-Stack RecoveryBox mobile app containing both client (front-end) and server (back-end).
 
 
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![GitHub license](https://img.shields.io/github/license/davzhardy/RecoveryBox)](https://github.com/davzhardy/RecoveryBox/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/davzhardy/RecoveryBox)](https://GitHub.com/davzhardy/RecoveryBox/issues)
 
 <p align="center">
