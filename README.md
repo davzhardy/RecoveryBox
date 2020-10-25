@@ -43,7 +43,7 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Tech Stack
 
-<u>FrontEnd</u>
+<span style="text-decoration:underline">FrontEnd</span>
 * [React Native](https://facebook.github.io/react-native/) 
 * [Redux](https://redux.js.org/)
 
