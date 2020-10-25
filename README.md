@@ -19,11 +19,12 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Installation
 
-The app is build on react native, which means you'll need a way to run the app on a phone or emulator. To do this, you'll need [expo](https://expo.io/), follow the steps below to get it up and running
+The app is built using react native, which means you'll need a way to run the app on a phone or emulator. To do this, you'll need to install [expo](https://expo.io/), follow the steps below to get it up and running:
 
 1. Download [expo](https://expo.io/learn)
 2. Install expo using the following
    <pre><code>npm install expo-cli --global</code></pre>
+   
 
 ## Getting Started
 
