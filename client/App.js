@@ -8,6 +8,7 @@ import CalendarScreen from './containers/CalendarScreen'
 import ModifySuggestionsList from './containers/ModifySuggestionsList'
 import SummaryScreen from './containers/SummaryScreen'
 import HistoryScreen from './containers/HistoryScreen'
+import Register from './containers/Register'
 import {useFonts, Montserrat_500Medium, Montserrat_700Bold} from '@expo-google-fonts/montserrat'
 import { Provider } from "react-redux";
 import store from './redux/store'
@@ -32,6 +33,7 @@ export default function App() {
        <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" options={{headerShown : false}} component={LoginScreen}/>
+            <Stack.Screen name="Register" options={{headerShown : false}} component={Register}/>
             <Stack.Screen name="Home" component={HomeScreen} options={{ 
               title: 'Today',
               headerStyle: {
