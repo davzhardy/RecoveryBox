@@ -17,10 +17,15 @@ It documents the efforts made by programme participants and encourages continuin
 ## Screenshots
 
 
-## Getting started
-
-
 ## Installation
+
+The app is build on react native, which means you'll need a way to run the app on a phone or emulator. To do this, you'll need [expo](https://expo.io/), follow the steps below to get it up and running
+
+1. Download [expo](https://expo.io/learn)
+2. Install expo using the following
+   <pre><code>npm install expo-cli --global</code></pre>
+
+## Getting Started
 
 1. Clone this repo!
 
@@ -44,7 +49,9 @@ It documents the efforts made by programme participants and encourages continuin
    expo start     # Start the Expo development environment that will build the JS bundle for the app
    ```
 
-3. xxx
+3. The Metro Bundler will now load in a new browser window and you can choose the platform where you want launch app. 
+
+The App was tested on a Huawei P20 with android.
 
 4. xxx
 
