@@ -31,10 +31,9 @@ It documents the efforts made by programme participants and encourages continuin
 2. Install dependencies in the server and client.
 
    ```bash
-   cd client      # ! Change into the client folder !
+   cd server      # ! Change into the server folder !
    npm install
-   ..             # ! Go back to the root folder ! 
-   cd server		# ! Change into the server folder !
+   cd ../client		# ! Change into the client folder !
    npm install
    ```
 
@@ -44,11 +43,11 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Tech Stack
 
-FrontEnd
+<u>FrontEnd</u>
 * [React Native](https://facebook.github.io/react-native/) 
 * [Redux](https://redux.js.org/)
 
-BackEnd
+<u>BackEnd</u>
 * [Node.js](https://nodejs.org/)
 * [Express](https://expressjs.com)
 * [Sequelize ORM](https://sequelize.org)
