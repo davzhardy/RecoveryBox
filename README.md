@@ -4,7 +4,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/davzhardy/RecoveryBox)](https://github.com/davzhardy/RecoveryBox/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/davzhardy/RecoveryBox)](https://GitHub.com/davzhardy/RecoveryBox/issues)
-[![shields.io](https://img.shields.io/badge/made%20with-❤️-blue?style=flat-square)](https://shields.io)
+[![shields.io](https://img.shields.io/badge/made%20with-💕-blue?style=flat-square)](https://shields.io)
 
 <p align="center">
   <img src="./client/assets/logo.jpeg" />
