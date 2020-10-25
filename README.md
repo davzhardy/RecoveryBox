@@ -23,6 +23,7 @@ The app is built using react native, which means you'll need a way to run the ap
 
 1. Download [expo](https://expo.io/learn)
 2. Install expo from your terminal
+
    ```
    npm install expo-cli --global
    ```
