@@ -7,6 +7,8 @@
   <img src="./client/assets/logo.jpeg" />
 </p>
 
+RecoveryBox is a mobile app aimed at helping to aid people in their journeys through twelve-step recovery programmes such as Alcoholics Anonymousus. The app is a tool for people to document their meeting attendance, moods and the difficulties they encounter in their day-to-day lives. It documents the efforts made by programme participants and encourages continuing, sustainable interaction and self-reflection to stay on top of their recovery.
+
 ## Screenshots
 
 
