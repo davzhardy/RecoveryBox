@@ -16,10 +16,17 @@ It documents the efforts made by programme participants and encourages continuin
 
 ## Presentation
 
-RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp.
+RecoveryBox was originally developed as a Solo Project for the Codeworks coding bootcamp. You can find a short video describing the project in further detail on [youtube](https://www.youtube.com/watch?v=FD78fHjs5BA).
 
-<Screenshots>
+<p align="center">
+  <img src="./public/screenshot1.jpeg" width="30%" />
+  <img src="./public/screenshot2.jpeg" width="30%" />
+</p>
 
+<p align="center">
+  <img src="./public/screenshot4.jpeg" width="30%" />
+  <img src="./public/screenshot3.jpeg" width="30%" />
+</p>
 
 ## Installation
 
@@ -58,9 +65,7 @@ The app is built using react native, which means you'll need a way to run the ap
 
 3. The Metro Bundler will now load in a new browser window and you can choose the platform where you want launch app. 
 
-The App was tested on a Huawei P20 with android.
-
-4. xxx
+4. Scan the barcode with the Expo app on your phone or follow the terminal instructions to load up the emulator on your machine.
 
 ## Tech Stack
 
