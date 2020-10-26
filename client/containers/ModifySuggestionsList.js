@@ -7,8 +7,6 @@ import colors from '../styles/colors';
 
 function ModifySuggestionsList ({ navigation: { goBack } }) {
 
-// TODO refactor to be a modal screen
-
   const dispatch = useDispatch()
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
   const suggestionList = useSelector((state) => state.settings.suggestionSettings.suggestionsList);

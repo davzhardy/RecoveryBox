@@ -36,8 +36,6 @@ function Moods () {
   const [animationValue5, setAnimationValue5] = useState(new Animated.Value(0));
   const [animationValue6, setAnimationValue6] = useState(new Animated.Value(0));
 
-//TODO refactor the loop to use animation.loop
-
   useEffect(() => {
     fadeIn(animationValue, 1500, 8500, 1000)
     setInterval(()=>fadeIn(animationValue, 1500, 8500, 1000), 11000)
@@ -148,8 +146,6 @@ function Moods () {
     </View>
   );
 }
-
-//TODO rework modal dimensions so that they are based on screen size
 
 const styles = StyleSheet.create({
   container: {

@@ -33,8 +33,6 @@ function SuggestionsVisuals () {
   const suggestionsData = _.map(periodData, el => el.suggestions) 
   const fullSuggestionsList = useSelector((state) => state.settings.suggestionSettings.fullSuggestionsList);
 
-  // TODO alltime broken, to fix
-
   function create (array) {
     let obj = {}
     for (let i of array) {

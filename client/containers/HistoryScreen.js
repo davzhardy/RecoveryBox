@@ -16,8 +16,6 @@ import { useNavigation } from '@react-navigation/native';
 
 function HistoryScreen () {
 
-  //TODO buggy nd broken at the moment, needs to bt split into separate components and put into reducers
-  //TODO once the above is completed, need to update the current put request
   const navigation = useNavigation();
 
   const selectedDate = useSelector((state) => state.helper.selectedDate)
@@ -373,40 +371,3 @@ const styles = StyleSheet.create({
 
 
 export default HistoryScreen;
-
-
-
-    // let startingFeeling = 0; 
-  // if (requiredInfo.length) startingFeeling = requiredInfo[0].feeling;
-  
-  // let startingMeetings = 0; 
-  // if (requiredInfo.length) startingMeetings = requiredInfo[0].meetings;
-
-  // let startingMoods = []; 
-  // if (requiredInfo.length) startingMoods = requiredInfo[0].moods.map(mood => mood.charAt(0).toUpperCase() + mood.slice(1));
-
-  // let startingSuggestions = []; 
-  // if (requiredInfo.length) startingSuggestions = requiredInfo[0].suggestions;
-
-  // const [feeling, setFeeling] = useState(startingFeeling)
-  // const [meetings, setMeetings ] = useState(startingMeetings)
-  // const [moodsArr, setMoods] = useState(startingMoods)
-  // const [suggestionsArr, setSuggestions] = useState(startingSuggestions)
-  // function onMeetingsAdd () {
-  //   setMeetings(meetings+1) 
-  // }
-
-  // function onMeetingsMinus () { 
-  //   if (meetings>0) setMeetings(meetings-1) 
-  //   else return
-  // }
-
-  // function onFeelingAdd () { 
-  //   if (feeling<10) setFeeling(feeling+1)
-  //   else return
-  // }
-
-  // function onFeelingMinus () { 
-  //   if (feeling>0) setFeeling(feeling-1)
-  //   else return
-  // }

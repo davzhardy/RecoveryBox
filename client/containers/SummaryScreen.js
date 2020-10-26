@@ -30,7 +30,6 @@ function SummaryScreen ({ route }) {
 
   const dynamicStyle = {
     height: fullHeight,
-    // paddingTop: statusBarHeight,
   };
 
   const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
@@ -49,10 +48,6 @@ function SummaryScreen ({ route }) {
   const durationMillis = now-firstDate
   const millisPerDay = 1000 * 60 * 60 * 24
   const durationDays = Math.round(durationMillis/millisPerDay)
-
-  //TODO change the current onpress to something swipeable?
-  // TODO add key for first graph
-  // TODO add values on graphs when clicked
 
   return (
     <View style={[styles.container,  dynamicStyle]}>

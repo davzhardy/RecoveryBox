@@ -2,7 +2,7 @@ const initialState = {
   id: false,
   email: false,
   username: false,
-  password: 'TODO: replace me',
+  password: false,
   firstName: false,
   lastName: false,
   registrationDate: false,

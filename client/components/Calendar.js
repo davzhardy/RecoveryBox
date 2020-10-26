@@ -33,8 +33,6 @@ function CalendarDH() {
       type: 'SELECT_DATE',
       payload: arg
     });
-    // if (DateTime.fromMillis(arg).toFormat('yyyy-LL-dd') === DateTime.fromMillis(now).toFormat('yyyy-LL-dd')) navigation.navigate('Home');
-    // else 
     navigation.navigate('History');
   }
 
@@ -44,11 +42,9 @@ function CalendarDH() {
         current={now}
         minDate={'2019-05-10'}
         maxDate={now}
-        // Handler which gets executed on day press. Default = undefined
         onDayPress={(day) => {pressHandler(day.timestamp)}}
         monthFormat={'MMMM yyyy'}
           hideArrows={false}
-          // Replace default arrows with custom ones (direction can be 'left' or 'right')
         renderArrow={(direction) => {
           if (direction==='right') return <Image style={styles.image} source={require('../assets/forward.png')}/>
           if (direction==='left') return <Image style={styles.image} source={require('../assets/back.png')}/>

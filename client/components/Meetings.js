@@ -18,7 +18,6 @@ function Meetings () {
     dispatch({type: 'DECREMENT_DAILY_MEETINGS'});
   };
 
-  //TODO put in a reducer as this info is used on multiple screens
   const historicalData = useSelector((state) => state.historicalData);
   const meetingsData = _.map(historicalData, el => el.meetings) 
 

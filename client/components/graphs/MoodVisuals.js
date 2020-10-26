@@ -13,7 +13,6 @@ import colors from '../../styles/colors'
 function MoodVisuals () {
 
   const moodsToShow = 5;
-  // TODO make the number of moods you show customisable
 
   const chartTimePeriod = useSelector((state) => state.helper.chartTimePeriod)
   const millisPerDay = 1000 * 60 * 60 * 24

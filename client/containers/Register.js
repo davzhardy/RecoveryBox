@@ -9,8 +9,6 @@ import { NavigationContainer, StackActions } from '@react-navigation/native';
 
 function Register ({ navigation }) {
 
-  // TODO: refactor to not have to useState for passwordInput and usernameInput?
-  // TODO: add a warning if your user is not on the db and don't trigger the navigation 
   const dispatch = useDispatch();
 
   const [usernameInput, onChangeUsername] = useState(useSelector((state) => state.user.username));
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:30,
     marginBottom:10,
-    fontFamily: 'Montserrat_500Medium',
+    
   },
   text: {
     fontFamily: 'Montserrat_500Medium',

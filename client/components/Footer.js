@@ -13,7 +13,6 @@ function Footer () {
 
   const home = 'Home'
   const summary = 'Summary'
-// TODO add highlights, opacity etc. depending on which navigation state you are in
 
   function homePress () {
     dispatch({
